@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import styles from "../_assets/css/modules/breadcrumb.module.css";
+import { WEBSITE_OPTIONS } from "../_settings/menu/config";
 
 export const Breadcrumb = ({ label }) => (
     <div className="file-navigation mb-3 d-flex flex-items-start mt-3">
@@ -9,7 +10,7 @@ export const Breadcrumb = ({ label }) => (
             <span className="text-bold">
             <span className="d-inline-block wb-break-all">
                 <Link href={"/"}>
-                    <a title="fullstack-next" className="link">fullstack-next</a>
+                    <a title="Início" className="link">Início</a>
                 </Link>
             </span>
             </span>

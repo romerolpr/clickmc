@@ -3,6 +3,7 @@ import { NextLink } from "./";
 
 // importa os links do menu dinâmico
 import { initialLinks } from "../_settings/menu/routes";
+import styles from '/src/_assets/css/modules/navbarCollapse.module.css';
 
 export const NavbarCollapse = () => {
 
@@ -14,8 +15,8 @@ export const NavbarCollapse = () => {
   }, [])
 
   return (
-      <div className="navbar-collapse offcanvas-collapse">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <div className={`navbar-collapse offcanvas-collapse ${styles.navbar_flex_grow}`}>
+        <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${styles.navbar_float_right}`}>
           {links && links.map((route, key) => {
               return !route.dropdown ? (
                 <li className="nav-item" key={key}>
@@ -23,7 +24,7 @@ export const NavbarCollapse = () => {
                 </li>
               ) : (
                 <li className="nav-item dropdown" key={key}>
-                  <a className="nav-link dropdown-toggle" href={route.pathname} title={route.label} onClick={
+                  <a className={route.bespeak ? `nav-link dropdown-toggle ${styles.bespeak}` : "nav-link dropdown-toggle"} href={route.pathname} title={route.label} onClick={
                     (e) => {
                       e.preventDefault()
                       // ao clicar, troca valor pra exibir dropdown

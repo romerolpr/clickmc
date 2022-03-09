@@ -1,28 +1,32 @@
 import Head from "next/head";
-import NextNprogress from 'nextjs-progressbar';
 
 import { Fragment } from "react";
 import { Breadcrumb } from "../components";
 import { Navbar, Container } from ".";
 
 import { ToastContainer } from "react-toastify";
+import { WEBSITE_OPTIONS } from "../_settings/menu/config";
 
-export const LayoutStatic = ({ children, breadcrumbLabel }) => (
+export const LayoutStatic = ({ 
+    children, 
+    breadcrumbLabel, 
+    breadcrumb = true, 
+    navbarAbsolute = false,
+    fluid = false,
+    full = false
+}) => (
     <Fragment>
         <Head>
-            <title>{breadcrumbLabel}</title>
+            <title>{breadcrumbLabel} - {WEBSITE_OPTIONS.sitename}</title>
         </Head>
-        <Navbar />
-        <NextNprogress
-            color="#29D"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={1.25}
-            showOnShallow={true}
-        />
+        <Navbar absolute={navbarAbsolute} />
         <ToastContainer />
-        <Container>
-            <Breadcrumb label={breadcrumbLabel}/>
+        <Container 
+        full={ full } 
+        fluid={ fluid }>
+            {breadcrumb && (
+                <Breadcrumb label={breadcrumbLabel}/>
+            )} 
             { children }
         </Container>
     </Fragment>

@@ -1,0 +1,14 @@
+.navbar_absolute {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    /* background-color: rgba(var(--bs-primary-rgb), 25%); */
+    z-index: 11;
+}
+
+.navbar_relative {
+    position: relative;
+    width: 100%;
+    background-color: var(--bs-primary) !important;
+    --bs-bg-opacity: 1;
+}

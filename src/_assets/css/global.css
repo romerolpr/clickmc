@@ -1,14 +1,19 @@
+@import url('./root.css');
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  height: 100%;
 }
 
 body {
-  padding-top: 4em;
+  background-color: rgb(230, 236, 235);
 }
 
 a.link {
   text-decoration: none;
+  color: #555 !important;
 }
 a.link:hover {
   text-decoration: underline;

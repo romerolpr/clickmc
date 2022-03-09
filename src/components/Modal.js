@@ -14,7 +14,7 @@ export const ModalNext = ({ modalShow, id }) => {
     const userData = user?.find(u => u.id == id)
 
     const handleClose = () => {
-        router.push({ pathname: '/clients/edit', query: null })
+        router.push({ pathname: '/' })
     }
 
     const validationSchema = Yup.object().shape({

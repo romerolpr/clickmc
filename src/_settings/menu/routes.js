@@ -1,25 +1,21 @@
 // menu dinâmico da aplicação
 export const initialLinks = [
     {
-        pathname: '/',
-        label: 'Página inicial',
-        dropdown: false
+        pathname: '/contato',
+        label: 'Contato'
     },
     {
-        pathname: '/clients',
-        label: 'Clientes',
+        pathname: '/',
+        label: 'Minha conta',
+        // bespeak: true,
         dropdown: [
             {
-                pathname: '/clients',
-                label: 'Listagem de clientes'
+                pathname: '/login?_type=medico',
+                label: 'Sou Médico'
             },
             {
-                pathname: '/clients/new',
-                label: 'Cadastrar novo cliente'
-            },
-            {
-                pathname: '/clients/edit',
-                label: 'Editar cliente existente'
+                pathname: '/login?_type=paciente',
+                label: 'Sou Paciente'
             }
         ]
     },

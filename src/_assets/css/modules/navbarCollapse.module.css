@@ -1,0 +1,12 @@
+.navbar_flex_grow {
+    flex-grow: inherit !important;
+}
+.navbar_float_right {
+    width: auto;
+    float: right;
+}
+.bespeak {
+    background-color: #fff;
+    color: #222 !important;
+    border-radius: 6px;
+}
