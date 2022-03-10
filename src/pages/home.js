@@ -25,7 +25,7 @@ export const Home = () => (
                 bottom: '6.25rem'
                 }}>
                 <h2>Quiropraxia</h2>
-                <p>Realize uma consulta sem sair de casa.</p>
+                <p>Realize sua consulta sem sair de casa.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
@@ -73,7 +73,7 @@ export const Home = () => (
             </Container>
 
             <Container>
-                <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{margin: '0'}}>
+                <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 w-100">
 
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <div className={`${card.box_link}`} style={{

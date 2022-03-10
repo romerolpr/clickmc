@@ -1,6 +1,6 @@
 import { LayoutStatic, Footer } from '/src/containers';
 import { Home } from '/src/pages';
-import { ModalNext } from '/src/components';
+import { AppModal } from '../../src/components';
 
 const Buscar = () => {
     return (
@@ -9,7 +9,7 @@ const Buscar = () => {
         breadcrumb={false} 
         navbarAbsolute={true}
         fluid={true}>
-            <ModalNext modalShow={true} id={1}/>
+            <AppModal />
             <Home />
             <Footer />
         </LayoutStatic>

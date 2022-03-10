@@ -6,4 +6,5 @@ export * from './Breadcrumb';
 export * from './Rounded';
 export * from './Pagination';
 export * from './Modal';
+export * from './AppModal';
 export * from './Form';
