@@ -21,19 +21,42 @@
     bottom: 0;
     float: left;
     width: 100%;
-    height: 80%;
+    height: 85%;
     background-color: #fff;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 2px 25px rgb(0 0 0 / 7%);
+    overflow-y: auto;
 }
+
+.closeDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    clear: both;
+    box-shadow: 0 2px 5px rgba(0,0,0,7%);
+    margin-bottom: .5em;
+}
+
+.closeDiv h2 {
+    font-size: 1.5em;
+    margin: 1em;
+}
+
 .closeButton {
     display: block;
     padding: 1em;
     font-size: 1.5em;
     font-weight: bold;
     cursor: pointer;
-    float: right;
-    clear: both;
+}
+.window_row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.padding {
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 .open {
@@ -69,5 +92,11 @@
     }
     to {
         bottom: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .window_row {
+        display: block;
     }
 }

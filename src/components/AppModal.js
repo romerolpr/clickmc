@@ -2,6 +2,8 @@ import modal from '/src/_assets/css/modules/appModal.module.css';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { LayoutForm } from '../containers';
+
 const AppModal = () => {
 
     const [ show, setShow ] = useState(true)
@@ -27,14 +29,21 @@ const AppModal = () => {
 
     return (
         <div className={`${modal.container}`}>
-            <div className={`${modal.title}`}>
-                <h2>Buscar especialista por perto</h2>
-            </div>
+
             <div className={show ? `${modal.window} ${modal.open}` : `${modal.window}`}>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <span onClick={handleClose} className={`${modal.closeButton}`}>&times;</span>
+                    <div className={`${modal.closeDiv}`}>
+                        <h2>Informe sua localização</h2>
+                        <span onClick={handleClose} className={`${modal.closeButton}`}>&times;</span>
+                    </div>
+
+                    <LayoutForm>
+                        <p>Form</p>
+                    </LayoutForm>
+
                 </div>
             </div>
+
         </div>
     )
 

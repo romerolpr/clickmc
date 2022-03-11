@@ -47,7 +47,7 @@ export const Home = () => (
             </Container>
 
             <Container> 
-                <div className="row">
+                <div className="row w-100">
 
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div className={`${card.box} ${card.paddingLeft_half}`}>
@@ -73,7 +73,7 @@ export const Home = () => (
             </Container>
 
             <Container>
-                <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 w-100">
+                <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0">
 
                     <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                     <div className={`${card.box_link}`} style={{
