@@ -1,0 +1,15 @@
+.buttonLocation {
+    display: block;
+    padding: 1em 0.75em;
+    border: none;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    color: #aaa;
+    width: 100%;
+    text-align: left;
+    transition: all .3s ease-in-out;
+}
+.buttonLocation:hover {
+    background-color: #eee;
+}

@@ -84,7 +84,7 @@ export const Home = () => (
                         </div>
                         <div className={`${card.box_link_arrow}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 36 22">
-                            <path fill="#FFF" fill-rule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
+                            <path fill="#FFF" fillRule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
                             </svg>
                         </div>
                     </div>
@@ -99,7 +99,7 @@ export const Home = () => (
                         </div>
                         <div className={`${card.box_link_arrow}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 36 22">
-                            <path fill="#FFF" fill-rule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
+                            <path fill="#FFF" fillRule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
                             </svg>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ export const Home = () => (
                         </div>
                         <div className={`${card.box_link_arrow}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 36 22">
-                            <path fill="#FFF" fill-rule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
+                            <path fill="#FFF" fillRule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
                             </svg>
                         </div>
                     </div>
@@ -129,7 +129,7 @@ export const Home = () => (
                         </div>
                         <div className={`${card.box_link_arrow}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 36 22">
-                            <path fill="#FFF" fill-rule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
+                            <path fill="#FFF" fillRule="evenodd" d="M24.926 0l-2.768 2.75 6.348 6.305H0v3.89h28.506l-6.348 6.304L24.926 22l8.306-8.25L36 11l-2.767-2.75z"></path>
                             </svg>
                         </div>
                     </div>

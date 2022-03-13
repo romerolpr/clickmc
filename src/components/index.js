@@ -8,3 +8,4 @@ export * from './Pagination';
 export * from './Modal';
 export * from './AppModal';
 export * from './Form';
+export * from './Loading';

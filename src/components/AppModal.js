@@ -2,9 +2,15 @@ import modal from '/src/_assets/css/modules/appModal.module.css';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { useSelector } from "react-redux";
+
 import { LayoutForm } from '../containers';
 
+import { Main } from './AppForm';
+
 const AppModal = () => {
+
+    const { subtitle } = useSelector( (state) => state.pageInformations);
 
     const [ show, setShow ] = useState(true)
     const router = useRouter()
@@ -33,12 +39,12 @@ const AppModal = () => {
             <div className={show ? `${modal.window} ${modal.open}` : `${modal.window}`}>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div className={`${modal.closeDiv}`}>
-                        <h2>Informe sua localização</h2>
+                        <h2>{ subtitle }</h2>
                         <span onClick={handleClose} className={`${modal.closeButton}`}>&times;</span>
                     </div>
 
                     <LayoutForm>
-                        <p>Form</p>
+                        <Main />
                     </LayoutForm>
 
                 </div>

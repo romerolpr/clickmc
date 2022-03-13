@@ -1,0 +1,7 @@
+button.selected {
+    filter: brightness(95%);
+    background-color: rgba(var(--bs-primary-rgb), 60%) !important;
+    border: var(--bs-primary) !important;
+    color: #fff !important;    
+    box-shadow: 0 5px 13px rgb(0 0 0 / 20%) !important;
+}

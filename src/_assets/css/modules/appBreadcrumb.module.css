@@ -1,0 +1,15 @@
+.breadcrumb {
+    position: relative;
+    z-index: 9;
+    float: left;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.link {
+    color: var(--bs-primary);
+    cursor: pointer !important;
+} 
+.link:hover {
+    text-decoration: underline;
+}

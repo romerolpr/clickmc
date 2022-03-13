@@ -7,7 +7,7 @@
 }
 
 .navbar_relative {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     background-color: var(--bs-primary) !important;
     --bs-bg-opacity: 1;

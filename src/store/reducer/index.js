@@ -5,6 +5,7 @@ import settingsReducer from './users/settings';
 
 import userReducer from './users';
 import listsReducer from './lists';
+import listInformations from "./informations";
 
 import listForm from './form/hydrate';
 import settingForm from './form/settings';
@@ -15,5 +16,6 @@ export default combineReducers({
     users: userReducer,
     lists: listsReducer,
     formValues: listForm,
-    formSettings: settingForm
+    formSettings: settingForm,
+    pageInformations: listInformations
 })

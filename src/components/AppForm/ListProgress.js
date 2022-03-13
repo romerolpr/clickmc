@@ -1,31 +1,49 @@
-import Link from "next/link";
-import { useState, useEffect, Fragment } from "react";
+import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { _setName } from "../../store/actions/form";
+import { identifyProgress } from "../AppForm/nextProgress";
 
-const ListProgress = ({ _step }) => {
+import list from '/src/_assets/css/modules/listProgress.module.css';
 
-    const { progress } = useSelector( (state) => state.formValues);
+const ListProgress = () => {
+
+    const dispatch = useDispatch()
+
+    const formValues = useSelector( (state) => state.formValues)
+    const { progress } = formValues
+
+    // const _className = list.list_group_item
+    const _className = "list-group-item list-group-item-action c-pointer"
 
     return (
         <Fragment>
             <div className="list-group">
-                <Link href={'/buscar'}>    
-                    <a className="list-group-item list-group-item-action active" title="Localização">Localização</a>
-                </Link>
-                <Link href={'/buscar?_step=you'}>    
-                    <a className="list-group-item list-group-item-action" title="Você mesmo">Você mesmo</a>
-                </Link>
-                <Link href={'/buscar?_step=category'}>    
-                    <a className="list-group-item list-group-item-action disabled" title="Categoria de especialista">Categoria de especialista</a>
-                </Link>
-                <Link href={'/buscar?_step=select'}>    
-                    <a className="list-group-item list-group-item-action disabled" title="Agendamento">Agendamento</a>
-                </Link>
-                <Link href={'/buscar?_step=finish'}>    
-                    <a className="list-group-item list-group-item-action disabled" title="Finalização">Finalização</a>
-                </Link>
+
+                <span 
+                onClick={() => identifyProgress(dispatch, formValues, 0)}
+                className={`${_className} ${progress == 0 && 'active'}`} 
+                title="Localização">{formValues.manualGeolocation == ''} Localização</span>
+
+                <span 
+                onClick={() => identifyProgress(dispatch, formValues, 1)}
+                className={`${_className} ${progress == 1 ? 'active' : formValues.manualGeolocation == null && 'disabled'}`} 
+                title={formValues.name == null ? "Você mesmo" : formValues.name}>{formValues.name == null ? "Você mesmo" : `${formValues.name} ${formValues.phone}`}</span>
+
+                <span 
+                onClick={() => identifyProgress(dispatch, formValues, 2)}
+                className={`${_className} ${progress == 2 ? 'active' : formValues.medical == null && formValues.name == null && 'disabled'}`} 
+                title="Categoria de especialista">Categoria de especialista</span>
+
+                <span 
+                onClick={() => identifyProgress(dispatch, formValues, 3)}
+                className={`${_className} ${progress == 3 ? 'active' : formValues.availableMedical == null && formValues.medical == null && 'disabled'}`} 
+                title="Agendamento">Agendamento</span>
+
+                <span 
+                onClick={() => identifyProgress(dispatch, formValues, 4)}
+                className={`${_className} ${progress == 4 ? 'active' : formValues.urlCode == null && formValues.availableMedical == null && 'disabled'}`} 
+                title="Finalização">Finalização</span>
+
             </div>
         </Fragment>
     )

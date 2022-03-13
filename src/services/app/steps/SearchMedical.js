@@ -1,0 +1,5 @@
+const SearchMedical = () => {
+
+}
+
+export { SearchMedical }
