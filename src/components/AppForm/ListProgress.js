@@ -37,7 +37,7 @@ const ListProgress = () => {
                 <span 
                 onClick={() => identifyProgress(dispatch, formValues, 3)}
                 className={`${_className} ${progress == 3 ? 'active' : formValues.availableMedical == null && formValues.medical == null && 'disabled'}`} 
-                title="Agendamento">Agendamento</span>
+                title="Confirmar agendamento">Confirmar agendamento</span>
 
                 <span 
                 onClick={() => identifyProgress(dispatch, formValues, 4)}

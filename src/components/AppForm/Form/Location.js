@@ -11,7 +11,8 @@ import form from '/src/_assets/css/modules/appForm.module.css';
 import { 
     _setAllowGeolocation, 
     _setManualGeolocation,
-    _setSupportGeolocation
+    _setSupportGeolocation,
+    _setCoordinates
 } from '../../../store/actions/form';
 
 import { _setPageSubtitle } from '../../../store/actions/informations';
@@ -75,9 +76,10 @@ const Location = () => {
 
     const navigatorGeolocation = () => {
 
-        const geoEnabled = () => {
+        const geoEnabled = (position) => {
             dispatch(_setAllowGeolocation(true))
             dispatch(_setManualGeolocation('getCurrentLocation'))
+            dispatch(_setCoordinates(position.coords))
         }
 
         const geoDisabled = () => {
@@ -95,7 +97,7 @@ const Location = () => {
     }
 
     useEffect(() => {
-        dispatch(_setPageSubtitle(initialPageInformations.subtitle))
+        dispatch(_setPageSubtitle('Sua localização'))
     }, [])
 
     if (loading)

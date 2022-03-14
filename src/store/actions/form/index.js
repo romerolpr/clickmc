@@ -13,7 +13,8 @@ import {
     RESET_FORM,
     SET_SEARCH_MEDICAL,
     SET_ALLOW_GEOLOCATION,
-    SET_SUPPORT_GEOLOCATION
+    SET_SUPPORT_GEOLOCATION,
+    SET_CATEGORY
 } from '..';
 
 const _updateProgress = (progress) => ({
@@ -49,6 +50,11 @@ const _setPhone = (phone) => ({
 const _setCity = (city) => ({
     type: SET_CITY,
     payload: city
+});
+
+const _setCategory = (category) => ({
+    type: SET_CATEGORY,
+    payload: category
 });
 
 const _setMedical = (medical) => ({

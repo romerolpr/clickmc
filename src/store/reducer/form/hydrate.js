@@ -8,6 +8,7 @@ import {
     SET_URLCODE,
     SET_PHONE,
     SET_CITY,
+    SET_CATEGORY,
     SET_MEDICAL,
     SET_AVAILABLE_MEDICAL,
     SET_COORDINATES,
@@ -36,7 +37,9 @@ const listForm = (state = initialForm, action) => {
         return {...state, phone: action.payload};
     case SET_CITY:
         return {...state, city: action.payload};
-    case SET_MEDICAL:''
+    case SET_CATEGORY:
+        return {...state, category: action.payload};
+    case SET_MEDICAL:
         return {...state, medical: action.payload};
     case SET_AVAILABLE_MEDICAL:
         return {...state, availableMedical: action.payload};

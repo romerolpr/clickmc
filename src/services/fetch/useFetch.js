@@ -4,6 +4,7 @@ import { API } from "../../constants";
 import { toast } from "react-toastify";
 
 export function useFetch(url) {
+
     const [ data, setData ] = useState(null)
 
     useEffect(() => {
@@ -19,4 +20,5 @@ export function useFetch(url) {
     }, [])
 
     return { data }
+
 }

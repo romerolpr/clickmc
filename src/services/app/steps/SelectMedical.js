@@ -1,6 +1,5 @@
 import Select from 'react-select';
 import { useFetch } from '../../fetch/useFetch';
-import { useState, useEffect } from 'react';
 
 import { Loading } from '../../../components';
 

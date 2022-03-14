@@ -1,0 +1,333 @@
+.selectFormMedical {
+position: relative;
+width: 100%;
+float: left;
+margin-bottom: 1em;
+}
+
+.list_medical {
+position: relative;
+display: flex;
+width: 100%;
+float: left;
+flex-direction: column;
+flex-wrap: nowrap;
+justify-content: flex-start;
+align-items: flex-start;
+margin: .25em 0;
+}
+
+.list_medical .list_li {
+display: block;
+width: 100%;
+/* max-height: 400px; */
+padding: 1em;
+border-radius: 5px;
+/* border: 1px solid #6c5ce7; */
+/* background-color: #593bdb; */
+transition: all .3s ease;
+margin: .25em 0;
+}
+
+.list_gridColumnControl {
+display: block;
+float: left;
+width: 100%;
+}
+
+.list_columns {
+display: grid;
+grid-template-columns: 2fr 4fr;
+}
+
+.list_medical .list_li:hover, 
+.list_medical .list_li:hover .controlLabelCircle  {
+border-color: #b87afb;
+}
+
+.list_medical.selected .list_li:hover,
+.list_medical.selected .list_li:hover .controlLabelCircle {
+border-color: #fff;
+}
+
+.list_medical.selected .list_li,
+.list_medical.selected .controlLabelCircle {
+border-color: #fff;
+}
+.list_medical.selected .controlLabelCircle_event {
+background-color: #fff;
+}
+
+.list_li .list_-controlLabel{
+float: right;
+}
+
+.list_-controlLabel .controlLabelCircle {
+display: flex;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background-color: #6c5ce7;
+border: 2px solid #58a4f5;
+}
+
+.list_-controlLabel .controlLabelCircle_event {
+display: block;
+margin: auto;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: transparent;
+}
+
+.list_li .list_-avatarIcon {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: .35em;
+width: 85%;
+/*height: 100px;*/
+margin: auto;
+border-radius: 5px;
+background-color: transparent;
+overflow: hidden;
+user-select: none;
+}
+
+.list_li .list_-avatarIcon i {
+font-size: 5em;
+color: #fff;
+}
+
+.list_li .list_availableScheduling {
+position: relative;
+flex-direction: row;
+flex-wrap: nowrap;
+overflow-x: hidden;
+float: left;
+width: 100%;
+color: #fff;
+}
+
+.nextOption,
+.prevOption {
+position: absolute;
+display: flex;
+align-items: center;
+width: 40px;
+height: 100%;
+z-index: 9;
+cursor: pointer;
+border-radius: 3px;
+transition: all .3s ease-in-out;
+}
+.nextOption:hover {
+background-image: linear-gradient(to left, #0663c7 10%, transparent 100%);
+} 
+.prevOption:hover {
+background-image: linear-gradient(to right, #0663c7 10%, transparent 100%);
+}
+.nextOption span,
+.prevOption span {  
+border-color: transparent!important;
+}
+.nextOption {
+justify-content: flex-end;
+background-image: linear-gradient(to left, #6c5ce7 10%, transparent 100%);
+right: 0;
+}
+
+.prevOption {
+justify-content: flex-start;
+background-image: linear-gradient(to right, #6c5ce7 10%, transparent 100%);
+left: 0;
+}
+
+.optionsCarousel {
+width: 100%;
+padding: 1em;
+padding-bottom: 1.5em;
+transition: all .3s ease-in-out;
+overflow-y: auto;
+}
+
+.list_li .list_availableScheduling,
+.optionsCarousel {
+display: flex;
+}
+
+.list_options {
+float: left;
+width: 200px;
+padding: 0 1em;
+}
+
+.list_button {
+display: block;
+width: auto;
+padding: .8em .6em;
+text-align: right;
+color: #fff;
+cursor: pointer;
+}
+
+.list_li .availableScheduling_list {
+display: flex;
+width: 100%;
+justify-content: flex-start;
+align-items: center;
+flex-wrap: nowrap;
+flex-direction: row;
+}
+
+.list_li .list_availableScheduling span {
+float: left;
+display: block;
+border: 1px solid #58a4f5;
+border-radius: 3px;
+margin: .25em;
+padding: .2em .4em;
+
+}
+
+.list_li .list_availableScheduling span.selectHour {
+cursor: pointer;
+transition: all .3s ease-in-out;
+}
+.list_li .list_availableScheduling span.selectHour:hover, span.selectHour:focus {
+border-color: #fff;
+}
+
+.list_li .list_availableScheduling span.notHourAvailable {
+cursor: default;
+user-select: none;
+border: none;
+font-size: .8em;
+color: #eee;
+transition: all .3s ease-in-out;
+}
+
+.selectedHour {
+border-color: #fff;
+}
+
+.list_li .list_availableScheduling span.noBorder {
+width: 100%;
+height: 40px;
+display: flex;
+line-height: 1.25em;
+align-items: center;
+border: none;
+padding: 0;
+}
+
+.availableScheduling_list {
+width: 100%;
+display: flex;
+overflow: hidden;
+flex-wrap: nowrap;
+}
+
+.list_li .list_availableScheduling .hours {
+float: left;
+display: flex;
+flex-wrap: nowrap;
+overflow-x: scroll;
+overflow-y: hidden;
+flex-direction: row;
+padding-bottom: .25em;
+}
+
+
+.optionsCarousel::-webkit-scrollbar,
+.list_availableScheduling::-webkit-scrollbar,
+.hours::-webkit-scrollbar,
+.container_scheduling::-webkit-scrollbar,
+.details_schedule::-webkit-scrollbar {
+height: 6px;
+width: 6px;
+}
+
+.optionsCarousel::-webkit-scrollbar-thumb,
+.list_availableScheduling::-webkit-scrollbar-thumb,
+.hours::-webkit-scrollbar-thumb,
+.container_scheduling::-webkit-scrollbar-thumb,
+.details_schedule::-webkit-scrollbar-thumb {
+border-radius: 5px;
+background-color: #eee;
+}
+.optionsCarousel::-webkit-scrollbar-track,
+.list_availableScheduling::-webkit-scrollbar-track,
+.hours::-webkit-scrollbar-track,
+.container_scheduling::-webkit-scrollbar-track {
+margin-top: 50px;
+-webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 0%);
+}
+
+.details_schedule::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 0%);
+}
+
+.list_li .list_-avatarIcon img {
+width: 90%;
+height: 75%;
+margin: auto 0;
+object-fit: cover;
+object-position: top;
+background-color: #137ced;
+border-radius: 50%;
+}
+
+.list_li .list_-infoText {
+display: -webkit-flex;
+display: -moz-box;
+display: flex;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+-webkit-flex-direction: row;
+-moz-box-orient: horizontal;
+-moz-box-direction: normal;
+width: 100%;
+padding: 1em;
+align-items: flex-start;
+align-content: center;
+flex-direction: column;
+}
+
+.list_li .list_-infoText .list_displayBadge {
+padding: .3em .6em;
+border-radius: 15px;
+background-color: #6c5ce7;
+border: 1px solid #6c5ce7;
+color: #fff;
+margin-bottom: .4em;
+}
+
+
+.list_li .list_-infoText .list_infoTitle {
+font-size: 1.5em;
+}
+
+.list_li .list_-infoText .list_displayBadge,
+.list_li .list_-infoText .list_infoTitle {
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-box-orient: vertical;  
+}
+
+.list_li .list_-infoText .list_displayBadge,
+.list_li .list_-infoText .list_infoTitle {
+-webkit-line-clamp: 1; /* number of lines to show */
+line-clamp: 1; 
+}
+
+.list_li .list_-infoText .list_rating {
+color: #fff;
+}
+
+.list_li .list_-infoText p {
+-webkit-line-clamp: 2; /* number of lines to show */
+line-clamp: 2; 
+margin-bottom: 0;
+}

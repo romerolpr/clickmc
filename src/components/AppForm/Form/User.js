@@ -47,7 +47,7 @@ const User = () => {
     }
 
     useEffect(() => {
-        dispatch(_setPageSubtitle('Preencha seus dados básicos'))
+        dispatch(_setPageSubtitle('Seus dados básicos'))
     }, [])
 
     if (loading)
