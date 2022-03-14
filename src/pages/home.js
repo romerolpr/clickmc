@@ -47,7 +47,7 @@ export const Home = () => (
             </Container>
 
             <Container> 
-                <div className="row w-100">
+                <div className="row w-100 m-0">
 
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div className={`${card.box} ${card.paddingLeft_half}`}>

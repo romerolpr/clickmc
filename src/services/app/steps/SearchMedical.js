@@ -8,6 +8,8 @@ import styles from '../../../_assets/css/modules/searchMedical.module.css';
 import { _positionByMedical } from "./calculate"; 
 import { ScheduleMedical } from "./ScheduleMedical";
 
+import { Button } from 'react-bootstrap';
+
 import { image } from "../../../constants";
 
 const SearchMedical = ({ category }) => {
@@ -16,10 +18,6 @@ const SearchMedical = ({ category }) => {
     const { coordinates } = formValues
 
     const { items } = _positionByMedical(category, [coordinates.latitude, coordinates.longitude])
-
-    if (items == null) {
-        return <Loading label={false}/>
-    }
 
     const Image = ({ src, title }) => {
 
@@ -40,9 +38,20 @@ const SearchMedical = ({ category }) => {
         
     }
 
+    if (items == null) {
+        return <Loading label={false}/>
+    }
+
+    if (items.length == 0) {
+        return (
+            <Fragment>
+                <p>Olá {formValues.name.split(' ')[0]}, infelizmente não conseguimos localizar nenhum especialista na categoria de {category} próximo de você.</p>
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
-            {console.log(items)}
             <p>Muito bom {formValues.name.split(' ')[0]}! Encontramos estes especialistas próximos de você.</p>
             <div className={styles.selectFormMedical}>
                     
