@@ -1,16 +1,29 @@
 import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { identifyProgress } from "../AppForm/nextProgress";
+import { identifyProgressLink } from "../../constants";
 
-import list from '/src/_assets/css/modules/listProgress.module.css';
+import {
+    LOCATION,
+    YOU,
+    CATEGORY,
+    CONFIRM,
+    FINISH
+} from '../../_settings/form/config';
 
 const ListProgress = () => {
 
     const dispatch = useDispatch()
 
     const formValues = useSelector( (state) => state.formValues)
-    const { progress } = formValues
+    const { 
+        progress,
+        coordinates,
+        name,
+        category,
+        availableMedical,
+        urlCode
+    } = formValues
 
     // const _className = list.list_group_item
     const _className = "list-group-item list-group-item-action c-pointer"
@@ -19,29 +32,29 @@ const ListProgress = () => {
         <Fragment>
             <div className="list-group">
 
-                <span 
-                onClick={() => identifyProgress(dispatch, formValues, 0)}
-                className={`${_className} ${progress == 0 && 'active'}`} 
-                title="Localização">{formValues.manualGeolocation == ''} Localização</span>
+                <span
+                onClick={() => identifyProgressLink(LOCATION, dispatch, formValues)}
+                className={`${_className} ${progress == LOCATION && 'active'}`} 
+                title="Localização">{coordinates == ''} Localização</span>
 
-                <span 
-                onClick={() => identifyProgress(dispatch, formValues, 1)}
-                className={`${_className} ${progress == 1 ? 'active' : formValues.manualGeolocation == null && 'disabled'}`} 
-                title={formValues.name == null ? "Você mesmo" : formValues.name}>{formValues.name == null ? "Você mesmo" : `${formValues.name} ${formValues.phone}`}</span>
+                <span
+                onClick={() => identifyProgressLink(YOU, dispatch, formValues)}
+                className={`${_className} ${progress == YOU ? 'active' : coordinates == null && 'disabled'}`} 
+                title={name == null ? "Você mesmo" : name}>{name == null ? "Você mesmo" : `${name} ${formValues.phone}`}</span>
 
-                <span 
-                onClick={() => identifyProgress(dispatch, formValues, 2)}
-                className={`${_className} ${progress == 2 ? 'active' : formValues.medical == null && formValues.name == null && 'disabled'}`} 
+                <span
+                onClick={() => identifyProgressLink(CATEGORY, dispatch, formValues)}
+                className={`${_className} ${progress == CATEGORY ? 'active' : name == null && name == category && 'disabled'}`} 
                 title="Categoria de especialista">Categoria de especialista</span>
 
-                <span 
-                onClick={() => identifyProgress(dispatch, formValues, 3)}
-                className={`${_className} ${progress == 3 ? 'active' : formValues.availableMedical == null && formValues.medical == null && 'disabled'}`} 
+                <span
+                onClick={() => identifyProgressLink(CONFIRM, dispatch, formValues)}
+                className={`${_className} ${progress == CONFIRM ? 'active' : availableMedical == null && 'disabled'}`} 
                 title="Confirmar agendamento">Confirmar agendamento</span>
 
-                <span 
-                onClick={() => identifyProgress(dispatch, formValues, 4)}
-                className={`${_className} ${progress == 4 ? 'active' : formValues.urlCode == null && formValues.availableMedical == null && 'disabled'}`} 
+                <span
+                onClick={() => identifyProgressLink(FINISH, dispatch, formValues)}
+                className={`${_className} ${progress == FINISH ? 'active' : urlCode == null && 'disabled'}`} 
                 title="Finalização">Finalização</span>
 
             </div>

@@ -8,7 +8,7 @@ margin-bottom: 1em;
 .list_medical {
 position: relative;
 display: flex;
-width: 100%;
+width: 90%;
 float: left;
 flex-direction: column;
 flex-wrap: nowrap;
@@ -37,7 +37,11 @@ width: 100%;
 
 .list_columns {
 display: grid;
-grid-template-columns: 2fr 4fr;
+grid-template-columns: 1fr 4fr;
+}
+
+.list_medical .list_gridColumnControlImage img {
+    width: 100%;
 }
 
 .list_medical .list_li:hover, 
@@ -68,7 +72,7 @@ width: 20px;
 height: 20px;
 border-radius: 50%;
 background-color: #6c5ce7;
-border: 2px solid #58a4f5;
+border: 2px solid var(--bs-primary);
 }
 
 .list_-controlLabel .controlLabelCircle_event {
@@ -80,12 +84,12 @@ border-radius: 50%;
 background-color: transparent;
 }
 
-.list_li .list_-avatarIcon {
+.list_li .list_avatarIcon {
 display: flex;
 justify-content: center;
 align-items: center;
 padding: .35em;
-width: 85%;
+width: 150px;
 /*height: 100px;*/
 margin: auto;
 border-radius: 5px;
@@ -94,7 +98,7 @@ overflow: hidden;
 user-select: none;
 }
 
-.list_li .list_-avatarIcon i {
+.list_li .list_avatarIcon i {
 font-size: 5em;
 color: #fff;
 }
@@ -107,6 +111,7 @@ overflow-x: hidden;
 float: left;
 width: 100%;
 color: #fff;
+padding: 2em;
 }
 
 .nextOption,
@@ -158,7 +163,7 @@ display: flex;
 
 .list_options {
 float: left;
-width: 200px;
+width: 250px;
 padding: 0 1em;
 }
 
@@ -178,16 +183,24 @@ justify-content: flex-start;
 align-items: center;
 flex-wrap: nowrap;
 flex-direction: row;
+
 }
 
 .list_li .list_availableScheduling span {
 float: left;
 display: block;
-border: 1px solid #58a4f5;
+border: 1px solid #bbb;
 border-radius: 3px;
 margin: .25em;
 padding: .2em .4em;
+color: #444;
+cursor: pointer;
+}
 
+/* when options is active */
+.optionsActive {
+    border-color: var(--bs-primary) !important;
+    background-color: #eee;
 }
 
 .list_li .list_availableScheduling span.selectHour {
@@ -203,7 +216,7 @@ cursor: default;
 user-select: none;
 border: none;
 font-size: .8em;
-color: #eee;
+color: #aaa;
 transition: all .3s ease-in-out;
 }
 
@@ -219,6 +232,10 @@ line-height: 1.25em;
 align-items: center;
 border: none;
 padding: 0;
+}
+
+.list_li .list_availableScheduling span:hover {
+    border-color: var(--bs-primary) !important;
 }
 
 .availableScheduling_list {
@@ -268,65 +285,68 @@ margin-top: 50px;
 -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 0%);
 }
 
-.list_li .list_-avatarIcon img {
+.list_columns .list_avatarIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list_columns .list_avatarIcon img{
+    /* width: 150px; */
+    border-radius: 50%;
+}
+.list_optionsInfo {
+    padding: 1em;
+}
+
+.list_li .list_avatarIcon img {
 width: 90%;
 height: 75%;
 margin: auto 0;
 object-fit: cover;
 object-position: top;
-background-color: #137ced;
+background-color: #bbb;
 border-radius: 50%;
+box-shadow: 0 3px 30px rgb(0 0 0 / 7%);
 }
 
-.list_li .list_-infoText {
-display: -webkit-flex;
-display: -moz-box;
-display: flex;
--webkit-flex-wrap: wrap;
-flex-wrap: wrap;
--webkit-flex-direction: row;
--moz-box-orient: horizontal;
--moz-box-direction: normal;
+.list_li .list_infoText {
 width: 100%;
 padding: 1em;
-align-items: flex-start;
-align-content: center;
-flex-direction: column;
 }
 
-.list_li .list_-infoText .list_displayBadge {
+.list_li .list_infoText .list_displayBadge {
+display: inline-block !important;
 padding: .3em .6em;
 border-radius: 15px;
-background-color: #6c5ce7;
-border: 1px solid #6c5ce7;
+background-color: var(--bs-primary);
+/* border: 1px solid var(--bs-primary); */
 color: #fff;
 margin-bottom: .4em;
 }
 
-
-.list_li .list_-infoText .list_infoTitle {
+.list_li .list_infoText .list_infoTitle {
 font-size: 1.5em;
 }
 
-.list_li .list_-infoText .list_displayBadge,
-.list_li .list_-infoText .list_infoTitle {
+.list_li .list_infoText .list_displayBadge,
+.list_li .list_infoText .list_infoTitle {
 overflow: hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-box-orient: vertical;  
 }
 
-.list_li .list_-infoText .list_displayBadge,
-.list_li .list_-infoText .list_infoTitle {
+.list_li .list_infoText .list_displayBadge,
+.list_li .list_infoText .list_infoTitle {
 -webkit-line-clamp: 1; /* number of lines to show */
 line-clamp: 1; 
 }
 
-.list_li .list_-infoText .list_rating {
+.list_li .list_infoText .list_rating {
 color: #fff;
 }
 
-.list_li .list_-infoText p {
+.list_li .list_infoText p {
 -webkit-line-clamp: 2; /* number of lines to show */
 line-clamp: 2; 
 margin-bottom: 0;

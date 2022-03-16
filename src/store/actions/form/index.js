@@ -111,4 +111,5 @@ export {
     _setAllowGeolocation,
     _setSupportGeolocation,
     _resetForm,
+    _setCategory
 }

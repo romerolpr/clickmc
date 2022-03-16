@@ -10,7 +10,7 @@ import {
     _setPageSubtitle
 } from '../../../store/actions/informations';
 
-import { toast } from 'react-toastify';
+import { ContainerApp } from '../../../containers';
 
 import { Loading } from '../';
 import { useEffect, useState } from 'react';
@@ -54,45 +54,47 @@ const User = () => {
         return <Loading />
     
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <ContainerApp current={'Você'}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
 
-            <p className="text-muted">Por favor, informe seu nome para que possamos informar ao médico</p>
+                <p className="text-muted">Por favor, informe seu nome para que possamos informar ao médico</p>
 
-            <Form.Group className="mb-3">
-                <Form.Label>Seu nome</Form.Label>
-                <input 
-                name="name"
-                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                type="text"
-                placeholder="Informe seu nome" 
-                {...register('name')}
-                defaultValue={formValues.name != null ? formValues.name : null}
-                />
-                <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
-            </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Seu nome</Form.Label>
+                    <input 
+                    name="name"
+                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                    type="text"
+                    placeholder="Informe seu nome" 
+                    {...register('name')}
+                    defaultValue={formValues.name != null ? formValues.name : null}
+                    />
+                    <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
+                </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Form.Label>Seu telefone</Form.Label>
-                <input 
-                name="phone"
-                className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
-                type="text"
-                placeholder="Informe seu telefone" 
-                defaultValue={formValues.phone != null ? formValues.phone : null}
-                {...register('phone')}
-                />
-                <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>
-            </Form.Group>
-            
-            <button
-            type="submit" 
-            className="btn btn-primary"
-            disabled={isSubmitting}
-            >
-                {isSubmitting ? 'Salvando...' : 'Salvar e continuar' }
-            </button>
+                <Form.Group className="mb-3">
+                    <Form.Label>Seu telefone</Form.Label>
+                    <input 
+                    name="phone"
+                    className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                    type="text"
+                    placeholder="Informe seu telefone" 
+                    defaultValue={formValues.phone != null ? formValues.phone : null}
+                    {...register('phone')}
+                    />
+                    <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>
+                </Form.Group>
+                
+                <button
+                type="submit" 
+                className="btn btn-primary"
+                disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Salvando...' : 'Salvar e continuar' }
+                </button>
 
-        </Form>
+            </Form>
+        </ContainerApp>
     )
 }
 

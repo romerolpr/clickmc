@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 
+import ContentLoader from "react-content-loader";
+
 import { useState, useEffect } from "react";
 
 import styles from '../../../_assets/css/modules/searchMedical.module.css';
 import { dateFormat } from "../../../constants/dateFormat";
 import { API } from "../../../constants";
-import { Loading } from "../../../components";
 
 import {
     _setAvailableMedical
@@ -19,16 +20,52 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
     const [ isLoading, setLoading ] = useState(true)
     const [ content, setContent ] = useState(undefined)
 
-    const toggleLoadPackage = (e) => {
+    const fetchApi = () => {
+
+        setLoading(true)
+        API
+        .get(`disponibilidade/id/${medicalCategoryId}`)
+        .then((response) => {
+    
+            if (response.status == 200) {
+                setContent(response.data)
+            }
+
+            setTimeout(() => setLoading(false), 1000)    
+            
+        })
+        .catch(() => {
+            setLoading(false)
+        })
+
+    }
+
+    const LoaderPackages = () => (
+        <ContentLoader
+            viewBox="0 5 120 30" 
+            backgroundColor={'#dedede'}
+            backgroundOpacity={0.35}
+            foregroundColor={'#eee'}
+            foregroundOpacity={0.25}
+            >
+                <rect x="10" y="8" rx="1" ry="1" width="45" height="3" />
+                <rect x="57" y="8" rx="1" ry="1" width="10" height="3" />
+                <rect x="10" y="13" rx="1" ry="1" width="40" height="25" />
+                <rect x="52" y="13" rx="1" ry="1" width="40" height="25" />
+                <rect x="94" y="13" rx="1" ry="1" width="40" height="25" />
+        </ContentLoader>
+    )
+
+    const toggleLoadPackage = button => {
         const packageTemp = {
             medical: {
-                id: e.target.dataset.id,
-                name: e.target.dataset.name
+                id: button.dataset.id,
+                name: button.dataset.name
             },
-            datetime: [e.target.dataset.date, e.target.dataset.hour].join(' ')
+            datetime: [button.dataset.date, button.dataset.hour].join(' ')
         }
         dispatch(_setAvailableMedical(packageTemp))
-        e.target.classList.add(styles.selectedHour)
+        button.classList.add(styles.selectedHour)
     }
 
     const getCurrentDate = (timestamp, interator) => {
@@ -55,22 +92,45 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
 
     }
 
+    const getSimpleDates = (key, medicalCategoryId, medicalName, date, hour, timeState, dateState) => {
+
+        if (timeState != undefined && dateState != undefined)
+            return <span 
+            key={key} 
+            onClick={(e) => toggleLoadPackage(e.target)}
+            className={timeState == hour+':00' && dateState == date && medicalName == formValues.availableMedical.medical.name ? `selectHour ${styles.optionsActive}` : 'selectHour' } 
+            data-id={medicalCategoryId}
+            data-name={medicalName}
+            data-date={date}
+            data-hour={hour}
+            >{hour}</span>
+
+        return <span 
+            key={key} 
+            onClick={(e) => toggleLoadPackage(e.target)}
+            className="selectHour" 
+            data-id={medicalCategoryId}
+            data-name={medicalName}
+            data-date={date}
+            data-hour={hour}>{hour}</span>
+    }
+
     const SelectDate = ({date, hours}) => {
 
         const listHours = [
-            '10:00','10:30',
-            '11:00','11:30',
-            '12:00','12:30',
-            '13:00','13:30',
-            '14:00','14:30',
-            '15:00','15:30','15:50',
-            '16:00','16:30','16:45',
-            '17:00','17:30',
-            '18:00','18:30',
+            '10:00','10:30','10:45','10:55',
+            '11:00','11:30','11:45','11:55',
+            '12:00','12:30','12:45','12:55',
+            '13:00','13:30','13:45','13:55',
+            '14:00','14:30','14:45','14:55',
+            '15:00','15:30','15:45','15:55',
+            '16:00','16:30','16:45','16:55',
+            '17:00','17:30','17:45','17:55',
+            '18:00','18:30','18:45','18:55',
             '19:00','19:30','19:45','19:55',
             '21:00','21:30','21:45','21:55',
-            '22:00','22:10','22:15'
-        ]   
+            '22:00','22:30','22:45','22:55'
+        ]
 
         listHours.sort()
         
@@ -120,32 +180,6 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
                                 const now = {
                                     compare: [defineCurrent.getHours(), fixMinutes(defineCurrent.getMinutes())].join(''),
                                     timestamp: defineCurrent.getTime()
-                                }
-
-                                const getSimpleDates = (key, medicalCategoryId, medicalName, date, hour, timeState, dateState) => {
-                                    return (timeState != undefined && dateState != undefined ? (
-                                        <span 
-                                        key={key} 
-                                        onClick={toggleLoadPackage}
-                                        className="selectHour" 
-                                        data-id={medicalCategoryId}
-                                        data-name={medicalName}
-                                        data-date={date}
-                                        data-hour={hour}
-                                        style={{
-                                            borderColor: timeState == hour+':00' && dateState == date && medicalName == formValues.availableMedical.medical.name ? '#fff' : '#58a4f5' 
-                                        }}
-                                        >{hour}</span>
-                                    ) : (
-                                        <span 
-                                        key={key} 
-                                        onClick={toggleLoadPackage}
-                                        className="selectHour" 
-                                        data-id={medicalCategoryId}
-                                        data-name={medicalName}
-                                        data-date={date}
-                                        data-hour={hour}>{hour}</span>
-                                    ))
                                 }
                                 
                                 if (defineDate.toLocaleDateString() == defineCurrent.toLocaleDateString()) {
@@ -197,30 +231,6 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
     }
 
     useEffect(() => {
-
-        function fetchApi() {
-            setLoading(true)
-            API
-            .get(`disponibilidade/id/${medicalCategoryId}`)
-            .then((response) => {
-        
-                if (response.status != 200) {
-                    
-                } else {
-                    setContent(response.data)
-                }
-        
-                setTimeout(() => {
-                    setLoading(false)
-                }, 500)
-                
-            })
-            .catch(() => {
-                setLoading(false)
-                
-            })
-
-        }
         
         fetchApi()
 
@@ -232,7 +242,7 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
     }, [])
 
     if (isLoading) {
-        return <Loading />
+        return <LoaderPackages />
     }
 
     function adjustDateString (date) {

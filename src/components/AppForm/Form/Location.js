@@ -26,7 +26,6 @@ import { Loading } from '../';
 import { useEffect, useState } from 'react';
 
 import { nextProgress } from '../nextProgress';
-import { initialPageInformations } from '../../../_settings/reducer/initialPageInformations';
 
 const Location = () => {
 

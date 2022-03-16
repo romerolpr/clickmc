@@ -6,51 +6,44 @@ import {
 } from "../../../services/app/steps";
 
 import { 
-    _setPageSubtitle
+    _setPageSubtitle,
 } from '../../../store/actions/informations';
+
+import {
+    _setCategory
+} from '../../../store/actions/form';
 
 import { Fragment, useState, useEffect } from "react";
 
-import container from '../../../_assets/css/modules/appBreadcrumb.module.css';
+import { ContainerApp } from "../../../containers";
 
 const Specialist = () => {
 
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues)
+
+    const { category } = formValues
     
-    const [ medicalCategory, setMedicalCategory ] = useState(null)
     const [ pageTitle, setPageTitle ] = useState(null)
 
     const ManageComponent = () => {
         // Se uma categoria ja foi selecionada e a localizacao existir
-        if (medicalCategory != null 
+        if (category != null 
             && formValues.manualGeolocation != null) {
-            setPageTitle(`Selecione por ${medicalCategory}`)
-            return <SearchMedical category={medicalCategory} pageTitle={setPageTitle} />
+            setPageTitle(`Selecione por ${category}`)
+            return (
+                <Fragment>
+                    <SearchMedical category={category} pageTitle={setPageTitle} />
+                </Fragment>
+            )
         }
 
-        return <SelectMedical defineCategory={setMedicalCategory} />
+        return <SelectMedical defineCategory={handleMedicalCategory} />
     }
-    
-    const Container = ({ children }) => (
-        <Fragment>
-            <div className={container.breadcrumb}>
-                <nav>
-                    <ol className="breadcrumb">
-                        <li className={`breadcrumb-item ${container.link}`}>
-                            Categoria
-                        </li>
-                        <li className="breadcrumb-item active">
-                            Categoria de especialista
-                        </li>
-                        {/* <li className="breadcrumb-item active">Data</li> */}
-                    </ol>
-                </nav>
-                <h2>{ pageTitle }</h2>
-            </div>
-            { children }
-        </Fragment>
-    )
+
+    const handleMedicalCategory = category => {
+        dispatch( _setCategory(category) )
+    }
 
     useEffect(() => {
         setPageTitle('Informe a categoria de especialista')
@@ -58,9 +51,9 @@ const Specialist = () => {
     }, [])
 
     return (
-        <Container>
+        <ContainerApp pageTitle={pageTitle} current={'Categoria de especialista'}>
             <ManageComponent />
-        </Container>
+        </ContainerApp>
     )
 }
 
