@@ -10,13 +10,10 @@ import { ScheduleMedical } from "./ScheduleMedical";
 
 import ContentLoader from "react-content-loader";
 
-import { Button } from 'react-bootstrap';
-
 import { useFetch } from "../../fetch/useFetch";
+import { randomNumber } from "../../../constants";
 
-import { image } from "../../../constants";
-
-import { Img } from 'react-image';
+// import { Img } from 'react-image';
 
 const SearchMedical = ({ category }) => {
 
@@ -29,43 +26,42 @@ const SearchMedical = ({ category }) => {
 
     const Image = ({ imageSrc, title }) => {
 
-        const unloaded = '/images/avatar/image_uvailable.png'
+        // const unloaded = '/images/avatar/image_uvailable.png'
 
-        return <Img src={imageSrc} loader={unloaded} unloader={unloaded} title={title}/>
+        // return <Img src={imageSrc} loader={unloaded} unloader={unloaded} title={title}/>
+
+        return <Loading label={false}/>
         
+    }
+
+    const GettingItems = () => {
+        const location = [20, 17, 26]
+        const titles = [65, 67, 54]
+        const number = randomNumber(0, 2)
+        return (
+            <ContentLoader
+                viewBox="0 5 150 55" 
+                backgroundColor={'#dedede'}
+                backgroundOpacity={0.35}
+                foregroundColor={'#eee'}
+                foregroundOpacity={0.25}
+                >
+                    <rect x="20" y="8" rx="50" ry="50" width="20" height="20" />
+                    <rect x="52" y="8" rx="1" ry="1" width={location[number]} height="5" />
+                    <rect x="52" y="15" rx="1" ry="1" width={titles[number]} height="5" />
+                    <rect x="10" y="32" rx="1" ry="1" width="40" height="25" />
+                    <rect x="52" y="32" rx="1" ry="1" width="40" height="25" />
+                    <rect x="94" y="32" rx="1" ry="1" width="40" height="25" />
+            </ContentLoader>
+        )
     }
 
     if (items == null || items.length == 0) {
         return (
-            <div className={styles.selectFormMedical}>
-                <div className={styles.list_medical}>
-                    <div className={styles.list_li}>
-                        <div className={styles.list_gridColumnControl}>
-                            <div className={styles.list_optionsInfo}>
-                                <div className={styles.list_columns}>
-                                    <div className={styles.list_avatarIcon}>
-                                        <Loading label={false}/>
-                                    </div>
-                                    <ContentLoader
-                                        viewBox="0 5 100 20" 
-                                        backgroundColor={'#dedede'}
-                                        backgroundOpacity={0.35}
-                                        foregroundColor={'#eee'}
-                                        foregroundOpacity={0.25}
-                                        >
-                                        <rect x="10" y="8" rx="1" ry="1" width="45" height="5" />
-                                    </ContentLoader>
-                                </div>
-                                <div className={styles.list_availableScheduling}>
-                                    <div className={styles.optionsCarousel} style={{marginLeft: 0}}>
-                                        <ScheduleMedical medicalName={null} medicalCategoryId={null}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Fragment>
+                <GettingItems />
+                <GettingItems />
+            </Fragment>
         )
     }
 

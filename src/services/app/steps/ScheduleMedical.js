@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import ContentLoader from "react-content-loader";
+import { Loading } from '../../../components';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 import styles from '../../../_assets/css/modules/searchMedical.module.css';
 import { dateFormat } from "../../../constants/dateFormat";
@@ -41,19 +41,11 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
     }
 
     const LoaderPackages = () => (
-        <ContentLoader
-            viewBox="0 5 120 30" 
-            backgroundColor={'#dedede'}
-            backgroundOpacity={0.35}
-            foregroundColor={'#eee'}
-            foregroundOpacity={0.25}
-            >
-                <rect x="10" y="8" rx="1" ry="1" width="45" height="3" />
-                <rect x="57" y="8" rx="1" ry="1" width="10" height="3" />
-                <rect x="10" y="13" rx="1" ry="1" width="40" height="25" />
-                <rect x="52" y="13" rx="1" ry="1" width="40" height="25" />
-                <rect x="94" y="13" rx="1" ry="1" width="40" height="25" />
-        </ContentLoader>
+        <Fragment>
+            <div className="col-4"><Loading label={false}/></div>
+            <div className="col-4"><Loading label={false}/></div>
+            <div className="col-4"><Loading label={false}/></div>
+        </Fragment>
     )
 
     const toggleLoadPackage = button => {
