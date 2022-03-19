@@ -6,22 +6,28 @@ import { useState, useEffect, Fragment } from "react";
 
 import styles from '../../../_assets/css/modules/searchMedical.module.css';
 import { dateFormat } from "../../../constants/dateFormat";
-import { API } from "../../../constants";
+import { API, compareObjects } from "../../../constants";
 
 import {
     _setAvailableMedical
 } from '../../../store/actions/form';
+
+import { isAvailableSchedule } from "./store";
+import { toast } from "react-toastify";
+import { listMedical } from "../../../_settings/reducer/initialForm";
 
 const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
 
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues)
 
+    const { availableMedical } = formValues
+
     const [ isLoading, setLoading ] = useState(true)
     const [ content, setContent ] = useState(undefined)
 
     const fetchApi = () => {
-
+   
         setLoading(true)
         API
         .get(`disponibilidade/id/${medicalCategoryId}`)
@@ -49,6 +55,7 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
     )
 
     const toggleLoadPackage = button => {
+        
         const packageTemp = {
             medical: {
                 id: button.dataset.id,
@@ -56,8 +63,19 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
             },
             datetime: [button.dataset.date, button.dataset.hour].join(' ')
         }
-        dispatch(_setAvailableMedical(packageTemp))
+
+        const { isAvailable } = isAvailableSchedule(packageTemp)
+
+        if ( compareObjects(availableMedical, packageTemp) ) { 
+            packageTemp = null
+        } else if ( isAvailable.length ) {
+            toast.info('Esse horário já foi agendado por outro paciente. Escolha outro.')
+        } else {
+            dispatch(_setAvailableMedical(packageTemp))
+        }
+
         button.classList.add(styles.selectedHour)
+        
     }
 
     const getCurrentDate = (timestamp, interator) => {
@@ -90,7 +108,7 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
             return <span 
             key={key} 
             onClick={(e) => toggleLoadPackage(e.target)}
-            className={timeState == hour+':00' && dateState == date && medicalName == formValues.availableMedical.medical.name ? `selectHour ${styles.optionsActive}` : 'selectHour' } 
+            className={timeState == hour+':00' && dateState == date && medicalName == availableMedical.medical.name ? `selectHour ${styles.optionsActive}` : 'selectHour' } 
             data-id={medicalCategoryId}
             data-name={medicalName}
             data-date={date}
@@ -109,20 +127,7 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
 
     const SelectDate = ({date, hours}) => {
 
-        const listHours = [
-            '10:00','10:30','10:45','10:55',
-            '11:00','11:30','11:45','11:55',
-            '12:00','12:30','12:45','12:55',
-            '13:00','13:30','13:45','13:55',
-            '14:00','14:30','14:45','14:55',
-            '15:00','15:30','15:45','15:55',
-            '16:00','16:30','16:45','16:55',
-            '17:00','17:30','17:45','17:55',
-            '18:00','18:30','18:45','18:55',
-            '19:00','19:30','19:45','19:55',
-            '21:00','21:30','21:45','21:55',
-            '22:00','22:30','22:45','22:55'
-        ]
+        const listHours = listMedical.hours
 
         listHours.sort()
         
@@ -178,9 +183,9 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
                                     
                                     if (free.compare >= now.compare)
                                         
-                                        if (formValues.availableMedical != undefined) {
+                                        if (availableMedical != undefined) {
 
-                                            const datetimestr = new Date(formValues.availableMedical.datetime)
+                                            const datetimestr = new Date(availableMedical.datetime)
                                             const timeState = datetimestr.toLocaleTimeString()
                                             const dateState = [datetimestr.getFullYear(), datetimestr.getMonth()+1, datetimestr.getDate()].join('-')
                                         
@@ -194,9 +199,9 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
 
                                 } else {
 
-                                    if (formValues.availableMedical != undefined) {
+                                    if (availableMedical != undefined) {
 
-                                        const datetimestr = new Date(formValues.availableMedical.datetime)
+                                        const datetimestr = new Date(availableMedical.datetime)
                                         const timeState = datetimestr.toLocaleTimeString()
                                         const dateState = [datetimestr.getFullYear(), datetimestr.getMonth()+1, datetimestr.getDate()].join('-')
 
@@ -227,7 +232,6 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
         fetchApi()
 
         return () => {
-            
             setContent(undefined)
         }
 

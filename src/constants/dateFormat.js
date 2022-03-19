@@ -1,4 +1,4 @@
-const dateFormat = (value) => {
+const dateFormat = value => {
     
     let dateString;
 

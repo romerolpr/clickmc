@@ -59,7 +59,9 @@ function _positionByMedical(categories, coords) {
 
     }
 
-    console.log(items)
+    if ( items.length === 0 ) {
+        return { items: false }
+    }
 
     return { items }
     

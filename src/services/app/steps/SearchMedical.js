@@ -1,7 +1,5 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
-
-import { Loading } from '../../../components';
 
 import styles from '../../../_assets/css/modules/searchMedical.module.css';
 
@@ -13,12 +11,14 @@ import ContentLoader from "react-content-loader";
 import { useFetch } from "../../fetch/useFetch";
 import { randomNumber } from "../../../constants";
 
-// import { Img } from 'react-image';
+import { Img } from 'react-image';
 
 const SearchMedical = ({ category }) => {
 
     const formValues = useSelector( (state) => state.formValues);
-    const { coordinates } = formValues
+    const { coordinates, name } = formValues
+
+    name = name.split(' ')[0]
 
     const { data: categories } = useFetch(`usuario/categoria/${category}`)
 
@@ -26,13 +26,13 @@ const SearchMedical = ({ category }) => {
 
     const Image = ({ imageSrc, title }) => {
 
-        // const unloaded = '/images/avatar/image_uvailable.png'
+        const unloaded = '/images/avatar/image_uvailable.png'
+        return <Img src={imageSrc} loader={unloaded} unloader={unloaded} title={title}/>
 
-        // return <Img src={imageSrc} loader={unloaded} unloader={unloaded} title={title}/>
-
-        return <Loading label={false}/>
+        // return <Loading label={false}/>
         
     }
+
 
     const GettingItems = () => {
         const location = [20, 17, 26]
@@ -65,20 +65,18 @@ const SearchMedical = ({ category }) => {
         )
     }
 
-    // if () {
-    //     return (
-    //         <Fragment>
-    //             <p>Olá {formValues.name.split(' ')[0]}, infelizmente não conseguimos localizar nenhum especialista na categoria de {category} próximo de você.</p>
-    //         </Fragment>
-    //     )
-    // }
+    if (items === false) {
+        return (
+            <Fragment>
+                <p>{ name }, infelizmente não conseguimos localizar nenhum especialista na categoria de {category} próximo de você.</p>
+            </Fragment>
+        )
+    }
 
     return (
         <Fragment>
-            {console.log(items)}
-            <p>{formValues.name.split(' ')[0]}, nós encontramos estes especialistas próximos de você.</p>
+            <p>{ name }, nós encontramos estes especialistas próximos de você.</p>
             <div className={styles.selectFormMedical}>
-                    
                 {items.map( (item, indice) => 
                     <div key={indice} className={styles.list_medical}>
                         <div className={styles.list_li}>
@@ -104,11 +102,7 @@ const SearchMedical = ({ category }) => {
                         </div>
                     </div>
                 )}
-                <button
-                className="btn btn-primary"
-                >
-                    Salvar e continuar
-                </button>
+                
             </div>
         </Fragment>
     )

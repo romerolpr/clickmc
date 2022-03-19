@@ -22,7 +22,7 @@ const Specialist = () => {
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues)
 
-    const { category } = formValues
+    const { category, availableMedical } = formValues
     
     const [ pageTitle, setPageTitle ] = useState(null)
 
@@ -34,10 +34,19 @@ const Specialist = () => {
             return (
                 <Fragment>
                     <SearchMedical category={category} pageTitle={setPageTitle} />
+                    <button
+                    style={{
+                        marginBottom: '1em'
+                    }}
+                    className="btn btn-primary"
+                    disabled={ availableMedical == null }
+                    >
+                        Continuar com agendamento
+                    </button>
                 </Fragment>
             )
         }
-
+        setPageTitle('Informe a categoria de especialista')
         return <SelectMedical defineCategory={handleMedicalCategory} />
     }
 

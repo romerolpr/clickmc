@@ -5,3 +5,5 @@ export * from './selectThisOption';
 export * from './image';
 export * from './identifyProgressLink';
 export * from './randomNumber';
+export * from './compareObjects';
+export * from './dateFormat';
