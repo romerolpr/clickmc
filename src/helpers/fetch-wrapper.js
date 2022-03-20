@@ -16,20 +16,32 @@ function patch(url, body) {
     return handleResponse( API.patch(url, body) )
 }
 
+function authHeader(url) {
+    // return auth header with jwt if user is logged in and request is to the api url
+    const user = userService.userValue;
+    const isLoggedIn = user && user.token;
+    const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
+    if (isLoggedIn && isApiUrl) {
+        return { Authorization: `Bearer ${user.token}` };
+    } else {
+        return {};
+    }
+}
+
+
 // realiza o tratamento das respostas das requisições
 function handleResponse(response) {
 
-    return response.then(text => {
-        const data = text.data;
-        
-        if (!data?.status) {
-            const error = (data && data.message);
-            toast.error('Não foi possível realizar requisição')
-            return Promise.reject(error);
-        }
+    const data = response.data;
 
-        return data;
-    });
+    if (!response?.status) {
+        const error = (response && response.message);
+
+        return Promise.reject(error);
+    }
+
+    return data
+
 }
 
 export const fetchWrapper = {

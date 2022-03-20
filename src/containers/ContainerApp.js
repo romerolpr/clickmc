@@ -7,12 +7,19 @@ import {
     _setCategory
 } from '../store/actions/form';
 
+import { nextProgress } from '../components/AppForm/nextProgress';
+
 const ContainerApp = ({ children, pageTitle, current }) => {
     
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues)
     
-    const { progress, category } = formValues
+    const { progress, category, medical } = formValues
+
+    const handleCategory = () => {
+        dispatch( _setCategory(null) )
+        nextProgress(dispatch, formValues)
+    }
 
     return (
         <Fragment>
@@ -21,12 +28,32 @@ const ContainerApp = ({ children, pageTitle, current }) => {
                     <ol className="breadcrumb">
                         { progress > 0 && (
                             <li className={`breadcrumb-item ${container.link}`} onClick={() => dispatch( _updateProgress(progress - 1) )}>
-                                <i class="bi bi-arrow-left-short"></i> Anterior
+                                <i className="bi bi-arrow-left-short"></i> Anterior
                             </li>
                         )}
                         { category != null && (
-                            <li className={`breadcrumb-item ${container.link}`} onClick={() => dispatch( _setCategory(null) )}>
+                            <>
+                                <li className={`breadcrumb-item ${container.link}`} 
+                                onClick={() => handleCategory()} 
+                                onMouseEnter={e => {
+                                    e.preventDefault()
+                                    e.target.textContent = 'Alterar categoria'
+                                }}
+                                onMouseLeave={e => {
+                                    e.preventDefault()
+                                    e.target.textContent = 'Categoria'
+                                }}
+                                >
+                                    Categoria
+                                </li>
+                                <li className={`breadcrumb-item ${container.not_link}`}>
                                 { category }
+                                </li>
+                            </>
+                        )}
+                        { medical != null && (
+                            <li className={`breadcrumb-item ${container.not_link}`}>
+                                { medical }
                             </li>
                         )}
                         <li className="breadcrumb-item active">

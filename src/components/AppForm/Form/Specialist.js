@@ -10,7 +10,8 @@ import {
 } from '../../../store/actions/informations';
 
 import {
-    _setCategory
+    _setCategory,
+    _updateProgress
 } from '../../../store/actions/form';
 
 import { Fragment, useState, useEffect } from "react";
@@ -22,7 +23,7 @@ const Specialist = () => {
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues)
 
-    const { category, availableMedical } = formValues
+    const { category, availableMedical, progress } = formValues
     
     const [ pageTitle, setPageTitle ] = useState(null)
 
@@ -40,6 +41,7 @@ const Specialist = () => {
                     }}
                     className="btn btn-primary"
                     disabled={ availableMedical == null }
+                    onClick={() => dispatch( _updateProgress(progress + 1) )}
                     >
                         Continuar com agendamento
                     </button>

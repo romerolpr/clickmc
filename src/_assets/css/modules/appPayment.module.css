@@ -1,0 +1,98 @@
+.list_payments {
+    float: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+ 
+.options_point {
+    float: left;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: .5em;
+  }
+ 
+.delete-card::after {
+    content: 'x' !important;
+    color: #aaa;
+    line-height: 15px;
+    border-color: transparent !important;
+  }
+ 
+.options_point::after {
+    content: '';
+    display: block;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    transition:  all .3s ease;
+  }
+ 
+.options_payment {
+    float: left;
+    width: 100%;
+    padding: 1em;
+    border-radius: 5px;
+    margin: .65em 0;
+    background-color: #fff;
+    color: #444;
+    border: 1px solid transparent;
+    box-shadow: 0 3px 15px rgb(0 0 0 / 9%);
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+ 
+  .options_payment:hover {
+    border-color: var(--bs-primary);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 14%);
+  }
+  .options_payment:hover .options_point::after{
+    border-color: var(--bs-primary);
+  }
+ 
+  .options_payment p {
+    margin: .15em 0;
+    color: #444;
+  }
+ 
+  .options_text_price {
+    
+    font-weight: bold;
+  }
+  /* .old-price {
+    text-decoration: line-through;
+  } */
+  .old_price,
+  .old_price_discount {
+    font-weight: normal;
+    color: #ddd !important;
+    font-size: .85em;
+  }
+ 
+  .appointment {
+    float: left;
+    width: 100%;
+  }
+ 
+  .group_cards {
+    float: left;
+    margin: 1.25em 0;
+    /* border-radius: 3px; */
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .05em;
+  }
+ 
+  .group_cards img {
+    float: left;
+    margin-left: .5em;
+    height: auto;
+  }

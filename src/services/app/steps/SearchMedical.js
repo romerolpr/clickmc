@@ -12,6 +12,7 @@ import { useFetch } from "../../fetch/useFetch";
 import { randomNumber } from "../../../constants";
 
 import { Img } from 'react-image';
+import { Loading } from "../../../components";
 
 const SearchMedical = ({ category }) => {
 
@@ -26,13 +27,12 @@ const SearchMedical = ({ category }) => {
 
     const Image = ({ imageSrc, title }) => {
 
-        const unloaded = '/images/avatar/image_uvailable.png'
-        return <Img src={imageSrc} loader={unloaded} unloader={unloaded} title={title}/>
+        const unloaded = <img src='/image/avatar/default.png' />
+        const loading = <Loading label={false}/>
 
-        // return <Loading label={false}/>
-        
+        return <Img src={imageSrc} loader={loading} unloader={unloaded} title={title}/>
+
     }
-
 
     const GettingItems = () => {
         const location = [20, 17, 26]

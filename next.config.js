@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   serverRuntimeConfig: {
     // chave segura com 16 caracteres 
-    secret: 'dE#eHptpxp6Syyz!',
+    secret: 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3',
     env: {
       "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "root",

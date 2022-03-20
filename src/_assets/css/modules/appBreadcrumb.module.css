@@ -13,3 +13,15 @@
 .link:hover {
     text-decoration: underline;
 }
+
+.not_link {
+    color: #777;
+    cursor: default;
+}
+
+.link, .not_link {
+    max-width: 125px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

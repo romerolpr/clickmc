@@ -13,11 +13,7 @@ import { toast } from "react-toastify";
 /**
  * Components form
 */
-import { 
-    Location, 
-    User,
-    Specialist
-} from "./Form";
+import * as Step from "./Form";
 
 const Main = () => {
 
@@ -40,15 +36,15 @@ const Main = () => {
     // Inclui o componente por estágio de progresso
     switch (progress) {
         case 0:
-            return <Location />
+            return <Step.Location />
         case 1:
-            return <User />
+            return <Step.User />
         case 2:
-            return <Specialist />
+            return <Step.Specialist />
         case 3:
-            return "O componente ainda não foi criado."
+            return <Step.Confirm />
         case 4:
-            return "O componente ainda não foi criado."
+            return <Step.Finish />
         default:
             if (DEVELOPER_MODE) 
                 toast.info('Nenhum componente foi selecionado')

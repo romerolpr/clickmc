@@ -9,7 +9,7 @@ import { dateFormat } from "../../../constants/dateFormat";
 import { API, compareObjects } from "../../../constants";
 
 import {
-    _setAvailableMedical
+    _setAvailableMedical, _setMedical
 } from '../../../store/actions/form';
 
 import { isAvailableSchedule } from "./store";
@@ -66,12 +66,14 @@ const ScheduleMedical = ({ medicalName, medicalCategoryId, interval }) => {
 
         const { isAvailable } = isAvailableSchedule(packageTemp)
 
-        if ( compareObjects(availableMedical, packageTemp) ) { 
-            packageTemp = null
+        if ( !compareObjects(availableMedical, packageTemp) ) { 
+            dispatch(_setAvailableMedical(packageTemp))
+            dispatch(_setMedical(button.dataset.name))
         } else if ( isAvailable.length ) {
             toast.info('Esse horário já foi agendado por outro paciente. Escolha outro.')
         } else {
-            dispatch(_setAvailableMedical(packageTemp))
+            dispatch(_setAvailableMedical(null))
+            dispatch(_setMedical(null))
         }
 
         button.classList.add(styles.selectedHour)

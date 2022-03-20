@@ -26,6 +26,7 @@ import { Loading } from '../';
 import { useEffect, useState } from 'react';
 
 import { nextProgress } from '../nextProgress';
+import { ContainerApp } from '../../../containers';
 
 const Location = () => {
 
@@ -103,51 +104,54 @@ const Location = () => {
         return <Loading />
     
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <ContainerApp current={'Localização'}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <h2>Sua localização</h2>
+                <p>Informe sua localização para que possamos buscar o especialista mais próximo</p>
+                <Form.Group className="mb-3">
+                    <Form.Label>CEP</Form.Label>
+                    <input 
+                    className="form-control"
+                    name="postalCode"
+                    type="text"
+                    placeholder="00000-000" 
+                    pattern="\d{5}-\d{3}"
+                    defaultValue={formValues.manualGeolocation != 'getCurrentLocation' ? formValues.manualGeolocation : null}
+                    onKeyUp={ () => {
+                        setManualPostalCode(true)
+                        removeByClassName(`.${elem.selected}`, elem.selected)
+                    }}
+                    {...register('postalCode')}
+                    />
+                    <Form.Text className="text-muted">Por favor, insira o código postal ou utilize sua localização atual.</Form.Text>
+                    <div className="invalid-feedback">{errors.postalCode?.message}</div>
+                </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Form.Label>CEP</Form.Label>
-                <input 
-                className="form-control"
-                name="postalCode"
-                type="text"
-                placeholder="00000-000" 
-                pattern="\d{5}-\d{3}"
-                defaultValue={formValues.manualGeolocation != 'getCurrentLocation' ? formValues.manualGeolocation : null}
-                onKeyUp={ () => {
-                    setManualPostalCode(true)
-                    removeByClassName(`.${elem.selected}`, elem.selected)
-                }}
-                {...register('postalCode')}
-                />
-                <Form.Text className="text-muted">Por favor, insira o código postal ou utilize sua localização atual.</Form.Text>
-                <div className="invalid-feedback">{errors.postalCode?.message}</div>
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="postalCode">
+                    <button onClick={ e => {
+                        e.preventDefault()
+                        setLoading(true)
+                        navigatorGeolocation()
+                        setLoading(false)
+                        e.target.className = selectThisOption(e)
 
-            <Form.Group className="mb-3" controlId="postalCode">
-                <button onClick={ e => {
-                    e.preventDefault()
-                    setLoading(true)
-                    navigatorGeolocation()
-                    setLoading(false)
-                    e.target.className = selectThisOption(e)
-
-                    setManualPostalCode(false)
-                    setGeolocationEnabled(!geolocationEnabled)
-                    
-                }} className={formValues.manualGeolocation != 'getCurrentLocation' ? form.buttonLocation : `${form.buttonLocation} ${selectThisOption(null, true)}`}>
-                    <i className="bi bi-geo"></i> Usar minha localização atual
+                        setManualPostalCode(false)
+                        setGeolocationEnabled(!geolocationEnabled)
+                        
+                    }} className={formValues.manualGeolocation != 'getCurrentLocation' ? form.buttonLocation : `${form.buttonLocation} ${selectThisOption(null, true)}`}>
+                        <i className="bi bi-geo"></i> Usar minha localização atual
+                    </button>
+                </Form.Group>
+                
+                <button
+                type="submit" 
+                className="btn btn-primary"
+                >
+                    Salvar e continuar
                 </button>
-            </Form.Group>
-            
-            <button
-            type="submit" 
-            className="btn btn-primary"
-            >
-                Salvar e continuar
-            </button>
 
-        </Form>
+            </Form>
+        </ContainerApp>
     )
 }
 

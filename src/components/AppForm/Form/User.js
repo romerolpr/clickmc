@@ -57,7 +57,8 @@ const User = () => {
         <ContainerApp current={'Você'}>
             <Form onSubmit={handleSubmit(onSubmit)}>
 
-                <p className="text-muted">Por favor, informe seu nome para que possamos informar ao médico</p>
+                <h2>Suas informações básicas</h2> 
+                <p>Por favor, informe seu nome para que possamos informar ao médico</p>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Seu nome</Form.Label>

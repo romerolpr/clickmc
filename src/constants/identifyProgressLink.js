@@ -41,9 +41,7 @@ const test = ( dispatch, select, values ) => {
         && values.name != null
         && values.phone != null
         && values.category != null
-        && values.availableMedical != null
-        && values.payment != null
-        && values.urlCode != null) {
+        && values.availableMedical != null) {
             dispatch( _updateProgress(FINISH) )
             return true
         }

@@ -31,6 +31,13 @@ a.link:hover {
   font-weight: 500;
 }
 
+.fleft {
+  float: left;
+}
+.fright {
+  float: right;
+}
+
 .list-group-item.active {
   background-color: var(--bs-primary) !important;
   border-color:#12a56e !important;

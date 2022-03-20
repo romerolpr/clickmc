@@ -5,10 +5,10 @@ const LayoutForm = ( { children } ) => {
 
     return (
         <div className={modal.window_row}>
-            <div className={`col-4 ${modal.padding}`}>
+            <div className={`col-xs-12 col-sm-12 col-md-4 col-lg-4 ${modal.padding}`}>
                 <ListProgress />
             </div>
-            <div className={`col-8 ${modal.padding}`}>
+            <div className={`col-xs-12 col-sm-12 col-md-8 col-lg-8 ${modal.padding}`}>
                 { children }
             </div>
         </div>
