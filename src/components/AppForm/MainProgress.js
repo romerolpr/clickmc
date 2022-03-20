@@ -1,9 +1,4 @@
 import { useSelector } from "react-redux";
-import { 
-    _setAllowGeolocation, 
-    _setManualGeolocation,
-    _setSupportGeolocation
-} from '../../store/actions/form';
 
 import { Loading } from '../';
 import { useEffect, useState } from 'react';
