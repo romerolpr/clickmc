@@ -1,6 +1,6 @@
 import { LayoutStatic, Footer } from '/src/containers';
 
-const Buscar = () => {
+const Contato = () => {
     return (
         <LayoutStatic 
         breadcrumbLabel="Contato">
@@ -10,4 +10,4 @@ const Buscar = () => {
     )
 }
 
-export default Buscar
+export default Contato

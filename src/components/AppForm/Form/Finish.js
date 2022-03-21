@@ -54,15 +54,19 @@ const Finish = () => {
         }
         if (thereIsAccount) {
             return (
-                <Login thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
-                    <h2>Faça login para continuar</h2>
-                </Login>
+                <ContainerApp current={'Accesar conta'}>
+                    <Login thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
+                        <h2>Faça login para continuar</h2>
+                    </Login>
+                </ContainerApp>
             )
         }
         return (
-            <Register thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
-                <h2>Crie sua conta para continuar</h2>
-            </Register>
+            <ContainerApp current={'Criar conta'}>
+                <Register thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
+                    <h2>Crie sua conta para continuar</h2>
+                </Register>
+            </ContainerApp>
         )
     }
 

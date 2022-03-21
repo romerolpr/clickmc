@@ -13,3 +13,11 @@
     text-align: inherit;
     cursor: pointer;
 }
+
+.my_account {
+    background: #f1f1f1 !important;
+}
+.my_account span {
+    color: var(--bs-primary) !important;
+    font-weight: bold;
+}

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { identifyProgressLink } from "../../constants";
 
+import { userService } from '../../services';
+
 import {
     LOCATION,
     YOU,
@@ -11,11 +13,14 @@ import {
     FINISH
 } from '../../_settings/form/config';
 
+import styles from '/src/_assets/css/modules/listProgress.module.css';
+
 const ListProgress = () => {
 
     const dispatch = useDispatch()
 
     const formValues = useSelector( (state) => state.formValues)
+
     const { 
         progress,
         coordinates,
@@ -31,6 +36,13 @@ const ListProgress = () => {
     return (
         <Fragment>
             <div className="list-group">
+
+                { userService.userValue != undefined && (
+                    <span
+                    onClick={() => identifyProgressLink(LOCATION, dispatch, formValues)}
+                    className={`${_className} ${styles.my_account}`} 
+                    title="Minha conta">Olá, <span>{userService.userValue.username}</span></span>
+                ) }
 
                 <span
                 onClick={() => identifyProgressLink(LOCATION, dispatch, formValues)}

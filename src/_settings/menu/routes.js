@@ -6,15 +6,15 @@ export const initialLinks = [
     },
     {
         pathname: '/',
-        label: 'Minha conta',
+        label: 'Criar conta',
         // bespeak: true,
         dropdown: [
             {
-                pathname: '/login?_type=medico',
+                pathname: '/acesso/medico',
                 label: 'Sou Médico'
             },
             {
-                pathname: '/login?_type=paciente',
+                pathname: '/acesso/paciente',
                 label: 'Sou Paciente'
             }
         ]

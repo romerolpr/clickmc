@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Form } from 'react-bootstrap';
 
 import { userService } from '../../services';
-import { ContainerApp } from '../../containers';
+
 import { toast } from 'react-toastify';
 
 import { useRedux } from '../../services/fetch';
@@ -14,8 +14,11 @@ import {
     _setPhone
 } from '../../store/actions/form'
 import { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
 
-const Register = ({ thereIsAccount, setAuthorized, children }) => {
+const Register = ({ thereIsAccount, redirect, children }) => {
+
+    const router = useRouter()
 
     const { formValues, dispatch } = useRedux()
 
@@ -88,144 +91,148 @@ const Register = ({ thereIsAccount, setAuthorized, children }) => {
                 toast.success('Sua conta foi criada com sucesso')
                 dispatch( _setName(user.name) )
                 dispatch( _setPhone(user.phone) )
+                if (redirect != undefined) {
+                    router.push('/')
+                }
             })
     }
 
     return (
-        <ContainerApp current={'Criar conta'}>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="col-12 mb-3 fleft">
-                    { children }
-                </div>
-                <div className="row">
-                    <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                        <Form.Label>Seu nome</Form.Label>
-                        <input 
-                        name="name"
-                        className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                        type="text"
-                        placeholder="Informe seu nome completo" 
-                        defaultValue={formValues.name != null && formValues.name}
-                        {...register('name')}
-                        />
-                        <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
-                    </Form.Group>
-
-                    <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                        <Form.Label>Nome de usuário</Form.Label>
-                        <input 
-                        name="username"
-                        className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-                        type="text"
-                        placeholder="Informe seu nome de usuário"
-                        {...register('username')}
-                        />
-                        <Form.Text>O nome de usuário não poderá ser modificado depois</Form.Text>
-                        <Form.Text className="invalid-feedback">{errors.username?.message}</Form.Text>
-                    </Form.Group>
-                </div>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Seu telefone</Form.Label>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+            <div className="col-12 mb-3 fleft">
+                { children }
+            </div>
+            <div className="row">
+                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <Form.Label>Seu nome</Form.Label>
                     <input 
-                    name="phone"
-                    className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                    name="name"
+                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                     type="text"
-                    placeholder="Informe seu telefone"
-                    defaultValue={formValues.phone != null && formValues.phone}
-                    {...register('phone')}
+                    placeholder="Informe seu nome completo" 
+                    defaultValue={formValues.name != null && formValues.name}
+                    {...register('name')}
                     />
-                    <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>
+                    <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Seu e-mail</Form.Label>
+                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <Form.Label>Nome de usuário</Form.Label>
                     <input 
-                    name="email"
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    type="email"
-                    placeholder="Informe seu e-mail" 
-                    {...register('email')}
+                    name="username"
+                    className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                    type="text"
+                    placeholder="Informe seu nome de usuário"
+                    {...register('username')}
                     />
-                    <Form.Text className="invalid-feedback">{errors.email?.message}</Form.Text>
+                    <Form.Text>O nome de usuário não poderá ser modificado depois</Form.Text>
+                    <Form.Text className="invalid-feedback">{errors.username?.message}</Form.Text>
                 </Form.Group>
+            </div>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Data de nascimento</Form.Label>
+            <Form.Group className="mb-3">
+                <Form.Label>Seu telefone</Form.Label>
+                <input 
+                name="phone"
+                className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                type="text"
+                placeholder="Informe seu telefone"
+                defaultValue={formValues.phone != null && formValues.phone}
+                {...register('phone')}
+                />
+                <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Seu e-mail</Form.Label>
+                <input 
+                name="email"
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                type="email"
+                placeholder="Informe seu e-mail" 
+                {...register('email')}
+                />
+                <Form.Text className="invalid-feedback">{errors.email?.message}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Data de nascimento</Form.Label>
+                <input 
+                name="dob"
+                className={`form-control ${errors.dob ? 'is-invalid' : ''}`}
+                type="date"
+                placeholder="Informe sua data de nascimento" 
+                {...register('dob')}
+                />
+                <Form.Text className="invalid-feedback">{errors.dob?.message}</Form.Text>
+            </Form.Group>
+
+            {errors.password && (
+                <Fragment>
+                    <p style={{
+                        margin: '.5em 0',
+                        color: '#666'
+                    }}>Sua senha:</p>
+
+                    <ul className="give-password">
+                        <li>deve conter ao menos um dígito.</li>
+                        <li>deve conter ao menos uma letra maiúscula e minúscula.</li>
+                        <li>deve conter ao menos um caractere especial.</li>
+                        <li>deve conter ao menos de 6 caracteres.</li>
+                    </ul>
+                </Fragment>
+            )}
+
+            <div className="row">
+                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <Form.Label>Senha</Form.Label>
                     <input 
-                    name="dob"
-                    className={`form-control ${errors.dob ? 'is-invalid' : ''}`}
-                    type="date"
-                    placeholder="Informe sua data de nascimento" 
-                    {...register('dob')}
+                    name="password"
+                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                    type="password"
+                    placeholder="Informe sua senha" 
+                    {...register('password')}
                     />
-                    <Form.Text className="invalid-feedback">{errors.dob?.message}</Form.Text>
+                    <Form.Text className="invalid-feedback">{errors.password?.message}</Form.Text>
                 </Form.Group>
 
-                {errors.password && (
-                    <Fragment>
-                        <p style={{
-                            margin: '.5em 0',
-                            color: '#666'
-                        }}>Sua senha:</p>
-
-                        <ul className="give-password">
-                            <li>deve conter ao menos um dígito.</li>
-                            <li>deve conter ao menos uma letra maiúscula e minúscula.</li>
-                            <li>deve conter ao menos um caractere especial.</li>
-                            <li>deve conter ao menos de 6 caracteres.</li>
-                        </ul>
-                    </Fragment>
-                )}
-
-                <div className="row">
-                    <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                        <Form.Label>Senha</Form.Label>
-                        <input 
-                        name="password"
-                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                        type="password"
-                        placeholder="Informe sua senha" 
-                        {...register('password')}
-                        />
-                        <Form.Text className="invalid-feedback">{errors.password?.message}</Form.Text>
-                    </Form.Group>
-
-                    <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                        <Form.Label>Confirmar senha</Form.Label>
-                        <input 
-                        name="confirmPassword"
-                        className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                        type="password"
-                        placeholder="Informe sua senha novamente" 
-                        {...register('confirmPassword')}
-                        />
-                        <Form.Text className="invalid-feedback">{errors.confirmPassword?.message}</Form.Text>
-                    </Form.Group>
-                </div>
-
-                <Form.Group className="mt-3">
-                    <button
-                    type="submit" 
-                    className="btn btn-primary"
-                    style={{
-                        marginRight: '.25em'
-                    }}
-                    disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Aguarde...' : 'Criar conta' }
-                    </button>
-
-                    <button
-                    className="btn btn-transparent"
-                    onClick={() => thereIsAccount(true)}
-                    >
-                        {isSubmitting ? 'Aguarde...' : 'Já tenho conta' }
-                    </button>
+                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <Form.Label>Confirmar senha</Form.Label>
+                    <input 
+                    name="confirmPassword"
+                    className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                    type="password"
+                    placeholder="Informe sua senha novamente" 
+                    {...register('confirmPassword')}
+                    />
+                    <Form.Text className="invalid-feedback">{errors.confirmPassword?.message}</Form.Text>
                 </Form.Group>
+            </div>
 
-            </Form>
-        </ContainerApp>
+            <Form.Group className="mt-3">
+                <button
+                type="submit" 
+                className="btn btn-primary"
+                style={{
+                    marginRight: '.25em'
+                }}
+                disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Aguarde...' : 'Criar conta' }
+                </button>
+
+                <button
+                className="btn btn-transparent"
+                onClick={(e) => {
+                    e.preventDefault()
+                    thereIsAccount(true)
+                }}
+                >
+                    {isSubmitting ? 'Aguarde...' : 'Já tenho conta' }
+                </button>
+            </Form.Group>
+
+        </Form>
     )
 }
 

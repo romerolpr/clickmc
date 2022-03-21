@@ -9,6 +9,6 @@
 .navbar_relative {
     /* position: relative; */
     width: 100%;
-    background-color: var(--bs-primary) !important;
+    background-color: #265242 !important;
     --bs-bg-opacity: 1;
 }
