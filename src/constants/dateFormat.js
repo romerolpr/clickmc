@@ -1,3 +1,6 @@
+const weekdays = ['domingo', 'segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado']
+const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+
 const dateFormat = value => {
     
     let dateString;
@@ -7,11 +10,6 @@ const dateFormat = value => {
     
     const date = new Date(value)
     date.setDate(date.getDate())
-
-    // return [date.getFullYear(), date.getMonth(), date.getDate()].join('/') + ' - ' + current.getDate()
-
-    const weekdays = ['domingo', 'segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado']
-    const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     
     if (date.getDate() == current.getDate()) {
         dateString = 'hoje'
@@ -29,4 +27,8 @@ const dateFormat = value => {
 
 }
 
-export { dateFormat }
+export { 
+    dateFormat,
+    weekdays,
+    months
+}

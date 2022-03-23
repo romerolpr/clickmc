@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from "react-redux";
 
-import { LayoutForm } from '../containers';
+import { LayoutForm } from '../../containers';
 
-import { Main } from './AppForm';
+import { Main } from '../AppForm';
 
 const AppModal = () => {
 

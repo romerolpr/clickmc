@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import styles from "../_assets/css/modules/breadcrumb.module.css";
-import { WEBSITE_OPTIONS } from "../_settings/menu/config";
+import styles from "/src/_assets/css/modules/breadcrumb.module.css";
+import { WEBSITE_OPTIONS } from "../../_settings/menu/config";
 
 export const Breadcrumb = ({ label }) => (
     <div className="file-navigation mb-3 d-flex flex-items-start mt-3">

@@ -1,8 +1,8 @@
-import styles from "../_assets/css/modules/pagination.module.css";
+import styles from "/src/_assets/css/modules/pagination.module.css";
 import { useState, Fragment, useEffect } from "react";
 import Link from "next/link";
-import { UserListAvatar, Rounded, ModalNext } from ".";
-import { useFetch } from "../services/fetch/useFetch";
+import { UserListAvatar, Rounded, ModalNext } from "../";
+import { useFetch } from "../../services/fetch/useFetch";
 
 import { useRouter } from "next/router";
 
