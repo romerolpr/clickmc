@@ -8,7 +8,7 @@ import styles from '/src/_assets/css/modules/navbar.module.css';
 export const Navbar = ({ absolute }) => (
     <Fragment>
         <NextNprogress
-            color="#29D"
+            color="var(--bs-primary)"
             startPosition={0.3}
             stopDelayMs={200}
             height={1.25}

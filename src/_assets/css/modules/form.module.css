@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 650px;
+    min-height: 500px;
 }
 .form {
     width: 40%;
@@ -12,7 +12,9 @@
     box-shadow: 0 3px 15px rgb(0 0 0 / 5%);
 }
 
-.box_form_flex,
+.box_form_flex {
+    padding-top: 1em;
+}
 .form {
     padding: 2.5em;
 }

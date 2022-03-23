@@ -36,7 +36,6 @@ function handleResponse(response) {
 
     if (!response?.status) {
         const error = (response && response.message);
-
         return Promise.reject(error);
     }
 
