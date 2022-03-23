@@ -8,3 +8,4 @@ export * from './randomNumber';
 export * from './compareObjects';
 export * from './dateFormat';
 export * from './validatePayment';
+export * from './getByStatus';

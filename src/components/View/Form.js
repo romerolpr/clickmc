@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { apiService } from '../services'
+import { apiService } from '../../services'
 
 export const FormNext = () => {
 

@@ -1,6 +1,6 @@
-import { AvatarColor } from './';
+import { AvatarColor } from '../';
 import { Button } from 'react-bootstrap';
-import styles from '../_assets/css/modules/userListAvatar.module.css';
+import styles from '/src/_assets/css/modules/userListAvatar.module.css';
 import { useRouter } from 'next/router';
 
 export const UserListAvatar = ({ userId, name, description, color, lastUpdate, actions }) => {

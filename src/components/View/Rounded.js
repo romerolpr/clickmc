@@ -1,4 +1,4 @@
-import { NextLink } from ".";
+import { NextLink } from "../";
 
 export const Rounded = ({ label, linkHref, linkLabel, children }) => (
     <div className="my-3 p-3 bg-body rounded shadow-sm">

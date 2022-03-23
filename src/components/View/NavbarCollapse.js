@@ -1,11 +1,11 @@
 import { Fragment, useState } from "react";
-import { NextLink } from "./";
+import { NextLink } from "../";
 
 // importa os links do menu dinâmico
-import { initialLinks as links } from "../_settings/menu/routes";
+import { initialLinks as links } from "../../_settings/menu/routes";
 import styles from '/src/_assets/css/modules/navbarCollapse.module.css';
 
-import { userService } from "../services";
+import { userService } from "../../services";
 import Link from "next/link";
 
 export const NavbarCollapse = () => {
@@ -42,7 +42,7 @@ export const NavbarCollapse = () => {
         </div>
       </li>
       <li className="nav-item">
-        <Link href={'/consultas'}>
+        <Link href={'/acompanhar'}>
           <a className="nav-link" title='Minhas consultas'>
             Minhas consultas
           </a>
