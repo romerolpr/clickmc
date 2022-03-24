@@ -51,6 +51,7 @@ function addCard(card) {
     card = encrypt(JSON.stringify(card))
     cards.push(card)
     localStorage.setItem('cards-in-cache', JSON.stringify(cards))
+    return { card }
 }
 
 function getAllCards() {

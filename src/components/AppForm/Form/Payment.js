@@ -15,6 +15,7 @@ import { userService } from '../../../services';
 import { toast } from 'react-toastify';
 
 import { acceptedCreditCards, validateCard, validateCVV } from '../../../constants';
+import axios from 'axios';
 
 const Payment = ({ payments }) => {
 
