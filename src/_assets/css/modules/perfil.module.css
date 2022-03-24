@@ -1,0 +1,44 @@
+.item_center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.item_box_icon {
+  float: left;
+  margin: 1.25em 0;
+  margin-top: 2.5em;
+}
+
+.img_box {
+  float: left;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 4%);
+}
+.img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text_name {
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  display: block;
+  color: #999;
+}
+
+.text_name span {
+  /* font-weight: bold; */
+  color: var(--bs-primary-small);
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  user-select: auto;
+}
+.text_name span:hover {
+  color: var(--bs-primary);
+}

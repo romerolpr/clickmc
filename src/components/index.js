@@ -9,3 +9,4 @@ export * from './View/Modal';
 export * from './View/Form';
 export * from './View/Loading';
 export * from './View/AppModal';
+export * from './View/Image';

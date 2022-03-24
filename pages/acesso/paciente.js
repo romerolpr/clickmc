@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import form from '/src/_assets/css/modules/form.module.css';
 import getCookie from '../../src/constants/getCookie';
 import { useRouter } from 'next/router';
+import { userService } from '../../src/services';
 
 const Paciente = () => {
 
@@ -30,7 +31,7 @@ const Paciente = () => {
     }
 
     useEffect(() => {
-      if (getCookie('_SESSION')) {
+      if (getCookie('_SESSION') || userService.userValue) {
         router.push('/')
       }
     }, [])

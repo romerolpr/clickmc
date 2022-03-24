@@ -11,8 +11,7 @@ import ContentLoader from "react-content-loader";
 import { useFetch } from "../../fetch/useFetch";
 import { randomNumber } from "../../../constants";
 
-import { Img } from 'react-image';
-import { Loading } from "../../../components";
+import { Image } from '../../../components';
 
 const SearchMedical = ({ category }) => {
 
@@ -25,14 +24,7 @@ const SearchMedical = ({ category }) => {
 
     const { items } = _positionByMedical(categories?.users, { lat: coordinates.latitude, lon: coordinates.longitude })
 
-    const Image = ({ imageSrc, title }) => {
-
-        const unloaded = <img src='/image/avatar/default.png' />
-        const loading = <Loading label={false}/>
-
-        return <Img src={imageSrc} loader={loading} unloader={unloaded} title={title}/>
-
-    }
+    
 
     const GettingItems = () => {
         const location = [20, 17, 26]

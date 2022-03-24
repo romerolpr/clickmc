@@ -15,6 +15,20 @@ const Informations = ({ item }) => {
     const [ categId, setCategId ] = useState(null)
     const [ appointment, setAppointment ] = useState(null)
     const [ status, setStatus ] = useState(null)
+    
+    // pages controller
+    const [ viewChat, setViewChat ] = useState(true)
+    const [ viewAttachment, setViewAttachment ] = useState(false)
+
+    const clickChat = () => {
+      setViewChat(true)
+      setViewAttachment(false)
+    }
+
+    const clickAttachment = () => {
+      setViewChat(false)
+      setViewAttachment(true)
+    }
 
     useEffect(() => {
 

@@ -9,36 +9,41 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 import { userService } from '../../services';
+import { useState } from 'react';
 
 const Login = ({ thereIsAccount, setAuthorized, redirect, children }) => {
-
-    const router = useRouter()
 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('O nome de usuário não pode ficar vazio.'),
         password: Yup.string().required('A senha não pode ficar vazia.')
     })
 
+    const [ isAuthorized, setIsAuthorized ] = useState(false)
+
     const formOptions = { resolver: yupResolver(validationSchema) }
 
     const { register, handleSubmit, setError, reset, formState } = useForm(formOptions)
     const { errors, isSubmitting  } = formState
 
-    const onSubmit = async ({ username, password }) => {
+    const onSubmit = ({ username, password }) => {
 
-        return userService.login(username, password)
-            .then(() => {
-                setAuthorized(true)
-                reset()
-                toast.success('Sua sessão foi iniciada com sucesso')
-            })
-            .catch( msgError => { 
-                toast.error(msgError)
-                setError("apiError", {
-                  type: "apiError",
-                  message: "Nome de usuário ou senha inválidos.",
-                })
-            })
+        if (!userService.userValue) {
+
+          userService.login(username, password)
+              .then( user => {
+                  if (user.token != undefined) {
+                    console.log(user.token, isAuthorized)
+                    setAuthorized(true)
+                  }
+              })
+              .catch( msgError => { 
+                  toast.error(msgError)
+                  setError("apiError", {
+                    type: "apiError",
+                    message: "Nome de usuário ou senha inválidos.",
+                  })
+              })
+        }
     }
 
     return (
