@@ -17,9 +17,6 @@ export const Navbar = ({ absolute }) => (
         <nav className={absolute ? `navbar navbar-expand-lg fixed-top navbar-dark ${styles.navbar_absolute}` : `navbar navbar-expand-lg navbar-dark bg-dark ${styles.navbar_relative}`}>
             <Container fluid={false}>
                 <NextLink href="/" label="Click+consulta" className="navbar-brand" />
-                <button className="navbar-toggler p-0 border-0" type="button">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
                 <NavbarCollapse/>
             </Container>
         </nav>

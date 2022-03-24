@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { NextLink } from "../";
 
 // importa os links do menu dinâmico
@@ -58,10 +58,19 @@ export const NavbarCollapse = () => {
   }
 
   return (
+    <Fragment>
+      <button className="navbar-toggler p-0 border-0" onClick={ e => {
+        e.preventDefault()
+        // ao clicar, troca valor pra exibir dropdown
+        setShowCollapse(!showCollapse)
+      }}>
+          <span className="navbar-toggler-icon"></span>
+      </button>
       <div className={`navbar-collapse offcanvas-collapse ${styles.navbar_flex_grow}`}>
         <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${styles.navbar_float_right}`}>
             { userService.userValue == undefined ? <AutoLinks link={withoutSessionLink} /> : <AutoLinks link={withSessionLink}/> }
         </ul>
       </div>
+    </Fragment>
   )
 }

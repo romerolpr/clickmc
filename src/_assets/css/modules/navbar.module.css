@@ -12,3 +12,10 @@
     background-color: #537468 !important;
     --bs-bg-opacity: 1;
 }
+
+@media (max-width: 767px) {
+  .navbar_relative, 
+  .navbar_absolute {
+    padding: 1em;
+  }
+}
