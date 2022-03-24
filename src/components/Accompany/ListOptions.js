@@ -27,15 +27,16 @@ const ListOptions = ({ items }) => {
 
     return (
         <div className={styles.container_scheduling}>
-            <h2>Agendamentos anteriores</h2>
-            <p>Selecione uma consulta para visualizar maiores informações e abrir e status pelo médico especialista.</p>
-            <br />
-            {items.map( value => {
+            <div className={styles.top_scheduling}>
+              <h2>Agendamentos anteriores</h2>
+              <p>Selecione uma consulta para visualizar maiores informações e abrir e status pelo médico especialista.</p>
+            </div>
+            <div className={styles.body_scheduling}>
+              {items.map( value => {
                 const appointment = JSON.parse(value.appointment)
                 return (
                     <div className={styles.list_schedulingDay}>
                         <div className={styles.scheduling_day} onClick={() => {
-                            console.log(console.log(value))
                             router.push({
                                 pathname: '/acompanhar', 
                                 query: { urlCode: value.urlCode }
@@ -49,13 +50,14 @@ const ListOptions = ({ items }) => {
                                 {/* <span style={{visibility: 'hidden'}}><i className="bi bi-eye"></i></span> */}
                             </div>
                             <div className={styles.infor_day}>
-                                <p><span className={styles.text_urlCode}>{value.urlCode}</span> <span className="status_day">{getByStatus(value.status).text}</span></p>
+                                <p><span className={styles.status_day}>{value.urlCode}</span> <span className={styles.text_urlCode}>{getByStatus(value.status).text}</span></p>
                                 <p className={styles.text_title}><strong>Dr. {value.medicalDetails.name}</strong></p>
                                 <p><span className={styles.text_list}><i className="bi bi-check2"></i> {_label(appointment)}</span></p>
                             </div>
                         </div>
                     </div>
-                )})}
+              )})}
+            </div>
         </div>
     )
 }

@@ -17,7 +17,7 @@ export const LayoutStatic = ({
 }) => (
     <Fragment>
         <Head>
-            <title>{breadcrumbLabel} - {WEBSITE_OPTIONS.sitename}</title>
+            <title>{breadcrumbLabel != undefined ? `${breadcrumbLabel} - ${WEBSITE_OPTIONS.sitename}` : WEBSITE_OPTIONS.sitename}</title>
         </Head>
         <Navbar absolute={navbarAbsolute} />
         <ToastContainer />

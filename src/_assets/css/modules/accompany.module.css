@@ -6,8 +6,8 @@
     padding: 1em;
     transition: all .3s ease;
     cursor: pointer;
-    /* margin-bottom: .5em; */
-    border-radius: 3px;
+    padding: 2em 3em;
+    border-radius: 1em;
   }
  
   .scheduling_day:hover {
@@ -19,7 +19,7 @@
     display: block;
     float: left;
     width: 100%;
-    margin-bottom: .5em;
+    /* margin-bottom: .5em; */
     overflow: hidden;
   }
  
@@ -39,16 +39,46 @@
   }
  
   .container_scheduling {
-    max-height: 600px;
-    overflow-y: auto;
-    margin: 2em 0;
-    padding: 2em;
+    float: left;
+    height: 100%;
+    width: 100%;
+    margin-top: 3em;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 1em;
+    box-shadow: 0 3px 15px rgb(0 0 0 / 2%);
   }
 
   .container_scheduling p {
       margin: 0;
+  }
+
+  .top_scheduling {
+    padding: 3em;
+    background-color: var(--bs-primary-small);
+    border-radius: 1em 1em 0 0;
+  }
+
+  .top_scheduling h2 {
+    font-weight: bold;
+  }
+  .top_scheduling > * {
+    color: #fff;
+  }
+
+  .top_scheduling,
+  .body_scheduling,
+  .body_scheduling_p {
+    float: left;
+    width: 100%;
+    
+  }
+
+  .body_scheduling {
+    padding: 0;
+  }
+
+  .body_scheduling_p {
+    padding: 3em;
   }
  
   .list_schedulingDay .icon_day {
@@ -59,7 +89,6 @@
     border-radius: 3px;
     background-color: transparent;
     color: #fff;
-    font-size: 2em;
     width: 150px;
     height: 150px;
     text-align: center;
@@ -111,25 +140,50 @@
  }
 
  .text_urlCode {
-     padding: .4em;
-     background-color: var(--bs-primary);
-     border-radius: 5px;
-     color: #fff;
+  float: right;
+  padding: .4em;
+  background-color: var(--bs-primary);
+  border-radius: 1em;
+  color: #fff;
  }
  
-  .list_schedulingDay  .infor_day {
+  .list_schedulingDay .infor_day {
     float: left;
     display: block;
     width: 80%;
-    padding-left: .4em;
+    padding-left: 1em;
   }
-  .list_schedulingDay  .infor_day p {
+  .list_schedulingDay .infor_day p {
     width: 100%;
     margin: 0;
     /* margin-bottom: .25em; */
   }
   .infor_day .status_day {
-    float: right;
     font-size: .85em;
-    color: #ddd;
+    color: #999;
+  }
+
+  @media (max-width: 1000px) {
+    .icon_day {
+      width: 80px !important;
+      height: 80px !important
+    }
+    
+  }
+  @media (max-width: 767px) {
+    .list_schedulingDay .infor_day {
+      width: 100%;
+      padding: 0;
+      margin-top: 1em;
+    }
+    .icon_day {
+      width: 100% !important;
+      height: 250px !important;
+      border-radius: 5px !important;
+      background-position: center !important;
+    }
+    .container_scheduling {
+      margin: .5em;
+      margin-top: 1em;
+    }
   }

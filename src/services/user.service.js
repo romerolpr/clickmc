@@ -1,10 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
 import { fetchWrapper } from '../helpers';
 import Router from 'next/router';
+import axios from 'axios';
 
 const bcrypt = require('bcryptjs');
+
 const baseUrl = `/usuario/acessos`;
-const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
+const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('_SESSION')));
 const secretKey = "vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3"
 
 export const userService = {
@@ -57,33 +59,18 @@ function getAllCards() {
 }
 
 function login(username, password) {
-    return fetchWrapper.get(`/usuario/acessos`, { username, password })
-    .then( users => {
-
-        const user = users.find( u => u.username === username )
-
-        if (!(user && bcrypt.compareSync(password, user.hash))) {
-            throw 'Nome de usuário ou senha inválido ou inexistente.'
-        }
-
-        const User = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            hash: user.hash
-        }
-       
-        userSubject.next( User )
-        localStorage.setItem('user', JSON.stringify( User ))
-
+    return axios.post(`/api/users/authenticate`, { username, password })
+    .then( response => {
+        const { data: user } = response
+        userSubject.next( user )
+        localStorage.setItem('_SESSION', JSON.stringify( user ))
         return user
-
     })
 }
 
 function logout(router = null) {
     // remove user from local storage, publish null to user subscribers and redirect to login page
-    localStorage.removeItem('user');
+    localStorage.removeItem('_SESSION');
     userSubject.next(null);
     if (router != null) {
         Router.push(router);
@@ -110,7 +97,7 @@ function update(id, params) {
             if (id === userSubject.value.id) {
                 // update local storage
                 const user = { ...userSubject.value, ...params };
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('_SESSION', JSON.stringify(user));
 
                 // publish updated user to subscribers
                 userSubject.next(user);

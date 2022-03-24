@@ -1,12 +1,15 @@
 import { LayoutStatic, Footer } from '/src/containers';
 
 import { Login, Register } from '../../src/components/Session';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import form from '/src/_assets/css/modules/form.module.css';
+import getCookie from '../../src/constants/getCookie';
+import { useRouter } from 'next/router';
 
 const Paciente = () => {
-    
+
+    const router = useRouter()
     const [ thereIsAccount, setThereIsAccount ] = useState(true)
 
     const ManageFinish = () => {
@@ -14,7 +17,7 @@ const Paciente = () => {
             return (
                 <Login thereIsAccount={setThereIsAccount} redirect={true}>
                     <h6>Paciente</h6>
-                    <h2>Faça login</h2>
+                    <h2>Faça login na sua conta</h2>
                 </Login>
             )
         }
@@ -25,6 +28,12 @@ const Paciente = () => {
             </Register>
         )
     }
+
+    useEffect(() => {
+      if (getCookie('_SESSION')) {
+        router.push('/')
+      }
+    }, [])
 
     return (
         <LayoutStatic breadcrumbLabel="Sou paciente" breadcrumb={false}>

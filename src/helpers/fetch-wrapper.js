@@ -38,9 +38,7 @@ function handleResponse(response) {
         const error = (response && response.message);
         return Promise.reject(error);
     }
-
     return data
-
 }
 
 export const fetchWrapper = {

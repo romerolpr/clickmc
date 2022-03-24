@@ -21,7 +21,7 @@ const Login = ({ thereIsAccount, setAuthorized, redirect, children }) => {
 
     const formOptions = { resolver: yupResolver(validationSchema) }
 
-    const { register, handleSubmit, setError, formState } = useForm(formOptions)
+    const { register, handleSubmit, setError, reset, formState } = useForm(formOptions)
     const { errors, isSubmitting  } = formState
 
     const onSubmit = async ({ username, password }) => {
@@ -29,10 +29,15 @@ const Login = ({ thereIsAccount, setAuthorized, redirect, children }) => {
         return userService.login(username, password)
             .then(() => {
                 setAuthorized(true)
+                reset()
                 toast.success('Sua sessão foi iniciada com sucesso')
             })
             .catch( msgError => { 
                 toast.error(msgError)
+                setError("apiError", {
+                  type: "apiError",
+                  message: "Nome de usuário ou senha inválidos.",
+                })
             })
     }
 
@@ -45,19 +50,19 @@ const Login = ({ thereIsAccount, setAuthorized, redirect, children }) => {
                 <Form.Label>Nome de usuário</Form.Label>
                 <input 
                 name="username"
-                className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                className={`form-control ${errors.username || errors.apiError ? 'is-invalid' : ''}`}
                 type="text"
                 placeholder="Informe seu nome de usuário" 
                 {...register('username')}
                 />
-                <Form.Text className="invalid-feedback">{errors.username?.message}</Form.Text>
+                <Form.Text className="invalid-feedback">{errors.username?.message || errors.apiError?.message}</Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Senha</Form.Label>
                 <input 
                 name="password"
-                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                className={`form-control ${errors.password || errors.apiError ? 'is-invalid' : ''}`}
                 type="password"
                 placeholder="Informe sua senha" 
                 {...register('password')}
