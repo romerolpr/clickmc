@@ -16,9 +16,10 @@ async function authenticate(req, res) {
     const { username, password } = req.body
 
     const { data: users } = await usersRepo.getAll()
-    const user = users.find(u => u.username === username)
 
-    if (!(user && bcrypt.compareSync(password, user.hash))) {
+    const user = users.find(u => u.username === username)
+    
+    if (!(user && bcrypt.compareSync(password, user.security.hash))) {
       throw 'Nome de usuário ou senha inválido ou inexistente.'
     }
 

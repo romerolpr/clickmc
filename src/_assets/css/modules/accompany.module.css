@@ -163,6 +163,63 @@
     color: #999;
   }
 
+  .list_schedule {
+    max-width: 70%;
+    clear: both;
+    padding: .6em .8em;
+    margin-bottom: 0.25em;
+    border-radius: 5px;
+  }
+
+  .left_side {
+    float: left;
+    background: #f0f0f0;
+  }
+ 
+  .right_side {
+    float: right;
+    background: #ddd;
+  }
+ 
+  .download_icon {
+    display: block;
+    padding: .4em .75em;
+    border-radius: 3px;
+    float: right;
+    color: #aaa;
+    transition: all .3s ease;
+    margin-left: .5em;
+    cursor: pointer;
+  }
+  
+  .download_icon:hover {
+    color: #fff;
+    background-color: #eee;
+  }
+
+  .icon_schedule {
+    /* float: left; */
+    width: 100%;
+    display: block;
+    }
+
+  .status_schedule i {
+    text-align: center;
+    /* padding: .15em; */
+    color: #fff;
+    background-color: var(--bs-primary);
+  }
+
+  .expand_item {
+    margin-bottom: 1em;
+    border-left: 1em rgb(234, 234, 234);
+  }
+
+  .info_schedule{
+    float: left;
+    clear: both;
+  }
+
   @media (max-width: 1000px) {
     .icon_day {
       width: 80px !important;

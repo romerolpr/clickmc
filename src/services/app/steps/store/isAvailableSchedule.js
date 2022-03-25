@@ -14,7 +14,7 @@ const isAvailableSchedule = ( availableMedical ) => {
 
     const _isAvailable = item => {
 
-        const appointment = JSON.parse(item.appointment)
+        const appointment = item.appointment
 
         return dateFormat(appointment.date) == dateFormat(datetime.date) && appointment.time == datetime.time || 
         appointment.date == datetime.date && appointment.time == datetime.time

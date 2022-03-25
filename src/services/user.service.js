@@ -3,8 +3,6 @@ import { fetchWrapper } from '../helpers';
 import Router from 'next/router';
 import axios from 'axios';
 
-const bcrypt = require('bcryptjs');
-
 const baseUrl = `/usuario/acessos`;
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('_SESSION')));
 const secretKey = "vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3"

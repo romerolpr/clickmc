@@ -1,10 +1,12 @@
 import styles from '/src/_assets/css/modules/accompany.module.css';
 
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { getByStatus } from '../../constants';
 import { Loading } from '../View/Loading';
+
+import { Chat } from './';
 
 const Informations = ({ item }) => {
 
@@ -18,17 +20,6 @@ const Informations = ({ item }) => {
     
     // pages controller
     const [ viewChat, setViewChat ] = useState(true)
-    const [ viewAttachment, setViewAttachment ] = useState(false)
-
-    const clickChat = () => {
-      setViewChat(true)
-      setViewAttachment(false)
-    }
-
-    const clickAttachment = () => {
-      setViewChat(false)
-      setViewAttachment(true)
-    }
 
     useEffect(() => {
 
@@ -39,10 +30,17 @@ const Informations = ({ item }) => {
       setCategId(extract?.medicalDetails.categoryId)
       setStatus(extract?.status)
       if (extract?.appointment != undefined) {
-        setAppointment(JSON.parse(extract?.appointment))
+        setAppointment(extract?.appointment)
       }
       
     }, [])
+
+    const RenderComponent = () => {
+      if (viewChat) {
+        return <Chat />
+      }
+      return <Attachment />
+    }
 
     if (name == undefined) {
       return (
@@ -64,8 +62,10 @@ const Informations = ({ item }) => {
               <h2>{`Dr. ${name}`}</h2>
               <p>{ getByStatus(status).text }</p>
             </div>
-            <div className={styles.body_scheduling}>
-              <Loading label={false}/>
+            <div className={styles.body_scheduling_p}>
+        
+                <Messages />
+
             </div>
         </div>
     )

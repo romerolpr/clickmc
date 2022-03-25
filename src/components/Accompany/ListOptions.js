@@ -33,7 +33,7 @@ const ListOptions = ({ items }) => {
             </div>
             <div className={styles.body_scheduling}>
               {items.map( value => {
-                const appointment = JSON.parse(value.appointment)
+                const appointment = value.appointment
                 return (
                     <div className={styles.list_schedulingDay}>
                         <div className={styles.scheduling_day} onClick={() => {
