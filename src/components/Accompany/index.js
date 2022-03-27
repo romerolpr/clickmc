@@ -3,3 +3,4 @@ export * from './Many';
 export * from './ListOptions';
 export * from './Informations';
 export * from './Chat';
+export * from './Attachment';

@@ -1,6 +1,9 @@
 import { Fragment, useState, useEffect } from "react"
-import { toast } from "react-toastify"
 import { getByStatus, dateFormat, API } from "../../constants"
+
+import styles from '/src/_assets/css/modules/accompany.module.css';
+import { toast } from "react-toastify"
+import { useRouter } from "next/router"; 
 
 const Chat = ({ 
     status,
@@ -8,6 +11,8 @@ const Chat = ({
     datetime,
     categoryId
  }) => {
+
+    const router = useRouter()
 
     const [ category, setCategory ] = useState(null)
 
@@ -38,7 +43,7 @@ const Chat = ({
             </span>
             <span className={`${styles.list_schedule} ${styles.left_side}`}>
                 <span className={`${styles.icon_schedule}`}><i className="bi bi-calendar-check-fill"></i> <strong>Data e hora</strong></span>
-                <span className={`${styles.info_schedule}`}>{ dateFormat(datetime) } às -</span>
+                <span className={`${styles.info_schedule}`}>{ dateFormat(datetime) } às {new Date(datetime).toLocaleTimeString()}</span>
             </span>
             <span className={`${styles.list_schedule} ${styles.left_side}`}>
                 <span className={`${styles.icon_schedule}`}><i className="bi bi-person-fill"></i> <strong>Doutor</strong></span>

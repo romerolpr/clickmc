@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import { getByStatus } from '../../constants';
-import { Loading } from '../View/Loading';
 
-import { Chat } from './';
+import { Image, Loading } from '../../components';
+
+import { Chat, Attachment } from './';
 
 const Informations = ({ item }) => {
 
@@ -37,18 +38,39 @@ const Informations = ({ item }) => {
 
     const RenderComponent = () => {
       if (viewChat) {
-        return <Chat />
+        return <Chat
+        categoryId={categId}
+        name={name}
+        status={status}
+        datetime={appointment?.datetime}
+        />
       }
-      return <Attachment />
+      return <Attachment urlCode={router.query?.urlCode}/>
     }
+
+    const TopButtons = ({ children, loading }) => (
+      <div className={styles.top_scheduling}>
+        <span className={styles.top_button_to_back} onClick={() => router.push('/acompanhar', {
+          query: null
+        })}>
+          <i className="bi bi-arrow-left-short"></i>
+        </span>
+        <div className={styles.top_scheduling_image}>
+          { loading ? <Image loading={true}/> : <Image imageSrc={backdrop} title={name}/>}
+        </div>
+        <div>
+          { children }
+        </div>
+      </div>
+    )
 
     if (name == undefined) {
       return (
           <div className={styles.container_scheduling}>
-              <div className={styles.top_scheduling}>
+              <TopButtons loading={true}>
                 <h2>Carregando informações...</h2>
                 <p>Estamos realizando uma validação dos dados.</p>
-              </div>
+              </TopButtons>
               <div className={styles.body_scheduling}>
                 <Loading label={false}/> 
               </div>
@@ -58,14 +80,22 @@ const Informations = ({ item }) => {
 
     return (
         <div className={styles.container_scheduling}>
-            <div className={styles.top_scheduling}>
+            <TopButtons>
               <h2>{`Dr. ${name}`}</h2>
               <p>{ getByStatus(status).text }</p>
+            </TopButtons>
+            <div className={styles.body_scheduling_top}>
+              <div
+              onClick={() => setViewChat(true)} 
+              className={viewChat ? `${styles.body_button_top} ${styles.body_button_top_active}` : styles.body_button_top}>
+                Detalhes da consulta</div>
+              <div 
+              onClick={() => setViewChat(false)}
+              className={!viewChat ? `${styles.body_button_top} ${styles.body_button_top_active}` : styles.body_button_top}>
+                Anexos documentos e imagens</div>
             </div>
-            <div className={styles.body_scheduling_p}>
-        
-                <Messages />
-
+            <div className={styles.body_scheduling_p} style={{ paddingTop: '1.5em' }}>
+                <RenderComponent />
             </div>
         </div>
     )

@@ -11,7 +11,9 @@ export function useFetch( url, message = true ) {
     
         API.get(url)
         .then(response => {
-            setData(response.data)
+            if (response.status != 204) {
+                setData(response.data)
+            }
         })
         .catch( () => {
             if ( message ) toast.error('A conexão foi perdida.')
