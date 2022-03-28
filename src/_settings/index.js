@@ -8,7 +8,10 @@ const TIMEOUT_CONTENT_LOADED = 1000
  */
 const DEVELOPER_MODE = true
 
+const API_URI = "http://localhost:8080"
+
 export {
     TIMEOUT_CONTENT_LOADED,
-    DEVELOPER_MODE
+    DEVELOPER_MODE,
+    API_URI
 }
