@@ -1,12 +1,16 @@
 import styles from '/src/_assets/css/modules/accompany.module.css';
 import { API_URI } from '../../_settings';
+import { userService } from '../../services';
 
 const Message = ({
     item,
     type
 }) => {
+
+    const _className = item.userId != userService.userValue.username ? styles.left_side : styles.right_side
+
     switch (type) {
-        case 'documents':
+        case 'doc':
             return (
                 <span className={`${styles.list_schedule} ${styles.list_document} ${styles.docDdf} ${_className}`}>
                     <span className={styles.document_schedule}>
@@ -21,7 +25,7 @@ const Message = ({
                     <span className={styles.info_schedule_time}><span className="time-text">{new Date(item.time).toLocaleTimeString()}</span></span>
                 </span>
             )
-        case 'images':
+        case 'img':
             return (
                 <span className={`${styles.list_schedule} ${styles.list_document} ${styles.docDdf} ${_className}`}>
                     <span className={styles.photo_schedule}>

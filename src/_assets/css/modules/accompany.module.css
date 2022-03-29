@@ -70,7 +70,14 @@ color: #fff !important;
 .body_scheduling_p {
   float: left;
   width: 100%;
-  
+}
+
+.body_scheduling_p_buttons {
+  float: left;
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
+  width: 100%;
 }
 
 .body_scheduling {
@@ -190,17 +197,47 @@ color: #fff;
   background-repeat: no-repeat;
 }
 
-.photo_schedule {
+.document_schedule {
   float: left;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* background-color: #0a519f; */
+  padding: .5em;
+}
+
+.info_document {
+  margin: 0 .25em;
+}
+
+.document_schedule a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.photo_schedule {
+  /* float: left; */
   position: relative;
   height: 100px;
   margin-bottom: .25em;
 }
 .photo_schedule img {
   display: block;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
+  max-height: 250px;
   object-fit: contain;
+}
+
+.list_empty {
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  background: transparent !important;
+  margin: 1em 0;
+  color: #999;
 }
 
 .download_icon {
@@ -299,10 +336,19 @@ color: #fff;
 }
 
 .info_schedule_time {
-  color: #ddd;
-  font-size: .85em;
+  width: 100%;
+  color: #666;
+  font-size: .75em;
   clear: both;
-  float: right !important;
+  float: left;
+  margin-top: .15em;
+}
+
+
+.document_contents {
+  float: left;
+  display: contents;
+  width: auto;
 }
 
 @media (max-width: 1000px) {

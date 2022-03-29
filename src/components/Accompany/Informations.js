@@ -7,6 +7,8 @@ import { getByStatus } from '../../constants';
 
 import { Image, Loading } from '../../components';
 
+import * as Button from '../Action';
+
 import { Chat, Attachment } from './';
 
 const Informations = ({ item }) => {
@@ -47,6 +49,12 @@ const Informations = ({ item }) => {
       }
       return <Attachment urlCode={router.query?.urlCode}/>
     }
+
+    const RenderButtons = () => (
+      <Fragment>
+        <Button.FileUpload />
+      </Fragment>
+    )
 
     const TopButtons = ({ children, loading }) => (
       <div className={styles.top_scheduling}>
@@ -96,6 +104,9 @@ const Informations = ({ item }) => {
             </div>
             <div className={styles.body_scheduling_p} style={{ paddingTop: '1.5em' }}>
                 <RenderComponent />
+            </div>
+            <div className={styles.body_scheduling_p_buttons} style={{ paddingTop: '0' }}>
+              <RenderButtons />
             </div>
         </div>
     )
