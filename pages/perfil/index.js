@@ -5,7 +5,7 @@ import styles from '/src/_assets/css/modules/accompany.module.css';
 import perfil from '/src/_assets/css/modules/perfil.module.css';
 
 import { Image } from '../../src/components';
-
+import { MyAccount } from '../../src/pages';
 import { identifySession } from '../../src/constants/session/identifySession';
 
 const Perfil = () => {
@@ -30,7 +30,7 @@ const Perfil = () => {
                     <p>Visualize e edite as informações da sua conta por aqui.</p>
                 </div>
                 <div className={styles.body_scheduling_p}>
-                    <p>componente do perfil do usuário...</p>
+                    <MyAccount />
                 </div>
             </div>
             <Footer />

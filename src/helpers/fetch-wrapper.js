@@ -8,12 +8,12 @@ function get(url) {
 
 // método POST para inserir na tabela
 function post(url, body) {
-    return handleResponse( API.post(url, body) )
+    return handleResponse( API.post(url, body).then(res => res) )
 }
 
 // método para realizar update na tabela
 function patch(url, body) {
-    return handleResponse( API.patch(url, body) )
+    return handleResponse( API.patch(url, body).then(res => res) )
 }
 
 function authHeader(url) {

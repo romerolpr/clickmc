@@ -113,7 +113,7 @@ color: #fff !important;
     color: #888;
 }
 .text_title {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #444;
 }
 
@@ -163,6 +163,7 @@ color: #fff;
 .list_schedulingDay .infor_day p {
   width: 100%;
   margin: 0;
+  /* font-size: 1.5em; */
   /* margin-bottom: .25em; */
 }
 .infor_day .status_day {

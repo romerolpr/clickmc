@@ -102,7 +102,9 @@ const Register = ({ thereIsAccount, redirect, children }) => {
             <div className="col-12 mb-3 fleft">
                 { children }
             </div>
-            <div className="row">
+            <div className="row" style={{
+                width: '100%'
+            }}>
                 <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
                     <Form.Label>Seu nome</Form.Label>
                     <input 

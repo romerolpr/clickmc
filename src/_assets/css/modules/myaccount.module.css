@@ -1,0 +1,41 @@
+.title_box {
+    float: left;
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 1em;
+}
+
+.item_account {
+    width: 100%;
+    float: left;
+    margin: .5em 0;
+    clear: both;
+}
+.item_account .subtitle {
+    display: block;
+    width: 100%;
+    color: #999;
+    font-size: .9em;
+}
+.item_account span {
+    font-size: 1em;
+    font-weight: normal;
+    color: #444;
+}
+.item {
+    border-radius: 1em;
+    float: left;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.button_change {
+    display: block;
+    float: right;
+    font-size: .75em !important;
+    cursor: pointer;
+    color: var(--bs-primary) !important;
+}
