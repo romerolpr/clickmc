@@ -11,3 +11,4 @@ export * from './View/Loading';
 export * from './View/AppModal';
 export * from './View/Image';
 export * from './View/Message';
+export * from './View/Update';

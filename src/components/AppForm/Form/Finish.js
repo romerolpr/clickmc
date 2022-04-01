@@ -10,6 +10,7 @@ import { Payment } from "./Payment";
 
 import { userService } from "../../../services";
 import { Login, Register } from "../../Session";
+import { Schedule } from "./Schedule";
 
 const Finish = () => {
 
@@ -30,27 +31,30 @@ const Finish = () => {
 
     const ManageFinish = () => {
         if (userService.userValue != undefined) {
-            return (
-                <ContainerApp current={'Pagamento'}>
-                    <h2>Escolha sua opção de pagamento</h2>
-                    <p>Selecione a melhor forma de pagamento para você, e cada médico possui seu valor.</p>
-                    <Payment payments={[
-                        { 
-                            method: 'cartão de crédito', 
-                            type: 'cartao-credito',
-                            price: 50,
-                            // discount: 50,
-                            installments: {
-                                times: 3,
-                                interest: false
+            if (formValues.payment == null) {
+                return (
+                    <ContainerApp current={'Pagamento'}>
+                        <h2>Escolha sua opção de pagamento</h2>
+                        <p>Selecione a melhor forma de pagamento para você, e cada médico possui seu valor.</p>
+                        <Payment payments={[
+                            { 
+                                method: 'cartão de crédito', 
+                                type: 'cartao-credito',
+                                price: 50,
+                                // discount: 50,
+                                installments: {
+                                    times: 3,
+                                    interest: false
+                                },
+                                api: ''
                             },
-                            api: ''
-                        },
-                        { method: 'Pix', type: 'pix', price: 50, api: '' },
-                        { method: 'Boleto', type: 'boleto', price: 50, api: ''  }
-                    ]}/>
-                </ContainerApp>
-            )
+                            { method: 'Pix', type: 'pix', price: 50, api: '' },
+                            { method: 'Boleto', type: 'boleto', price: 50, api: ''  }
+                        ]}/>
+                    </ContainerApp>
+                )
+            }
+            return <Schedule />
         }
         if (thereIsAccount) {
             return (

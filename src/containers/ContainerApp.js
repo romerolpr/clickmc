@@ -4,7 +4,8 @@ import container from '/src/_assets/css/modules/appBreadcrumb.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { 
     _updateProgress,
-    _setCategory
+    _setCategory,
+    _setMedical
 } from '../store/actions/form';
 
 import { nextProgress } from '../components/AppForm/nextProgress';
@@ -18,6 +19,7 @@ const ContainerApp = ({ children, pageTitle, current }) => {
 
     const handleCategory = () => {
         dispatch( _setCategory(null) )
+        dispatch( _setMedical(null) )
         nextProgress(dispatch, formValues)
     }
 

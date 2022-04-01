@@ -6,3 +6,4 @@ export * from './User';
 export * from './Specialist';
 export * from './Confirm';
 export * from './Finish';
+export * from './Schedule';

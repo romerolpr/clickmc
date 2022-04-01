@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { API } from "../../constants";
 import { toast } from "react-toastify";
 
-export function useFetch( url, message = true ) {
+export function useFetch( url, message = true, item ) {
 
     const [ data, setData ] = useState(null)
 
@@ -12,7 +12,7 @@ export function useFetch( url, message = true ) {
         API.get(url)
         .then(response => {
             if (response.status != 204) {
-                setData(response.data)
+                setData(item == undefined ? response.data : response.data[item])
             }
         })
         .catch( () => {

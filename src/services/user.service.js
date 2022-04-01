@@ -53,8 +53,11 @@ function addCard(card) {
 }
 
 function getAllCards() {
-    const cards = localStorage.getItem('cards-in-cache') === null ? [] : JSON.parse(localStorage.getItem('cards-in-cache')) 
-    return cards
+    if (typeof localStorage != 'undefined') {
+        const cards = localStorage.getItem('cards-in-cache') === null ? [] : JSON.parse(localStorage.getItem('cards-in-cache')) 
+        return cards
+    }
+    return []
 }
 
 function login(username, password) {

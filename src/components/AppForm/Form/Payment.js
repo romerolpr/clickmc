@@ -16,10 +16,14 @@ import { toast } from 'react-toastify';
 
 import { acceptedCreditCards, validateCard, validateCVV } from '../../../constants';
 import axios from 'axios';
+import { _setPayment } from '../../../store/actions/form';
+import { Loading } from '../../View/Loading';
 
 const Payment = ({ payments }) => {
 
     const { formValues, dispatch } = useRedux()
+
+    console.log(formValues.payment)
 
     const validationSchema = Yup.object().shape({
         nr: Yup.string()
@@ -57,6 +61,8 @@ const Payment = ({ payments }) => {
             .required('Informe o nome do titular do cartão.')
     })
 
+    const [ processPayment, setProcessPayment ] = useState(false)
+
     const [ price, setPrice ] = useState(0)
     const [ methodPayment, setMethodPayment ] = useState(undefined)
     const [ cardParity, setCardParity ] = useState(1)
@@ -88,20 +94,12 @@ const Payment = ({ payments }) => {
             }
         }
 
-        axios.post('/api/payment', body, config)
-        .then((response) => {
-            if (response.data && response.data.status == 200) {
-                userService.addCard(body.card)
-            }
-        })
-        .catch(() => {
-            toast.error('Não foi possível processar o pagamento')
-        })
+        if (userService.addCard(body)) {
+            toast.success("O cartão foi adicionado com sucesso")
+        } else {
+            toast.error('Não foi possível adicionar a forma de pagamento')
+        }
     
-    }
-
-    const confirmPayment = () => {
-        
     }
 
     const handleSelectPayment = (type, installments, price) => {
@@ -130,7 +128,7 @@ const Payment = ({ payments }) => {
 
         userService.getAllCards().filter((card) => {
 
-            const _this = JSON.parse(userService.decrypt(card))
+            const _this = JSON.parse(userService.decrypt(card)).card
 
             if (_this.username == userService.userValue.username && _this.nr.split(' ')[3] == cardDecrypt.nr.split(' ')[3]) {
                 setMethodPayment({
@@ -148,6 +146,10 @@ const Payment = ({ payments }) => {
     const handleSelectCardParity = (e) => {
         const value = e.target.value
         setCardParity(parseInt(value))
+    }
+
+    if (processPayment) {
+        return <Loading label={'Processando o pagamento...'} />
     }
 
     if (payments.length == 0) {
@@ -285,10 +287,13 @@ const Payment = ({ payments }) => {
                         </div>
                         <div className="col-md-12 d-md-inline-flex flex-row justify-content-end">
                             <button
-                            style={{
-                                marginTop: '1em',
-                            }}
+                            style={{ marginTop: '1em' }}
                             className="btn btn-primary"
+                            onClick={e => {
+                                e.preventDefault()
+                                // console.log(methodPayment)
+                                dispatch(_setPayment(methodPayment))
+                            }}
                             >
                                 Confirmar e finalizar
                             </button>
@@ -340,13 +345,13 @@ const Payment = ({ payments }) => {
                             const paymentPrice = paymentCard.discount == undefined ? paymentCard.price : paymentCard.price - ( (paymentCard.price  * paymentPrice.discount) / 100)
                             
                             const cardDecrypt = JSON.parse(userService.decrypt(card))
-                            if (cardDecrypt.username == userService.userValue.username) {
+                            if (cardDecrypt.card.username == userService.userValue.username) {
                                 return (
                                     <Fragment>
-                                        <div className={form.options_payment} onClick={ () => handlePaymentGoahed(cardDecrypt, paymentPrice, paymentCard.installments) }>
+                                        <div className={form.options_payment} onClick={ () => handlePaymentGoahed(cardDecrypt.card, paymentPrice, paymentCard.installments) }>
                                             <div className={`${form.options_point} ${form.delete_card}`}></div>
                                             <p>{`${formatter.format(paymentPrice).replace('US','R')}`} {paymentCard.installments != undefined ? `até ${paymentCard.installments.times}x ${paymentCard.installments.interest ? (formatter.format( Math.floor( (paymentCard.installments.interest / ( 1 - ( 1 / Math.pow(1 + paymentCard.installments.interest,  paymentCard.installments.times) ))) * paymentPrice)).replace('US','R')) : 'sem juros'}` : null}  no Crédito pelo app</p>
-                                            <p className={form.options_text_price}>{cardDecrypt.flag} **** {cardDecrypt.nr.split(' ')[3]}</p>
+                                            <p className={form.options_text_price}>{cardDecrypt.card.flag} **** {cardDecrypt.card.nr.split(' ')[3]}</p>
                                         </div>
                                     </Fragment>
                                 )

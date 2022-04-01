@@ -44,7 +44,7 @@ const Informations = ({ item }) => {
         categoryId={categId}
         name={name}
         status={status}
-        datetime={appointment?.datetime}
+        datetime={[appointment?.date, appointment?.time].join(' ')}
         />
       }
       return <Attachment urlCode={router.query?.urlCode}/>

@@ -1,14 +1,14 @@
 const weekdays = ['domingo', 'segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado']
 const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
-const dateFormat = value => {
+const dateFormat = ( _date, _full ) => {
     
     let dateString;
 
     const current = new Date()
     current.setDate(current.getDate())
     
-    const date = new Date(value)
+    const date = new Date(_date)
     date.setDate(date.getDate())
     
     if (date.getDate() == current.getDate()) {
@@ -22,8 +22,14 @@ const dateFormat = value => {
     if (dateString) {
         return [dateString, body].join(', ')
     }
+    
+    const final = [weekdays[date.getDay()], body].join(', ')
 
-    return [weekdays[date.getDay()], body].join(', ')
+    if (_full) {
+        return `${final} de ${date.getFullYear()}`
+    }
+
+    return final
 
 }
 

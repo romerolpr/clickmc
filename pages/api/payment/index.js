@@ -6,10 +6,12 @@ export default apiHandler({
 });
 
 function newPaymentCard(req, res) {
+    
     const { card } = userService.addCard(req.body.card)
+
     return res.status(200).json({
       error: false,
-      message: 'O cartão foi adicionado em storage.',
+      message: 'O cartão foi adicionado.',
       card: card
     })
 }

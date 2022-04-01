@@ -12,7 +12,7 @@ const Single = () => {
     const { urlCode } = router.query
 
     const { data: hist } = useFetch(`status/urlCode/${urlCode}`)
-
+    
     if ( hist == null ) {
         return (
             <div className={styles.container_scheduling}>

@@ -43,6 +43,10 @@ export const initialLinksWithSession = [
     label: 'Minhas consultas'
   },
   {
+    pathname: '/buscar',
+    label: 'Novo agendamento'
+  },
+  {
     pathname: '/contato',
     label: 'Fale conosco'
   },

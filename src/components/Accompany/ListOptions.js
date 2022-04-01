@@ -9,10 +9,11 @@ const ListOptions = ({ items }) => {
     const router = useRouter()
 
     const _label = (appointment) => {
-        const date = new Date(appointment?.date)
+        const datetime = [appointment.date, appointment.time].join(' ')
+        const date = new Date(datetime)
         const weekday = weekdays[date.getDay()] ? weekdays[date.getDay()] : '[invalid date]'
         const time = appointment.time
-        return `solicitado para ${weekday}, ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()} às ${time}`
+        return `solicitado para ${weekday}, ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()} às ${date.toLocaleTimeString()}`
     }
     
     const _filter = (status) => {

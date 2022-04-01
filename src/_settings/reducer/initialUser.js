@@ -5,5 +5,5 @@ export const initialUser = {
     email: null,
     avatar: null,
     phone: null,
-    address: null,
+    address: null
 }
