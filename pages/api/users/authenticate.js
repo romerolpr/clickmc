@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 import getConfig from 'next/config';
 import { apiHandler, usersRepo } from '../../../src/helpers/api';
 import cookie from "cookie";
+import { identifyAccount } from '../../../src/constants';
 
 const { serverRuntimeConfig } = getConfig();
 
@@ -37,6 +38,7 @@ async function authenticate(req, res) {
     )
 
     return res.status(200).json({
+        _type: identifyAccount(user.nvlAccess),
         id: user.id,
         username: user.username,
         token

@@ -22,9 +22,17 @@ const SearchMedical = ({ category }) => {
 
     const { data: categories } = useFetch(`usuario/categoria/${category}`)
 
-    const { items } = _positionByMedical(categories?.users, { lat: coordinates.latitude, lon: coordinates.longitude })
+    if (coordinates == null) {
 
-    
+        // resgatar através do cep informado
+        coordinates = {
+            latitude: 0,
+            longitude: 0
+        }
+
+    }
+
+    const { items } = _positionByMedical(categories?.users, { lat: coordinates.latitude, lon: coordinates.longitude })
 
     const GettingItems = () => {
         const location = [20, 17, 26]

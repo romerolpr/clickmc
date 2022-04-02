@@ -2,6 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 import { fetchWrapper } from '../helpers';
 import Router from 'next/router';
 import axios from 'axios';
+import { MEDICAL_ACCOUNT_LEVEL } from '../_settings/_auth';
 
 const baseUrl = `/usuario/acessos`;
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('_SESSION')));
@@ -68,6 +69,11 @@ function login(username, password) {
         localStorage.setItem('_SESSION', JSON.stringify( user ))
         return user
     })
+}
+
+function isAccountMedic() {
+    const storage = localStorage.getItem('_SESSION')
+    return storage._type == MEDICAL_ACCOUNT_LEVEL
 }
 
 function logout(router = null) {

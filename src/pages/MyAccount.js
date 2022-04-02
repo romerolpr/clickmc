@@ -8,6 +8,8 @@ import { userService } from '../services';
 import { dateFormat } from '../constants';
 import { useFetch } from '../services/fetch';
 
+import { ModalConfigAccount } from '../components';
+
 const MyAccount = () => {
 
     const router = useRouter()
@@ -20,17 +22,35 @@ const MyAccount = () => {
         label, 
         value }) => (
         <Fragment>
-            <span>{value == '' ? '-' : value}</span>
+            <span>{value == '' || value == null ? '-' : value}</span>
             <span onClick={() => setUpdateAccount({
                 title: label, 
                 key: item,
                 value: value
             })}
             className={account.button_change}>
-                {value == '' ? 'Adicionar' : 'Alterar'} {label} <i className="bi bi-pen-fill"></i>
+                {value == '' || value == null ? 'Adicionar' : 'Alterar'} {label} <i className="bi bi-pen-fill"></i>
             </span>
         </Fragment>
     )
+
+    const FinalConfigurationStep = () => {
+
+        const _details = Object.values(info?.details)
+        const _location = Object.values(info?.location)
+        
+        const repository = [
+            ..._details, ..._location
+        ]
+
+
+        if (repository.includes(null)) {
+            return <ModalConfigAccount previousValue={info} />   
+        }
+
+        return null
+
+    }
 
     if (updateAccount != null) {
         return <Update item={updateAccount} updateAccount={setUpdateAccount}/>
@@ -38,6 +58,10 @@ const MyAccount = () => {
     
     return (
         <div className="col-12">
+
+            {info?.details != undefined && (
+                <FinalConfigurationStep />
+            )}
 
             <div className="row mb-3">
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">

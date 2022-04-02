@@ -4,6 +4,7 @@ export * from './keyPress';
 export * from './selectThisOption';
 export * from './image';
 export * from './identifyProgressLink';
+export * from './identifyAccount';
 export * from './randomNumber';
 export * from './compareObjects';
 export * from './dateFormat';

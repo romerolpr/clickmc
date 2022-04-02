@@ -1,38 +1,90 @@
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
-import { useRouter } from 'next/router';
+import { userService } from '../../services';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Form } from 'react-bootstrap';
 
-export const ModalNext = ({ modalShow, title, children }) => {
+import { ClientLevel, validationSchemaClient } from '../Account/ClientLevel';
+import { API } from '../../constants';
+
+export const ModalConfigAccount = ({ previousValue }) => {
     
-    const router = useRouter()
+    const [ authorization, setAuthorization ] = useState(false)
 
-    const handleClose = () => {
-        router.push({ pathname: '/' })
+    const formOptions = { 
+        resolver: yupResolver(validationSchemaClient) 
+    }
+
+    const { register, handleSubmit, reset, formState } = useForm(formOptions)
+
+    const { errors, isSubmitting } = formState
+
+    const onSubmit = async data => {
+        const request = {
+            name: data.name,
+            description: data.description,
+            phone: data.phone,
+            address: data.address,
+            county: data.county,
+            number: data.number,
+            postalCode: data.postalCode
+        }
+
+        API.put(`usuario/configuracao/conta/${userService.userValue.username}`, 
+        request,
+        {
+            headers: {
+                authorization: `Bearer ${userService.userValue.token}`
+            }
+        })
+        .then(response => {
+            if (response.status == 200) {
+                toast.success('Seus dados foram atualizados com sucesso!')
+                setAuthorization(true)
+            } else {
+                toast.error('Houve algum erro ao atualizar os dados')
+            }
+        })
+        .catch(() => toast.error('Não foi possível alterar seus dados'))
     }
 
     return (
         <>
         <Modal
-            show={modalShow}
-            onHide={handleClose}
+            show={!authorization}
             backdrop="static"
             keyboard={false}
         >
-            <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
+            <Modal.Header>
+            <Modal.Title>
+                Configurações da conta
+            </Modal.Title>
             </Modal.Header>
             <Modal.Body>
 
-                { children }
+                <p>Bem vindo <strong>@{userService.userValue.username}</strong>! Verificamos que você ainda não finalizou a configuração da sua conta.</p>
+
+                <Form onSubmit={handleSubmit(onSubmit)}>
+                    <ClientLevel 
+                    previousValue={previousValue}
+                    register={register} 
+                    errors={errors}/>
+                </Form>
 
             </Modal.Body>
+
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Fechar
+
+                <Button
+                onClick={handleSubmit(onSubmit)}
+                variant="primary">
+                    Salvar
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Ok
-                </Button>
+
             </Modal.Footer>
+
         </Modal>
         </>
     )

@@ -26,7 +26,7 @@ const Perfil = () => {
             </div>
             <div className={styles.container_scheduling} style={{ marginTop: '0' }}>
                 <div className={styles.top_scheduling}>
-                    <h2>Olá, {userService.userValue ? userService.userValue.username : null}!</h2>
+                    <h2>Olá, @{userService.userValue ? userService.userValue.username : null}!</h2>
                     <p>Visualize e edite as informações da sua conta por aqui.</p>
                 </div>
                 <div className={styles.body_scheduling_p}>
