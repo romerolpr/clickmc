@@ -7,17 +7,19 @@ import perfil from '/src/_assets/css/modules/perfil.module.css';
 import { Image } from '../../src/components';
 import { MyAccount } from '../../src/pages';
 import { identifySession } from '../../src/constants/session/identifySession';
+import { useRedux } from '../../src/services/fetch'
 
 const Perfil = () => {
 
     identifySession()
+    const { userValues } = useRedux()
 
     return (
         <LayoutStatic breadcrumb={false}>
             <div className={perfil.item_center}>
               <div className={perfil.item_box_icon}>
                 <div className={perfil.img_box}>
-                  <Image imageSrc={'/image/avatar/default.png'} title={'Seu avatar'}/>
+                  <Image imageSrc={`/${userValues.avatar}`} title={'Seu avatar'}/>
                 </div>
                 <div className={perfil.text_name}>
                   <span>Alterar avatar</span>

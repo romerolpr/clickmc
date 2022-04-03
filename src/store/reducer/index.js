@@ -13,9 +13,9 @@ import settingForm from './form/settings';
 // exporta os reducers
 export default combineReducers({
     settings: settingsReducer,
-    users: userReducer,
-    lists: listsReducer,
+    // lists: listsReducer,
+    userValues: userReducer,
     formValues: listForm,
-    formSettings: settingForm,
+    // formSettings: settingForm,
     pageInformations: listInformations
 })

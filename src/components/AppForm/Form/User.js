@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import { nextProgress } from '../nextProgress';
 import { _setName, _setPhone } from '../../../store/actions/form';
 
-const User = () => {
+const User = ({ user: _user }) => {
 
     const dispatch = useDispatch()
     const formValues = useSelector( (state) => state.formValues);
@@ -68,7 +68,7 @@ const User = () => {
                     type="text"
                     placeholder="Informe seu nome" 
                     {...register('name')}
-                    defaultValue={formValues.name != null ? formValues.name : null}
+                    defaultValue={_user.name != null ? _user.name : null}
                     />
                     <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
                 </Form.Group>
@@ -80,7 +80,7 @@ const User = () => {
                     className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
                     type="text"
                     placeholder="Informe seu telefone" 
-                    defaultValue={formValues.phone != null ? formValues.phone : null}
+                    defaultValue={_user.phone != null ? _user.phone : null}
                     {...register('phone')}
                     />
                     <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>

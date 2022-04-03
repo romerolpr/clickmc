@@ -26,43 +26,43 @@ const ClientLevel = ({ register, errors, previousValue }) => {
         <Fragment>
             <Form.Group className="mb-3">
                 <Form.Label>Nome</Form.Label>
-                <Form.Control defaultValue={previousValue?.details.name} {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu nome" />
+                <Form.Control defaultValue={previousValue.name} {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu nome" />
                 <div className="invalid-feedback">{errors.name?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Descrição (opcional)</Form.Label>
-                <Form.Control defaultValue={previousValue?.details.description || ''} {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} type="text" placeholder="Insira sua descrição" />
+                <Form.Control defaultValue={previousValue.description || ''} {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} type="text" placeholder="Insira sua descrição" />
                 <div className="invalid-feedback">{errors.description?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Telefone</Form.Label>
-                <Form.Control defaultValue={previousValue?.details.phone} {...register('phone')} className={`form-control ${errors.phone ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu número de telefone" />
+                <Form.Control defaultValue={previousValue.phone} {...register('phone')} className={`form-control ${errors.phone ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu número de telefone" />
                 <div className="invalid-feedback">{errors.phone?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Município</Form.Label>
-                <Form.Control defaultValue={previousValue?.location.county} {...register('county')} className={`form-control ${errors.county ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu município" />
+                <Form.Control defaultValue={previousValue.county} {...register('county')} className={`form-control ${errors.county ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu município" />
                 <div className="invalid-feedback">{errors.county?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Endereço</Form.Label>
-                <Form.Control defaultValue={previousValue?.location.address} {...register('address')} className={`form-control ${errors.address ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu endereço" />
+                <Form.Control defaultValue={previousValue.address} {...register('address')} className={`form-control ${errors.address ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu endereço" />
                 <div className="invalid-feedback">{errors.phone?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Número</Form.Label>
-                <Form.Control defaultValue={previousValue?.location.number} {...register('number')} className={`form-control ${errors.number ? 'is-invalid' : ''}`} type="text" placeholder="Insira o número do endereço" />
+                <Form.Control defaultValue={previousValue.number} {...register('number')} className={`form-control ${errors.number ? 'is-invalid' : ''}`} type="text" placeholder="Insira o número do endereço" />
                 <div className="invalid-feedback">{errors.number?.message}</div>
             </Form.Group>
 
             <Form.Group className="mb-3">
                 <Form.Label>Código postal</Form.Label>
-                <Form.Control defaultValue={previousValue?.location.postalCode} {...register('postalCode')} className={`form-control ${errors.postalCode ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu código postal" />
+                <Form.Control defaultValue={previousValue.postalCode} {...register('postalCode')} className={`form-control ${errors.postalCode ? 'is-invalid' : ''}`} type="text" placeholder="Insira seu código postal" />
                 <div className="invalid-feedback">{errors.postalCode?.message}</div>
             </Form.Group>
         </Fragment>

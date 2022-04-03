@@ -6,15 +6,15 @@ import { Update } from '../components';
 import account from '/src/_assets/css/modules/myaccount.module.css';
 import { userService } from '../services';
 import { dateFormat } from '../constants';
-import { useFetch } from '../services/fetch';
+import { useRedux } from '../services/fetch';
 
 import { ModalConfigAccount } from '../components';
+import { TIMEOUT_CONTENT_LOADED } from '../_settings';
 
 const MyAccount = () => {
-
-    const router = useRouter()
-    const { data: info } = useFetch(`/usuario/username/${userService.userValue.username}`, false, 0)
     
+    const { userValues } = useRedux()
+
     const [ updateAccount, setUpdateAccount ] = useState(null)
 
     const AccountUpdate = ({ 
@@ -36,17 +36,15 @@ const MyAccount = () => {
 
     const FinalConfigurationStep = () => {
 
-        const _details = Object.values(info?.details)
-        const _location = Object.values(info?.location)
-        
-        const repository = [
-            ..._details, ..._location
-        ]
+        const repository = Object.values(userValues)
 
+        setTimeout(() => {
 
-        if (repository.includes(null)) {
-            return <ModalConfigAccount previousValue={info} />   
-        }
+            if (repository.includes(null)) {
+                return <ModalConfigAccount previousValue={userValues} />   
+            }
+
+        }, 1000)
 
         return null
 
@@ -59,9 +57,7 @@ const MyAccount = () => {
     return (
         <div className="col-12">
 
-            {info?.details != undefined && (
-                <FinalConfigurationStep />
-            )}
+            <FinalConfigurationStep />
 
             <div className="row mb-3">
                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -105,7 +101,7 @@ const MyAccount = () => {
                             <span className={account.subtitle}>E-mail</span>
                             <AccountUpdate 
                             item='email' 
-                            value={info?.details.email}
+                            value={userValues.email}
                             label={'E-mail'}/>
                         </div>
                         <div className={account.item_account}>
@@ -119,7 +115,7 @@ const MyAccount = () => {
                             <span className={account.subtitle}>Data de nascimento</span>
                             <AccountUpdate 
                             item='birthday' 
-                            value={`${dateFormat(info?.details.birthday, true)}`}
+                            value={`${dateFormat(userValues.birthday, true)}`}
                             label={'Nascimento'}/>
                         </div>
                     </div>
@@ -132,14 +128,14 @@ const MyAccount = () => {
                             <span className={account.subtitle}>Nome</span>
                             <AccountUpdate 
                             item='name' 
-                            value={info?.details.name}
+                            value={userValues.name}
                             label={'Nome'}/>
                         </div>
                         <div className={account.item_account}>
                             <span className={account.subtitle}>Telefone</span>
                             <AccountUpdate 
                             item='phone' 
-                            value={info?.details.phone}
+                            value={userValues.phone}
                             label={'Telefone'}/>
                         </div>
                     </div>
@@ -150,14 +146,14 @@ const MyAccount = () => {
                             <span className={account.subtitle}>Endereço</span>
                             <AccountUpdate 
                             item='address' 
-                            value={info?.location.address}
+                            value={userValues.address}
                             label={'Endereço'}/>
                         </div>
                         <div className={account.item_account}>
                             <span className={account.subtitle}>Código postal</span>
                             <AccountUpdate 
                             item='cep' 
-                            value={info?.location.postalCode}
+                            value={userValues.postalCode}
                             label={'CEP'}/>
                         </div>
                     </div>

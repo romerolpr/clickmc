@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useRedux } from "../../services/fetch";
 
 import { Loading } from '../';
 import { useEffect, useState } from 'react';
@@ -12,7 +13,8 @@ import * as Step from "./Form";
 
 const Main = () => {
 
-    const formValues = useSelector( (state) => state.formValues);
+    const { formValues, userValues } = useRedux()
+
     const { progress } = formValues
     
     const [ loading, setLoading ] = useState(true)
@@ -24,6 +26,8 @@ const Main = () => {
         }, TIMEOUT_CONTENT_LOADED)
 
     }, [])
+
+    console.log(userValues)
     
     if (loading)
         return <Loading />
@@ -31,9 +35,9 @@ const Main = () => {
     // Inclui o componente por estágio de progresso
     switch (progress) {
         case 0:
-            return <Step.Location />
+            return <Step.Location user={userValues}/>
         case 1:
-            return <Step.User />
+            return <Step.User user={userValues}/>
         case 2:
             return <Step.Specialist />
         case 3:

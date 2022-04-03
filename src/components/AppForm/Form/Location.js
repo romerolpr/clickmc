@@ -28,7 +28,7 @@ import { useEffect, useState } from 'react';
 import { nextProgress } from '../nextProgress';
 import { ContainerApp } from '../../../containers';
 
-const Location = () => {
+const Location = ({ user: _user }) => {
 
     const [ manualPostalCode, setManualPostalCode ] = useState(false)
     const [ geolocationEnabled, setGeolocationEnabled ] = useState(false)
@@ -45,7 +45,7 @@ const Location = () => {
     const formOptions = { resolver: yupResolver(validationSchema) }
 
     const { register, handleSubmit, setError, formState } = useForm(formOptions)
-    const { errors, isSubmitting  } = formState
+    const { errors } = formState
 
     const handleNextProgress = (_manualGeolocation) => {
         
@@ -116,7 +116,7 @@ const Location = () => {
                     type="text"
                     placeholder="00000-000" 
                     pattern="\d{5}-\d{3}"
-                    defaultValue={formValues.manualGeolocation != 'getCurrentLocation' ? formValues.manualGeolocation : null}
+                    defaultValue={formValues.manualGeolocation != 'getCurrentLocation' ?  _user.postalCode : null}
                     onKeyUp={ () => {
                         setManualPostalCode(true)
                         removeByClassName(`.${elem.selected}`, elem.selected)

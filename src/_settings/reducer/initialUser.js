@@ -1,9 +1,10 @@
 export const initialUser = {
     id: null,
     name: null,
-    cpf: null,
+    phone: null,
+    birthday: null,
     email: null,
     avatar: null,
-    phone: null,
-    address: null
+    address: null,
+    postalCode: null
 }
