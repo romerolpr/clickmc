@@ -36,15 +36,15 @@ const MyAccount = () => {
 
     const FinalConfigurationStep = () => {
 
+        console.log(userValues)
+
         const repository = Object.values(userValues)
 
-        setTimeout(() => {
 
-            if (repository.includes(null)) {
-                return <ModalConfigAccount previousValue={userValues} />   
-            }
+        if (repository.includes(null)) {
+            return <ModalConfigAccount previousValue={userValues} />   
+        }
 
-        }, 1000)
 
         return null
 

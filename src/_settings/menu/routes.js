@@ -1,51 +1,70 @@
 import { userService } from '../../services'
+import { MEDICAL_ACCOUNT_LEVEL } from '../_auth'
 
-// menu dinâmico da aplicação
-export const initialLinks = [
+// console.log(
+//   'type', userService.userValue._type,
+//   'medical account type', MEDICAL_ACCOUNT_LEVEL
+// )
+
+const defaultDropdown = [
+  {
+    pathname: '/perfil',
+    label: 'Minha conta'
+  },
+  {
+    pathname: '/',
+    label: 'Sair',
+    event: () => userService.logout()
+  }
+]
+
+const _defaultLinks = userService.userValue?._type != MEDICAL_ACCOUNT_LEVEL ? [
+  {
+    pathname: '/acompanhar',
+    label: 'Meus agendamentos'
+  },
+  {
+    pathname: '/buscar',
+    label: 'Buscar'
+  } 
+] : [
+  {
+    pathname: '/acompanhar',
+    label: 'Minhas consultas'
+  }
+]
+
+const _withoutSession = [
   {
     pathname: '/contato',
     label: 'Fale conosco'
   },
   {
-    pathname: '/',
-    label: 'Acessar conta',
-    dropdown: [
-      {
-        pathname: '/acesso/medico',
-        label: 'Médico'
-    },
-    {
-        pathname: '/acesso/paciente',
-        label: 'Paciente'
-      }
-    ]
+    pathname: '/acesso',
+    label: 'Acessar conta'
   },
 ]
 
-export const initialLinksWithSession = [
+const _withSession = [
   {
     pathname: '/',
     async: true,
-    dropdown: [
+    dropdown: userService.userValue?._type != MEDICAL_ACCOUNT_LEVEL ? defaultDropdown : [
       {
-        pathname: '/perfil',
-        label: 'Minha conta'
+        pathname: '/dashboard',
+        label: 'Dashboard'
       },
-      {
-        pathname: '/',
-        label: 'Sair',
-        event: () => userService.logout()
-      }
+      ...defaultDropdown
     ]
-  },
-  {
-    pathname: '/acompanhar',
-    label: 'Minhas consultas'
-  },
-  {
-    pathname: '/buscar',
-    label: 'Novo agendamento'
-  },
+  }
+]
+
+/**
+ * With session; is logged
+ */
+const initialLinksWithSession = [
+  ..._withSession,
+  ..._defaultLinks,
   {
     pathname: '/contato',
     label: 'Fale conosco'
@@ -55,3 +74,13 @@ export const initialLinksWithSession = [
     icon: 'bi-bell'
   }
 ]
+
+/**
+ * No session started; is not logged
+ */
+const initialLinks = _withoutSession
+
+export {
+  initialLinksWithSession,
+  initialLinks
+}

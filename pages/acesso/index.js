@@ -5,34 +5,37 @@ import { useEffect, useState } from 'react';
 
 import form from '/src/_assets/css/modules/form.module.css';
 import getCookie from '../../src/constants/getCookie';
-import { useRouter } from 'next/router';
 import { userService } from '../../src/services';
 
-const Paciente = () => {
+const Access = () => {
 
-    const router = useRouter()
+    const [ authorized, setAuthorized ] = useState(false)
     const [ thereIsAccount, setThereIsAccount ] = useState(true)
 
     const ManageFinish = () => {
         if (thereIsAccount) {
             return (
-                <Login thereIsAccount={setThereIsAccount} redirect={true}>
-                    <h6>Paciente</h6>
-                    <h2>Faça login na sua conta</h2>
+                <Login thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
+                    <h6>Bem vindo!</h6>
+                    <h2>Acesse sua conta</h2>
                 </Login>
             )
         }
         return (
-            <Register thereIsAccount={setThereIsAccount} redirect={true}>
-                <h6>Paciente</h6>
+            <Register thereIsAccount={setThereIsAccount} setAuthorized={setAuthorized}>
+                <h6>Bem vindo!</h6>
                 <h2>Crie sua conta</h2>
             </Register>
         )
     }
 
+    if (authorized) {
+        window.location.replace('/')
+    }
+
     useEffect(() => {
       if (getCookie('_SESSION') || userService.userValue) {
-        router.push('/')
+        window.location.replace('/')
       }
     }, [])
 
@@ -51,4 +54,4 @@ const Paciente = () => {
     
 }
 
-export default Paciente
+export default Access

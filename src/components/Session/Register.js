@@ -95,6 +95,9 @@ const Register = ({ thereIsAccount, redirect, children }) => {
                     router.push('/')
                 }
             })
+            .catch( (error) => {
+                console.error(error)
+            })
     }
 
     return (
@@ -102,35 +105,33 @@ const Register = ({ thereIsAccount, redirect, children }) => {
             <div className="col-12 mb-3 fleft">
                 { children }
             </div>
-            <div className="row" style={{
-                width: '100%'
-            }}>
-                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                    <Form.Label>Seu nome</Form.Label>
-                    <input 
-                    name="name"
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                    type="text"
-                    placeholder="Informe seu nome completo" 
-                    defaultValue={formValues.name != null && formValues.name}
-                    {...register('name')}
-                    />
-                    <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
-                </Form.Group>
 
-                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                    <Form.Label>Nome de usuário</Form.Label>
-                    <input 
-                    name="username"
-                    className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-                    type="text"
-                    placeholder="Informe seu nome de usuário"
-                    {...register('username')}
-                    />
-                    <Form.Text>O nome de usuário não poderá ser modificado depois</Form.Text>
-                    <Form.Text className="invalid-feedback">{errors.username?.message}</Form.Text>
-                </Form.Group>
-            </div>
+            <Form.Group className="mb-3">
+                <Form.Label>Seu nome</Form.Label>
+                <input 
+                name="name"
+                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                type="text"
+                placeholder="Informe seu nome completo" 
+                defaultValue={formValues.name != null ? formValues.name : ''}
+                {...register('name')}
+                />
+                <Form.Text className="invalid-feedback">{errors.name?.message}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Nome de usuário</Form.Label>
+                <input 
+                name="username"
+                className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                type="text"
+                placeholder="Informe seu nome de usuário"
+                {...register('username')}
+                />
+                <Form.Text>O nome de usuário não poderá ser modificado depois</Form.Text>
+                <Form.Text className="invalid-feedback">{errors.username?.message}</Form.Text>
+            </Form.Group>
+
 
             <Form.Group className="mb-3">
                 <Form.Label>Seu telefone</Form.Label>
@@ -139,7 +140,7 @@ const Register = ({ thereIsAccount, redirect, children }) => {
                 className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
                 type="text"
                 placeholder="Informe seu telefone"
-                defaultValue={formValues.phone != null && formValues.phone}
+                defaultValue={formValues.phone != null ? formValues.phone : ''}
                 {...register('phone')}
                 />
                 <Form.Text className="invalid-feedback">{errors.phone?.message}</Form.Text>

@@ -4,8 +4,8 @@ export function useRedux() {
 
     const dispatch = useDispatch()
     
-    const formValues = useSelector( (state) => state.formValues);
-    const userValues = useSelector( (state) => state.userValues);
+    const formValues = useSelector( (state) => state.formValues)
+    const userValues = useSelector( (state) => state.userValues)
 
     return { 
         formValues,

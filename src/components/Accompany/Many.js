@@ -8,9 +8,7 @@ import { userService } from "../../services";
 
 const Many = () => {
 
-    const { data: hist } = useFetch(`/status/user/${userService.userValue ? userService.userValue.username : undefined}`, false)
-
-    console.log(hist)
+    const { data: hist } = useFetch(`/status/user/${userService.userValue?.username}`, false)
 
     if ( hist == null ) {
       return (

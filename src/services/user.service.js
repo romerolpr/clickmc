@@ -12,6 +12,7 @@ export const userService = {
     user: userSubject.asObservable(),
     get userValue () { return userSubject.value },
     login,
+    getMedicalAccount,
     addCard,
     getAllCards,
     decrypt,
@@ -71,7 +72,7 @@ function login(username, password) {
     })
 }
 
-function isAccountMedic() {
+function getMedicalAccount() {
     const storage = localStorage.getItem('_SESSION')
     return storage._type == MEDICAL_ACCOUNT_LEVEL
 }
@@ -80,9 +81,7 @@ function logout(router = null) {
     // remove user from local storage, publish null to user subscribers and redirect to login page
     localStorage.removeItem('_SESSION');
     userSubject.next(null);
-    if (router != null) {
-        Router.push(router);
-    }
+    window.location.replace('/')
 }
 
 function register(user, method = 0) {

@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { userService } from '../../services';
 import { useState } from 'react';
 
-const Login = ({ thereIsAccount, setAuthorized, redirect, children }) => {
+const Login = ({ thereIsAccount, setAuthorized, children }) => {
 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('O nome de usuário não pode ficar vazio.'),

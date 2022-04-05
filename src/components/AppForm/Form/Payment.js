@@ -80,7 +80,7 @@ const Payment = ({ payments }) => {
     const onSubmit = card => {
 
         const config = {
-            headers: { Authorization: `Bearer ${userService.userValue.hash}` }
+            headers: { Authorization: `Bearer ${userService.userValue.token}` }
         }
         const body = {
             price: payments.find(opt => opt.type == 'cartao-credito').price,

@@ -12,3 +12,4 @@ export * from './View/AppModal';
 export * from './View/Image';
 export * from './View/Message';
 export * from './View/Update';
+export * from './View/Cards';

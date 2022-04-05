@@ -9,8 +9,21 @@ import { Form } from 'react-bootstrap';
 import { ClientLevel, validationSchemaClient } from '../Account/ClientLevel';
 import { API } from '../../constants';
 
+import { useRedux } from '../../services/fetch'
+import { 
+    _setUserName,
+    _setUserAddress,
+    _setUserBirthday,
+    _setUserCounty,
+    _setUserNumber,
+    _setUserPhone,
+    _setUserEmail,
+    _setUserPostalCode
+ } from '../../store/actions/users'
+
 export const ModalConfigAccount = ({ previousValue }) => {
     
+    const { dispatch } = useRedux()
     const [ authorization, setAuthorization ] = useState(false)
 
     const formOptions = { 
@@ -42,6 +55,17 @@ export const ModalConfigAccount = ({ previousValue }) => {
         .then(response => {
             if (response.status == 200) {
                 toast.success('Seus dados foram atualizados com sucesso!')
+
+                dispatch( _setUserName(request.name) )
+                dispatch( _setUserBirthday(request.birthday) )
+                dispatch( _setUserAvatar(request.backdrop) )
+                dispatch( _setUserPhone(request.phone) )
+                dispatch( _setUserEmail(request.email) )
+                dispatch( _setUserAddress(request.address) )
+                dispatch( _setUserPostalCode(request.postalCode) )
+                dispatch( _setUserNumber(request.number) )
+                dispatch( _setUserCounty(request.county) )
+
                 setAuthorization(true)
             } else {
                 toast.error('Houve algum erro ao atualizar os dados')
