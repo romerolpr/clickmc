@@ -2,7 +2,7 @@ import { Loading } from "./Loading"
 
 export const Cards = ({ title, value, loader, color, icon }) => {
     color = color != undefined ? color : 'pink'
-
+    console.log(value)
     return (
         <div className="card">
             <div className="stat-widget-one card-body">

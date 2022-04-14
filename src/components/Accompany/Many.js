@@ -32,7 +32,9 @@ const Many = () => {
                   <p>Parece que você ainda não realizou nenhuma consulta.</p>
               </div>
               <div className={styles.body_scheduling_p}>
-                  <p>componente para médicos sugeridos...</p>
+                <div className="col-12">
+                    <p>Agende uma consulta com um especialista de sua preferência, e receba-o em sua residência.</p>
+                </div>
               </div>
           </div>
       )

@@ -51,7 +51,7 @@ const ListProgress = () => {
 
                 <span
                 onClick={() => identifyProgressLink(YOU, dispatch, formValues)}
-                className={`${_className} ${progress == YOU ? 'active' : coordinates == null && 'disabled'}`} 
+                className={`${_className} ${progress == YOU ? 'active' : coordinates == null && formValues.manualGeolocation == null && 'disabled'}`} 
                 title={name == null ? "Você mesmo" : name}>{name == null ? "Você mesmo" : `${name} ${formValues.phone}`}</span>
 
                 <span

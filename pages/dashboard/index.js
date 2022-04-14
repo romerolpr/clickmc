@@ -62,16 +62,10 @@ const Dashboard = () => {
         datasets: [
             {
             label: "First dataset",
-            data: [5, 14, 25, 41, 44, 65, 55, 42, 52, 36, 40, 41],
-            fill: true,
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            fill: false,
             backgroundColor: "rgba(75,192,192,0.2)",
             borderColor: "rgba(75,192,192,1)"
-            },
-            {
-            label: "Second dataset",
-            data: [33, 25, 35, 51, 54, 46, 0, 0, 0, 0, 0, 0],
-            fill: true,
-            borderColor: "#343957"
             }
         ]
     }
@@ -111,59 +105,63 @@ const Dashboard = () => {
 
                 <div className="col-lg-12 m-0">                        
 
-                    <div className="col-12 pr-0 mr-0 row">
+                    <h2 className="mt-3">Geral</h2>
 
-                        <div className="col-lg-6 col-sm-12 card" style={{
-                            padding: '2em'
-                        }}>
-                            <Line data={data}/>
-                        </div>
+                    <div className="row">
 
-                        <div className="col-lg-6 col-sm-12 row m-0">
+                        <div className="row col-12 p-0 m-0">
 
-                            <div className="col-lg-6 col-sm-12"> 
-                                <div className="card h-100-card">
-                                    <div className="stat-widget-one card-body">
-                                        <div className="stat-content d-inline-block">
-                                            <div className="stat-text">{_timeExcept == 0 ? 'Faturamento' : !_timeExcept? 'Carregando...' : `Você teve estornos devido ao atraso`}</div>
-                                            <div className="start-digit">
-                                                {!_rowsPrice? <Loading label={false}/> : realMoneyConvert(_rowsPrice, _timeExcept, price)}</div>
-                                        </div>
-                                    </div>
+                            <div className="col-sm-12 col-lg-6 p-0 m-0">
+                                <div className="card p-3">
+                                    <Line data={data}/>
                                 </div>
                             </div>
 
-                            <div className="col-lg-6 col-sm-12">
-                                <div className="card h-100-card">
-                                    <div className="stat-widget-one card-body">
-                                        <div className="stat-content d-inline-block">
-                                            <div className="stat-text">{!_rows ? 'Carregando...' : 'Total de agendamentos'}</div>
-                                            <div className="start-digit">
-                                                { !_rows ? <Loading label={false}/> : _rows == 0 ? '-' : _rows }</div>
+                            <div className="row col-6 p-0 m-0">
+                                <div className="col-sm-12 col-lg-6 p-0"> 
+                                    <div className="card h-100">
+                                        <div className="stat-widget-one card-body">
+                                            <div className="stat-content d-inline-block">
+                                                <div className="stat-text">{_timeExcept == 0 ? 'Faturamento' : !_timeExcept? 'Carregando...' : `Você teve estornos devido ao atraso`}</div>
+                                                <div className="start-digit">
+                                                    { _rowsPrice == undefined ? <Loading label={false}/> : <strong>{realMoneyConvert(_rowsPrice, _timeExcept, price)}</strong>}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="col-lg-6 col-sm-12">
-                            <   div className="card h-100-card">
-                                    <div className="stat-widget-one card-body">
-                                        <div className="stat-content d-inline-block">
-                                            <div className="stat-text">{!_waitConfirm ? 'Carregando...' : 'Aguardando sua confirmação'}</div>
-                                            <div className="start-digit">
-                                                {!_waitConfirm ? <Loading label={false}/> : _waitConfirm == 0 ? '-' : _waitConfirm}</div>
+                                <div className="col-sm-12 col-lg-6 p-0">
+                                    <div className="card h-100">
+                                        <div className="stat-widget-one card-body">
+                                            <div className="stat-content d-inline-block">
+                                                <div className="stat-text">{_rows ? 'Carregando...' : 'Total de agendamentos'}</div>
+                                                <div className="start-digit">
+                                                    { _rows == undefined ? <Loading label={false}/> : _rows == 0 ? '-' : _rows }</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="col-lg-6 col-sm-12">
-                                <div className="card h-100-card">
-                                    <div className="stat-widget-one card-body">
-                                        <div className="stat-content d-inline-block">
-                                            <div className="stat-text">{!_waitConfirm ? 'Carregando...' : 'Aguardando pagamento'}</div>
-                                            <div className="start-digit">
-                                                {!_waitConfirm ? <Loading label={false}/> : _waitConfirm == 0 ? '-' : _waitConfirm}</div>
+                                <div className="col-sm-12 col-lg-6 p-0">
+                                <   div className="card h-100">
+                                        <div className="stat-widget-one card-body">
+                                            <div className="stat-content d-inline-block">
+                                                <div className="stat-text">{_waitConfirm ? 'Carregando...' : 'Aguardando sua confirmação'}</div>
+                                                <div className="start-digit">
+                                                    { _waitConfirm == undefined ? <Loading label={false}/> : _waitConfirm == 0 ? '-' : _waitConfirm}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-12 col-lg-6 p-0">
+                                    <div className="card h-100">
+                                        <div className="stat-widget-one card-body">
+                                            <div className="stat-content d-inline-block">
+                                                <div className="stat-text">{_waitPayment ? 'Carregando...' : 'Aguardando pagamento'}</div>
+                                                <div className="start-digit">
+                                                    { _waitPayment == undefined ? <Loading label={false}/> : _waitPayment == 0 ? '-' : _waitPayment}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -172,19 +170,21 @@ const Dashboard = () => {
                         </div>
 
                     </div>
+                    
+                    <h2 className="mt-3">Outros</h2>
 
                     <div className="row">
 
-                        <div className="col-lg-4 col-sm-12">
+                        <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
-                            value={!_cancelYourself}
+                            value={_cancelYourself}
                             loader={!_cancelYourself}
                             color='danger'
                             icon='ti-arrow-down'
                             title='Você cancelou'/>
                         </div>
 
-                        <div className="col-lg-4 col-sm-12">
+                        <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
                             value={_cancelClient}
                             loader={!_cancelClient}
@@ -193,7 +193,7 @@ const Dashboard = () => {
                             title='Cliente cancelou'/>
                         </div>
 
-                        <div className="col-lg-4 col-sm-12">
+                        <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
                             value={_timeExcept}
                             loader={!_timeExcept}
@@ -206,7 +206,7 @@ const Dashboard = () => {
 
                 </div>
 
-                <div className="col-lg-12 col-sm-12">   
+                <div className="col-lg-12 col-sm-12 mt-3">   
 
                     <p>Status de consultas 
                         

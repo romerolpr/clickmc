@@ -71,7 +71,7 @@ export const ModalConfigAccount = ({ previousValue }) => {
                 toast.error('Houve algum erro ao atualizar os dados')
             }
         })
-        .catch(() => toast.error('Não foi possível alterar seus dados'))
+        .catch(error => console.error(error))
     }
 
     return (

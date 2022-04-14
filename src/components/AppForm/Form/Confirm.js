@@ -45,7 +45,7 @@ const Confirm = () => {
         if (isAvailable) {
             identifyProgressLink(4, dispatch, formValues)
         }
-        console.log(isAvailable)
+        console.log(formValues, isAvailable)
     }
 
     useEffect(() => {

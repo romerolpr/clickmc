@@ -1,5 +1,6 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { 
+  SET_NETWORK_STATUS_CONNECTION,
   USER_SET_ID,
   USER_SET_NAME,
   USER_SET_BIRTHDAY,
@@ -19,6 +20,8 @@ const userReducer = (state = initialUser, action) => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload.user };
+    case SET_NETWORK_STATUS_CONNECTION:
+      return { ...state, network_status_connection: action.payload }
     case USER_SET_ID:
       return {...state, id: action.payload};
     case USER_SET_NAME:

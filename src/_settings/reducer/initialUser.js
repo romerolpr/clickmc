@@ -6,5 +6,6 @@ export const initialUser = {
     email: null,
     avatar: null,
     address: null,
-    postalCode: null
+    postalCode: null,
+    network_status_connection: null
 }

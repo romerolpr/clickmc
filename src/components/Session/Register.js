@@ -83,6 +83,8 @@ const Register = ({ thereIsAccount, redirect, children }) => {
             username: user.username,
             password: user.password,
             email: user.email,
+            name: user.name,
+            phone: user.phone,
             dob: user.dob
         }
         return userService.register(body)

@@ -6,6 +6,7 @@ import NextNprogress from 'nextjs-progressbar';
 import styles from '/src/_assets/css/modules/navbar.module.css';
 
 import { _session } from '../constants';
+import { toast } from 'react-toastify';
 
 export const Navbar = ({ absolute }) => {
 
@@ -17,7 +18,7 @@ export const Navbar = ({ absolute }) => {
                 color="var(--bs-primary)"
                 startPosition={0.3}
                 stopDelayMs={200}
-                height={1.25}
+                height={2}
                 showOnShallow={true}
             />
             <nav className={absolute ? `navbar navbar-expand-lg fixed-top navbar-dark ${styles.navbar_absolute}` : `navbar navbar-expand-lg navbar-dark bg-dark ${styles.navbar_relative}`}>

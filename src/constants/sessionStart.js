@@ -14,7 +14,8 @@ import {
     _setUserPostalCode,
     _resetUser,
     _setUserNumber,
-    _setUserCounty
+    _setUserCounty,
+    _setNetworkStatusConnection
  } from '../store/actions/users'
 import { toast } from "react-toastify"
 
@@ -26,6 +27,13 @@ const _session = () => {
     const session = userService.userValue != undefined
 
     useEffect(() => {
+
+        if (navigator.onLine) {
+            dispatch( _setNetworkStatusConnection(true) )
+        } else {
+            toast.error('Você está offline, verifique sua conexão com a internet.')
+            dispatch( _setNetworkStatusConnection(false) )
+        }
 
         if (session && userData == null) {
 

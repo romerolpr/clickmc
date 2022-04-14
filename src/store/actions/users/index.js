@@ -1,4 +1,5 @@
 import { 
+    SET_NETWORK_STATUS_CONNECTION,
     USER_SET_ID, 
     USER_SET_NAME,
     USER_SET_PHONE,
@@ -10,6 +11,11 @@ import {
     USER_SET_NUMBER,
     USER_SET_ADDRESS,
     USER_RESET } from "..";
+
+const _setNetworkStatusConnection = status => ({
+    type: SET_NETWORK_STATUS_CONNECTION,
+    payload: status
+})
 
 // Atualiza usuário
 const _setUserId = id => ({
@@ -79,5 +85,6 @@ export {
     _setUserNumber,
     _setUserAddress,
     _setUserBirthday,
-    _resetUser
+    _resetUser,
+    _setNetworkStatusConnection
 }

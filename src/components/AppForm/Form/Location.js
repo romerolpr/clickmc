@@ -34,7 +34,8 @@ const Location = ({ user: _user }) => {
     const [ geolocationEnabled, setGeolocationEnabled ] = useState(false)
 
     const dispatch = useDispatch()
-    const formValues = useSelector( (state) => state.formValues);
+    const formValues = useSelector( (state) => state.formValues)
+    const userValues = useSelector( (state) => state.userValues)
 
     const [ loading, setLoading ] = useState(false)
 
@@ -62,38 +63,49 @@ const Location = ({ user: _user }) => {
     }
 
     const onSubmit = ({ postalCode }) => {
+        if (userValues.network_status_connection) {
 
-        if (postalCode == '' && !geolocationEnabled) {
-            dispatch(_setManualGeolocation(null))
-        }
-        if (postalCode != '') {
-            handleNextProgress( postalCode )
-        } 
-        if (geolocationEnabled) {
-            handleNextProgress( 'getCurrentLocation' )
+            if (postalCode == '' && !geolocationEnabled) {
+                dispatch(_setManualGeolocation(null))
+            }
+            if (postalCode != '') {
+                handleNextProgress( postalCode )
+            } 
+            if (geolocationEnabled) {
+                handleNextProgress( 'getCurrentLocation' )
+            }
+        
         }
     }
 
     const navigatorGeolocation = () => {
 
-        const geoEnabled = (position) => {
-            dispatch(_setAllowGeolocation(true))
-            dispatch(_setManualGeolocation('getCurrentLocation'))
-            dispatch(_setCoordinates(position.coords))
+        if (userValues.network_status_connection) {
+
+            
+            const geoEnabled = (position) => {
+                dispatch(_setAllowGeolocation(true))
+                dispatch(_setManualGeolocation('getCurrentLocation'))
+                dispatch(_setCoordinates(position.coords))
+                toast.success('Geolocalização ativada')
+            }
+
+            const geoDisabled = (error) => {
+                dispatch(_setAllowGeolocation(false))
+                dispatch(_setManualGeolocation(null))
+                toast.info('Você precisa ativar a geolocalização do navegador')
+            }
+
+
+            if (navigator.geolocation) {
+                return navigator.geolocation.getCurrentPosition(geoEnabled, geoDisabled)
+            } else {
+                dispatch(_setSupportGeolocation(false))
+            }
+            
         }
 
-        const geoDisabled = () => {
-            dispatch(_setAllowGeolocation(false))
-            dispatch(_setManualGeolocation(null))
-            toast.info('Você precisa ativar a geolocalização do navegador')
-        }
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(geoEnabled, geoDisabled)
-        } else {
-            dispatch(_setSupportGeolocation(false))
-        }
-
+        return false
     }
 
     useEffect(() => {
@@ -130,13 +142,14 @@ const Location = ({ user: _user }) => {
                 <Form.Group className="mb-3" controlId="postalCode">
                     <button onClick={ e => {
                         e.preventDefault()
-                        setLoading(true)
-                        navigatorGeolocation()
-                        setLoading(false)
-                        e.target.className = selectThisOption(e)
-
-                        setManualPostalCode(false)
-                        setGeolocationEnabled(!geolocationEnabled)
+                        
+                        if (navigatorGeolocation()) {
+                            e.target.className = selectThisOption(e)
+                            setManualPostalCode(false)
+                            setGeolocationEnabled(!geolocationEnabled)
+                        } else {
+                            toast.error('Falha ao tentar obter sua geolocalização.')
+                        }
                         
                     }} className={formValues.manualGeolocation != 'getCurrentLocation' ? form.buttonLocation : `${form.buttonLocation} ${selectThisOption(null, true)}`}>
                         <i className="bi bi-geo"></i> Usar minha localização atual
