@@ -27,7 +27,7 @@ const Chat = ({
                 }
             }
         })
-        .catch( err => toast.error('Não foi possível resgatar a categoria') )
+        .catch( err => toast.error('Não foi possível obter a categoria') )
 
     }, [])
 

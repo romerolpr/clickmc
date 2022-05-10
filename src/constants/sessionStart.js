@@ -15,6 +15,7 @@ import {
     _resetUser,
     _setUserNumber,
     _setUserCounty,
+    _setUserPrice,
     _setNetworkStatusConnection
  } from '../store/actions/users'
 import { toast } from "react-toastify"
@@ -54,6 +55,7 @@ const _session = () => {
                         dispatch( _setUserPostalCode(user.location.postalCode) )
                         dispatch( _setUserNumber(user.location.number) )
                         dispatch( _setUserCounty(user.location.county) )
+                        dispatch( _setUserPrice(user.medicalDetails.price) )
                     })
                 }
             })

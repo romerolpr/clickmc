@@ -8,7 +8,7 @@ export const Footer = () => (
     <Fragment>
         <div className={`${styles.footer}`}>
             <Container>
-                <span>Copyright © {new Date().getFullYear()} {WEBSITE_OPTIONS.sitename}. All Rights Reserved | Política de Privacidade | LGPD</span>
+                <span>© {new Date().getFullYear()} {WEBSITE_OPTIONS.sitename}. Todos os direitos reservados.</span>
             </Container>
         </div>
     </Fragment>

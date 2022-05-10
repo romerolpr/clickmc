@@ -1,8 +1,10 @@
 import styles from '/src/_assets/css/modules/accompany.module.css';
-import { getByStatus } from "../../constants";
-import { weekdays, months } from "../../constants";
+import { weekdays, months, getByStatus } from "../../constants";
 
 import { useRouter } from 'next/router';
+import { MEDICAL_ACCOUNT_LEVEL } from '../../_settings/_auth';
+import { userService } from '../../services';
+import { listOptionsInformations } from '../../constants/listOptionsInformations';
 
 const ListOptions = ({ items }) => {
 
@@ -15,6 +17,8 @@ const ListOptions = ({ items }) => {
         const time = appointment.time
         return `solicitado para ${weekday}, ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()} às ${date.toLocaleTimeString()}`
     }
+
+    const title = MEDICAL_ACCOUNT_LEVEL == userService.userValue._type ? 'Próximas consultas' : 'Seus agendamentos'
     
     const _filter = (status) => {
         switch (status) {
@@ -29,31 +33,31 @@ const ListOptions = ({ items }) => {
     return (
         <div className={styles.container_scheduling}>
             <div className={styles.top_scheduling}>
-              <h2>Agendamentos anteriores</h2>
-              <p>Selecione uma consulta para visualizar maiores informações e abrir e status pelo médico especialista.</p>
+              <h2>{title}</h2>
+              <p>Selecione uma consulta para visualizar maiores informações e seu status.</p>
             </div>
             <div className={styles.body_scheduling}>
               {items.map( value => {
-                const appointment = value.appointment
+                const informations = listOptionsInformations(value)
                 return (
                     <div className={styles.list_schedulingDay}>
                         <div className={styles.scheduling_day} onClick={() => {
                             router.push({
                                 pathname: '/acompanhar', 
-                                query: { urlCode: value.urlCode }
+                                query: { urlCode: informations.urlCode }
                             })
                         }} style={{
-                                filter: _filter(value.status) && 'opacity(50%)'
+                                filter: _filter(informations.status) && 'opacity(50%)'
                             }}>
                             <div className={`${styles.icon_day} ${styles.view_list}`} style={{
-                                backgroundImage: `url(/${value.medicalDetails.backdrop})`
+                                backgroundImage: `url(/${informations.getBackdrop()})`
                             }}>
                                 {/* <span style={{visibility: 'hidden'}}><i className="bi bi-eye"></i></span> */}
                             </div>
                             <div className={styles.infor_day}>
-                                <p><span className={styles.status_day}>{value.urlCode}</span> <span className={styles.text_urlCode}>{getByStatus(value.status).text}</span></p>
-                                <p className={styles.text_title}><strong>Dr. {value.medicalDetails.name}</strong></p>
-                                <p><span className={styles.text_list}><i className="bi bi-check2"></i> {_label(appointment)}</span></p>
+                                <p><span className={styles.status_day}>{informations.urlCode}</span> <span className={styles.text_urlCode}>{getByStatus(informations.status).text}</span></p>
+                                <p className={styles.text_title}><strong>{informations.getName()}</strong></p>
+                                <p><span className={styles.text_list}><i className="bi bi-check2"></i> {_label(value.appointment)}</span></p>
                             </div>
                         </div>
                     </div>

@@ -44,7 +44,7 @@ const realMoneyConvert = (value, timer, price) => {
 const Dashboard = () => {
 
     const { userValues } = useRedux()
-    const { data: info } = useFetch(`status/medicoId/${userService.userValue?.id}/count`, true, 'data')
+    const { data: info } = useFetch(`status/medicoId/${userService.userValue?.id}/count`, true)
 
     const [ _totalCancel, setTotalCancel ] = useState(false)
     const [ _waitConfirm, setWaitConfirm ] = useState(false)
@@ -70,14 +70,11 @@ const Dashboard = () => {
         ]
     }
 
-    console.log(info)
-
     useEffect(() => {
 
-        if (info != null && info.status != undefined) {
+        if (info != null) {
 
             const { 
-                _rows,
                 _0: _totalCancel,
                 _1: _waitConfirm,
                 _3: _cancelYourself,
@@ -86,6 +83,8 @@ const Dashboard = () => {
                 _9: _waitPayment
             } = info.status
 
+            const { rows: _rows } = info
+
             setRows(_rows)
             setTotalCancel(_totalCancel)
             setWaitConfirm(_waitConfirm)
@@ -93,12 +92,16 @@ const Dashboard = () => {
             setTimeExcept(_timeExcept)
             setCancelYourself(_cancelYourself)
             setWaitPayment(_waitPayment)
-            setRowsPrice( _rows * price )
-        
+            if (_rows != undefined) {
+                setRowsPrice( _rows * price )
+            }
+            
+            // console.log(userValues)
         }
-
+        
     }, [info])
-
+    
+    
     return (
         <LayoutStatic breadcrumbLabel="Dashboard" >
             <Fragment>
@@ -112,7 +115,9 @@ const Dashboard = () => {
                         <div className="row col-12 p-0 m-0">
 
                             <div className="col-sm-12 col-lg-6 p-0 m-0">
-                                <div className="card p-3">
+                                <div className="card" style={{
+                                    padding: '1.5em'
+                                }}>
                                     <Line data={data}/>
                                 </div>
                             </div>
@@ -122,7 +127,7 @@ const Dashboard = () => {
                                     <div className="card h-100">
                                         <div className="stat-widget-one card-body">
                                             <div className="stat-content d-inline-block">
-                                                <div className="stat-text">{_timeExcept == 0 ? 'Faturamento' : !_timeExcept? 'Carregando...' : `Você teve estornos devido ao atraso`}</div>
+                                                <div className="stat-text">{_timeExcept == 0 ? 'Faturamento parcial' : !_timeExcept? 'Carregando...' : `Você teve estornos devido ao atraso`}</div>
                                                 <div className="start-digit">
                                                     { _rowsPrice == undefined ? <Loading label={false}/> : <strong>{realMoneyConvert(_rowsPrice, _timeExcept, price)}</strong>}</div>
                                             </div>
@@ -134,7 +139,7 @@ const Dashboard = () => {
                                     <div className="card h-100">
                                         <div className="stat-widget-one card-body">
                                             <div className="stat-content d-inline-block">
-                                                <div className="stat-text">{_rows ? 'Carregando...' : 'Total de agendamentos'}</div>
+                                                <div className="stat-text">{_rows == undefined ? 'Carregando...' : 'Total de agendamentos'}</div>
                                                 <div className="start-digit">
                                                     { _rows == undefined ? <Loading label={false}/> : _rows == 0 ? '-' : _rows }</div>
                                             </div>
@@ -146,7 +151,7 @@ const Dashboard = () => {
                                 <   div className="card h-100">
                                         <div className="stat-widget-one card-body">
                                             <div className="stat-content d-inline-block">
-                                                <div className="stat-text">{_waitConfirm ? 'Carregando...' : 'Aguardando sua confirmação'}</div>
+                                                <div className="stat-text">{_waitConfirm == undefined ? 'Carregando...' : 'Aguardando sua confirmação'}</div>
                                                 <div className="start-digit">
                                                     { _waitConfirm == undefined ? <Loading label={false}/> : _waitConfirm == 0 ? '-' : _waitConfirm}</div>
                                             </div>
@@ -158,7 +163,7 @@ const Dashboard = () => {
                                     <div className="card h-100">
                                         <div className="stat-widget-one card-body">
                                             <div className="stat-content d-inline-block">
-                                                <div className="stat-text">{_waitPayment ? 'Carregando...' : 'Aguardando pagamento'}</div>
+                                                <div className="stat-text">{_waitPayment == undefined ? 'Carregando...' : 'Aguardando pagamento'}</div>
                                                 <div className="start-digit">
                                                     { _waitPayment == undefined ? <Loading label={false}/> : _waitPayment == 0 ? '-' : _waitPayment}</div>
                                             </div>
@@ -177,8 +182,7 @@ const Dashboard = () => {
 
                         <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
-                            value={_cancelYourself}
-                            loader={!_cancelYourself}
+                            value={_cancelYourself || '-'}
                             color='danger'
                             icon='ti-arrow-down'
                             title='Você cancelou'/>
@@ -186,8 +190,7 @@ const Dashboard = () => {
 
                         <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
-                            value={_cancelClient}
-                            loader={!_cancelClient}
+                            value={_cancelClient || '-'}
                             color='danger'
                             icon='ti-arrow-down'
                             title='Cliente cancelou'/>
@@ -195,33 +198,13 @@ const Dashboard = () => {
 
                         <div className="col-lg-4 col-sm-12 p-0 m-0">
                             <Cards 
-                            value={_timeExcept}
-                            loader={!_timeExcept}
+                            value={_timeExcept || '-'}
                             color='warning'
                             icon='ti-timer'
                             title='Tempo excedido'/>
                         </div>
 
                     </div>
-
-                </div>
-
-                <div className="col-lg-12 col-sm-12 mt-3">   
-
-                    <p>Status de consultas 
-                        
-                        <Link href={'/painel'}>
-                        <a 
-                        className="link">(ver mais)</a>
-                        </Link>
-
-                    </p>
-
-                    <div className="row">
-
-                        ...
-
-                    </div>  
 
                 </div>
 

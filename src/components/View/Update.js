@@ -33,9 +33,10 @@ const Update = ({ updateAccount, item }) => {
 
         _userValues[key] = item
 
-        const request = Object.assign({}, _userValues)
-
-        // console.log(userService.userValue)
+        const request = {
+            ...Object.assign({}, _userValues),
+            username: userService.userValue.username
+        }
 
         API.put(`/usuario/update/preferences`, request, {
             headers: { Authorization: `Bearer ${userService.userValue.token}` }

@@ -10,11 +10,17 @@ import {
     USER_SET_COUNTY,
     USER_SET_NUMBER,
     USER_SET_ADDRESS,
-    USER_RESET } from "..";
+    USER_RESET,
+    USER_SET_PRICE } from "..";
 
 const _setNetworkStatusConnection = status => ({
     type: SET_NETWORK_STATUS_CONNECTION,
     payload: status
+})
+
+const _setUserPrice = price => ({
+    type: USER_SET_PRICE,
+    payload: price
 })
 
 // Atualiza usuário
@@ -80,6 +86,7 @@ export {
     _setUserId,
     _setUserName,
     _setUserPhone,
+    _setUserPrice,
     _setUserPostalCode,
     _setUserCounty,
     _setUserNumber,

@@ -20,6 +20,8 @@ import {
     _setUserEmail,
     _setUserPostalCode
  } from '../../store/actions/users'
+import { CLIENT_ACCOUNT_LEVEL } from '../../_settings/_auth';
+import { MedicalLevel } from '../Account/MediclLevel';
 
 export const ModalConfigAccount = ({ previousValue }) => {
     
@@ -30,19 +32,35 @@ export const ModalConfigAccount = ({ previousValue }) => {
         resolver: yupResolver(validationSchemaClient) 
     }
 
+    const account = userService.userValue?._type
+
     const { register, handleSubmit, reset, formState } = useForm(formOptions)
+    
+    const [ data, setData ] = useState({
+        categmedicId: null,
+        daysCall: 0
+    })
 
     const { errors, isSubmitting } = formState
 
-    const onSubmit = async data => {
+    const onSubmit = async input => {
         const request = {
-            name: data.name,
-            description: data.description,
-            phone: data.phone,
-            address: data.address,
-            county: data.county,
-            number: data.number,
-            postalCode: data.postalCode
+            name: input.name,
+            description: input.description,
+            phone: input.phone,
+            address: input.address,
+            county: input.county,
+            number: input.number,
+            postalCode: input.postalCode
+        }
+
+        if (account != CLIENT_ACCOUNT_LEVEL) {
+            request = {
+                ...request,
+                ...data,
+                crm: input.crm,
+                price: input.price
+            }
         }
 
         API.put(`usuario/configuracao/conta/${userService.userValue.username}`, 
@@ -65,8 +83,8 @@ export const ModalConfigAccount = ({ previousValue }) => {
                 dispatch( _setUserPostalCode(request.postalCode) )
                 dispatch( _setUserNumber(request.number) )
                 dispatch( _setUserCounty(request.county) )
-
                 setAuthorization(true)
+                location.replace('/perfil')
             } else {
                 toast.error('Houve algum erro ao atualizar os dados')
             }
@@ -91,10 +109,18 @@ export const ModalConfigAccount = ({ previousValue }) => {
                 <p>Bem vindo <strong>@{userService.userValue.username}</strong>! Verificamos que você ainda não finalizou a configuração da sua conta.</p>
 
                 <Form onSubmit={handleSubmit(onSubmit)}>
+                    {account == CLIENT_ACCOUNT_LEVEL ? 
                     <ClientLevel 
                     previousValue={previousValue}
                     register={register} 
                     errors={errors}/>
+                    : 
+                    <MedicalLevel 
+                    previousValue={previousValue} 
+                    register={register} 
+                    errors={errors}
+                    data={data}
+                    setData={setData}/>}
                 </Form>
 
             </Modal.Body>

@@ -6,11 +6,15 @@ import { Message } from "../";
 import { toast } from "react-toastify";
 
 import styles from '/src/_assets/css/modules/accompany.module.css';
+import { userService } from "../../services";
+import { MEDICAL_ACCOUNT_LEVEL } from "../../_settings/_auth";
 
 const Attachment = ({ urlCode }) => {
 
     const [ attachment, setAttachment ] = useState(null)
     const { data: prev } = useFetch(`/upload/urlCode/${urlCode}`)
+
+    const { _type } = userService.userValue
 
     const DocumentByType = ({ item }) => {
 
@@ -49,7 +53,7 @@ const Attachment = ({ urlCode }) => {
     }, [])
 
     if (attachment == null ) 
-        return <p className={`${styles.list_schedule} ${styles.list_empty}`} >Você não possui histórico recente com este especialista.</p>
+        return <p className={`${styles.list_schedule} ${styles.list_empty}`} >Você não possui histórico recente com { MEDICAL_ACCOUNT_LEVEL == _type ? 'este paciente' : 'este especialista' } ainda.</p>
 
     return (
         <Fragment>

@@ -188,31 +188,30 @@ const Register = ({ thereIsAccount, redirect, children }) => {
                 </Fragment>
             )}
 
-            <div className="row">
-                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                    <Form.Label>Senha</Form.Label>
-                    <input 
-                    name="password"
-                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                    type="password"
-                    placeholder="Informe sua senha" 
-                    {...register('password')}
-                    />
-                    <Form.Text className="invalid-feedback">{errors.password?.message}</Form.Text>
-                </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Senha</Form.Label>
+                <input 
+                name="password"
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                type="password"
+                placeholder="Informe sua senha" 
+                {...register('password')}
+                />
+                <Form.Text className="invalid-feedback">{errors.password?.message}</Form.Text>
+            </Form.Group>
 
-                <Form.Group className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                    <Form.Label>Confirmar senha</Form.Label>
-                    <input 
-                    name="confirmPassword"
-                    className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                    type="password"
-                    placeholder="Informe sua senha novamente" 
-                    {...register('confirmPassword')}
-                    />
-                    <Form.Text className="invalid-feedback">{errors.confirmPassword?.message}</Form.Text>
-                </Form.Group>
-            </div>
+            <Form.Group className="mb-3">
+                <Form.Label>Confirmar senha</Form.Label>
+                <input 
+                name="confirmPassword"
+                className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                type="password"
+                placeholder="Informe sua senha novamente" 
+                {...register('confirmPassword')}
+                />
+                <Form.Text className="invalid-feedback">{errors.confirmPassword?.message}</Form.Text>
+            </Form.Group>
+     
 
             <Form.Group className="mt-3">
                 <button

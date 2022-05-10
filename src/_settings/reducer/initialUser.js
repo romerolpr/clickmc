@@ -1,4 +1,5 @@
 export const initialUser = {
+    price: null,
     id: null,
     name: null,
     phone: null,

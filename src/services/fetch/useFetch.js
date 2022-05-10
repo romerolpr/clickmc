@@ -17,7 +17,7 @@ export function useFetch( url, message = true, item, authorization ) {
         })
         .then(response => {
             if (response.status != 204) {
-                setData(item == undefined ? response.data : response.data[item])
+                setData(response.data)
             }
         })
         .catch( () => {

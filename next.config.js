@@ -10,6 +10,12 @@ const nextConfig = {
         "MYSQL_DATABASE": "db_fullstack",
         "MYSQL_HOST": "localhost",
         "MYSQL_PORT": "3307",
+    },
+    mail: {
+      host: "smtp.gmail.com",
+      port: 587,
+      username: "pblucasromero@gmail.com",
+      password: "595959salvesaopaulo"
     }
   },
   resolve: {

@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import LatLon from '../ellipsoidal/latlon-ellipsoidal-vincenty';
 import { datums } from '../ellipsoidal/latlon-ellipsoidal-datum';
+import { userService } from '../../../user.service';
 
 const EXTERNAL = axios.create({
   baseURL: "https://nominatim.openstreetmap.org/",
@@ -25,8 +26,11 @@ function _positionByMedical(categories, coords) {
             const joined = Object.values(omit(item.location, 'postalCode'))
             const data = joined.join('+').trim().replaceAll(new RegExp(/\s+?/, 'gm'), '+')
 
-                item['distance'] = 0;
+            if (item.id != userService.userValue.id) {
+                // create an object distance
+                item['distance'] = 0
                 items.push(item)
+            }
         
         
             // EXTERNAL

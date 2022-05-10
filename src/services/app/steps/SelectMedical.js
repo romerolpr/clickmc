@@ -3,7 +3,7 @@ import { useFetch } from '../../fetch/useFetch';
 
 import { Loading } from '../../../components';
 
-const SelectMedical = ({ defineCategory }) => {
+const SelectMedical = ({ defineCategory, _id = false }) => {
 
     const { data: repo } = useFetch('/categoria')
     const options = repo?.values
@@ -19,7 +19,13 @@ const SelectMedical = ({ defineCategory }) => {
         <Select 
         className="basic-single"
         classNamePrefix="select"
-        onChange={(e) => defineCategory(e.label)}
+        onChange={(e) => {
+            if (_id) {
+                defineCategory(e.id)
+            } else {
+                defineCategory(e.label)
+            }
+        }}
         placeholder="Buscar por categoria de especialista..."
         isLoading={options == undefined}
         isSearchable={true}

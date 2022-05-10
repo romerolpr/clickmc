@@ -10,6 +10,9 @@ import { Image, Loading } from '../../components';
 import * as Button from '../Action';
 
 import { Chat, Attachment } from './';
+import { MEDICAL_ACCOUNT_LEVEL } from '../../_settings/_auth';
+import { userService } from '../../services';
+import { listOptionsInformations } from '../../constants/listOptionsInformations';
 
 const Informations = ({ item }) => {
 
@@ -24,16 +27,22 @@ const Informations = ({ item }) => {
     // pages controller
     const [ viewChat, setViewChat ] = useState(true)
 
+    const { _type } = userService.userValue
+
     useEffect(() => {
 
       const extract = item?.schedules[0]
 
-      setName(extract?.medicalDetails.name)
-      setBackdrop(extract?.medicalDetails.backdrop)
-      setCategId(extract?.medicalDetails.categoryId)
-      setStatus(extract?.status)
-      if (extract?.appointment != undefined) {
+      if (extract != undefined) {
+          
+        const options = listOptionsInformations(extract)
+
+        setName(options.getName())
+        setBackdrop(options.getBackdrop())
+        setCategId(extract?.medicalDetails.categoryId)
+        setStatus(options.status)
         setAppointment(extract?.appointment)
+
       }
       
     }, [])
@@ -53,6 +62,10 @@ const Informations = ({ item }) => {
     const RenderButtons = () => (
       <Fragment>
         <Button.FileUpload />
+        { 
+        MEDICAL_ACCOUNT_LEVEL == _type
+        && status == 1 
+        && <Button.AcceptRequest urlCode={router.query?.urlCode}/> }
       </Fragment>
     )
 
@@ -89,8 +102,8 @@ const Informations = ({ item }) => {
     return (
         <div className={styles.container_scheduling}>
             <TopButtons>
-              <h2>{`Dr. ${name}`}</h2>
-              <p>{ getByStatus(status).text }</p>
+              <h2>{name}</h2>
+              <p>{getByStatus(status).text}</p>
             </TopButtons>
             <div className={styles.body_scheduling_top}>
               <div

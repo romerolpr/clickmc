@@ -11,6 +11,7 @@ import {
   USER_SET_COUNTY,
   USER_SET_POSTALCODE,
   USER_SET_ADDRESS,
+  USER_SET_PRICE,
   USER_RESET } from "../../actions";
 
 // importa o estado inicial default users
@@ -26,6 +27,8 @@ const userReducer = (state = initialUser, action) => {
       return {...state, id: action.payload};
     case USER_SET_NAME:
       return {...state, name: action.payload};
+    case USER_SET_PRICE:
+      return {...state, price: action.payload};
     case USER_SET_BIRTHDAY:
       return {...state, birthday: action.payload};
     case USER_SET_PHONE:
